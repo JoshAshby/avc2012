@@ -19,7 +19,8 @@ from configSub import *
 import web
 import listPage
 
-base = '/'
+
+base = '/avc/'
 
 urls = (
 	(base + 'list'), listPage.app

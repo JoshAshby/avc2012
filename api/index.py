@@ -20,6 +20,7 @@ os.chdir(abspath)
 from config import *
 from configSub import *
 import baseObject
+import indexView
 
 baseObject.urlReset()
 
@@ -31,7 +32,9 @@ class index(baseObject.baseHTTPObject):
 	
 	'''
 	def get(self):
-
+		view = indexView.indexView()
+		
+		return view.returnData()
 
 urls += baseObject.urls
 

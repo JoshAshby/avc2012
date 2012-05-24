@@ -22,16 +22,15 @@ import baseView
 import templates
 
 
-class listView(baseView.baseView):
+class indexView(baseView.baseView):
 	def JSON(self):
 		web.header('Content-Type', 'application/json')
-		return json.dumps({'bots': self.data})
+		return json.dumps({'index': self.data})
 		
 	def HTML(self):
-		page = templates.indexTemplate(file=templates.templateSet['listView'])
-		page.title = (titleHalf + 'List-O-Bots') 
-		
-# Finish the partial template stuff		page.content = templates.PartialListRow(self.data)
+		page = templates.indexTemplate(file=templates.templateSet['index'])
+		page.title = (titleHalf + 'Landing')
+		page.content = self.data
 		
 		web.header('Content-Type', "text/html")
 		

@@ -24,7 +24,8 @@ To determine the underlying wsgi server for the application.
 If set to gevent, be sure to also change HTTPport to the port
 you want to server the main HTTP interface on.
 '''
-serverType = 'gevent'
+#serverType = 'gevent'
+serverType = 'web.py'
 
 HTTPport = 80
 
@@ -32,8 +33,8 @@ databaseName = 'avc'
 database = couchdbkit.Server()[databaseName]
 
 templatesFolder = 'public/'
-
-render = web.template.render(templatesFolder)
+urlRoot = '/avc2012/api/public'
+titleHalf = 'SparkFun 2012 AVC - '
 
 class slash:
 	def GET(self): raise web.seeother("/")

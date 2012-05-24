@@ -20,10 +20,26 @@ from Cheetah.Template import Template
 
 templateSet = {
 	'index': (templatesFolder + 'index.tpl.html'),
-	'listView': (templatesFolder + 'listView.tpl.html')
+	'listView': (templatesFolder + 'listView.tpl.html'),
+	'adminMainView': (templatesFolder + 'admin.tpl.html')
 }
 
 class indexTemplate(Template):
-	baseurl = '/'
-	title = 'SparkFun AVC 2012 Scoreboard'
-	
+	baseurl = urlRoot
+	title = ''
+	content = ''
+
+class listViewTemplate(Template):
+	baseurl = urlRoot
+	title = ''
+	content = ''
+
+class adminMainView(Template):
+	baseurl = urlRoot
+	title = ''
+	content = ''
+
+class PartialListRow(Template):
+	picture = ''
+	name = ''
+	checkin = ''

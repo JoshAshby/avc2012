@@ -40,13 +40,15 @@ class all(baseObject.baseHTTPObject):
 			
 		Returns:
 			
-		'''
+		''
 		bots = database.view("bots/all").all()
 		
 		for i in bots:
 			i = i['value']
+			'''
+		bots = "hello"
 		
-		view = listView.botsInfoView(data=bots)
+		view = listView.listView(data=bots)
 		
 		return view.returnData()
 		
@@ -83,7 +85,6 @@ class all(baseObject.baseHTTPObject):
 			goop = Pics(frodo)
 			goop.Thumb()
 			product.picture = frodo
-
 
 
 app = web.application(baseObject.urls, globals())

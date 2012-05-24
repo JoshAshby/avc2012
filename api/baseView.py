@@ -22,12 +22,17 @@ from configSub import *
 
 class baseView(object):
 	def __init__(self, **kwargs):
-		self.data = kwargs['data']
+		try:
+			self.data = kwargs['data']
+		except:
+			self.data = ''
 		
-		self.t = 'json'
+		self.t = 'html'
 		
-		if 'wi' in kwargs:
-			if 't' in kwargs['wi']: self.t = kwargs['wi']['t']
+		wi = web.input()
+		
+		#find some wit in the query... ;)
+		if 't' in wi: self.t = wi['t']
 		
 		if self.t == 'html':
 			self.inform = self.HTML()
