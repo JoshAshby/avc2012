@@ -40,45 +40,37 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">SparkFun 2012 AVC</a>
+          <a class="brand" href="$urlRoot/">SparkFun 2012 AVC</a>
           <div class="nav-collapse">
             <ul class="nav">
-              <li class="active"><a href="./hero_files/hero.html">Home</a></li>
-              <li><a href="#">About</a></li>
-            </ul>
+              <li><a href="$urlRoot/">Home</a></li>
+              <li class="active"><a href="$urlRoot/list/">Team List</a></li>
+	      <li><a href="$urlRoot/scoreboard/">Live Scoreboard</a></li>
+              <li><a href="$urlRoot/about/">About</a></li>            </ul>
           </div><!--/.nav-collapse -->
         </div>
       </div>
     </div>
 
     <div class="container">
-
-      <div class="hero-unit">
-        <h1>Oh Hi!</h1>
-        <p>Welcome to the official SparkFun Electronics 2012 AVC Scoreboard!<br>
-	View the live Scoreboard, browse the teams and current standings and watch the live broadcast!</p>
-        <p><a class="btn btn-primary btn-large">Tell me more! »</a></p>
-      </div>
-
-      <div class="row">
-        <div class="span4">
-          <h2>Scoreboard</h2>
-           <p>See the live scoreboard running in our parking lot for all to see!</p>
-	   <p><a class="btn" href="#">View Scoreboard »</a></p>
-        </div>
-        <div class="span4">
-          <h2>Team Info</h2>
-           <p>Catch up with the teams bio, and read about the amazing machines running around the place today.</p>
-	   <p><a class="btn" href="#">View Bios »</a></p>
-       </div>
-        <div class="span4">
-          <h2>Standings</h2>
-          <p>View the current standings and heat schedule.</p>
-	  <p><a class="btn" href="#">View Standings s»</a></p>
-        </div>
-      </div>
-
-      <hr>
+	<div class="page-header">
+		<h1>List of Autonomous Vehicles</h1>
+	</div>
+	<hr>
+	<table class="table table-striped table-bordered table-condensed">
+		<thead>
+			<tr>
+				<th>Photo</th>
+				<th>Team Name</th>
+				<th>Bots Name</th>
+				<th>Builders</th>
+				<th>Bio</th>
+			</tr>
+		</thead>
+		<tbody>
+			$content
+		</tbody>
+	</table>
 
       <footer>
         <p>© SparkFun Electronics 2012</p>

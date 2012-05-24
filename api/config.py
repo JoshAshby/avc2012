@@ -20,8 +20,6 @@ import web
 import listPage
 
 
-base = '/avc/'
-
 urls = (
-	(base + 'list'), listPage.app
+	(urlRoot + '/list'), listPage.app
 )

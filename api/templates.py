@@ -18,28 +18,38 @@ os.chdir(abspath)
 from configSub import *
 from Cheetah.Template import Template
 
-templateSet = {
+mainTemplateSet = {
 	'index': (templatesFolder + 'index.tpl.html'),
 	'listView': (templatesFolder + 'listView.tpl.html'),
 	'adminMainView': (templatesFolder + 'admin.tpl.html')
 }
 
+partialTemplateSet = {
+	'row_listView': (partialTemplatesFolder + 'row_listView.tpl.html')
+}
+
 class indexTemplate(Template):
-	baseurl = urlRoot
+	baseurl = baseurl
+	urlRoot = urlRoot
 	title = ''
-	content = ''
 
 class listViewTemplate(Template):
-	baseurl = urlRoot
+	baseurl = baseurl
+	urlRoot = urlRoot
 	title = ''
 	content = ''
 
 class adminMainView(Template):
-	baseurl = urlRoot
+	baseurl = baseurl
+	urlRoot = urlRoot
 	title = ''
 	content = ''
 
 class PartialListRow(Template):
-	picture = ''
-	name = ''
-	checkin = ''
+	baseurl = baseurl
+	urlRoot = urlRoot
+	teamId = ''
+	botName = ''
+	teamName = ''
+	builders = ''
+

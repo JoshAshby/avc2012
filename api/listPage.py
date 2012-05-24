@@ -40,14 +40,12 @@ class all(baseObject.baseHTTPObject):
 			
 		Returns:
 			
-		''
-		bots = database.view("bots/all").all()
+		'''
+		bots = database.view("bots/Bots").all()
 		
 		for i in bots:
 			i = i['value']
-			'''
-		bots = "hello"
-		
+
 		view = listView.listView(data=bots)
 		
 		return view.returnData()

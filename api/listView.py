@@ -28,10 +28,18 @@ class listView(baseView.baseView):
 		return json.dumps({'bots': self.data})
 		
 	def HTML(self):
-		page = templates.indexTemplate(file=templates.templateSet['listView'])
-		page.title = (titleHalf + 'List-O-Bots') 
-		
-# Finish the partial template stuff		page.content = templates.PartialListRow(self.data)
+		page = templates.listViewTemplate(file=templates.mainTemplateSet['listView'])
+		page.title = (titleHalf + 'List-O-Bots')
+		page.content = ''
+		for bot in self.data:
+			partial = templates.PartialListRow(file=templates.partialTemplateSet['row_listView'])
+			bot = bot['value']
+			partial.teamId = bot['id']
+			partial.teamName = bot['team']
+			partial.botName = bot['name']
+			partial.builders = bot['builders']
+			partial.checkin = bot['checkedIn']
+			page.content += str(partial)
 		
 		web.header('Content-Type', "text/html")
 		

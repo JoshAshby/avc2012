@@ -25,7 +25,7 @@ import indexView
 baseObject.urlReset()
 
 
-@baseObject.route('/')
+@baseObject.route(urlRoot + '/')
 class index(baseObject.baseHTTPObject):  
 	'''
 	Base Index
@@ -33,12 +33,13 @@ class index(baseObject.baseHTTPObject):
 	'''
 	def get(self):
 		view = indexView.indexView()
-		
 		return view.returnData()
 
 urls += baseObject.urls
 
 if __name__ == "__main__":
+	print "Heres the URLs I'm serving things on..."
+	print urls
 	if serverType is 'gevent':
 		from gevent import monkey; monkey.patch_all()
 		from gevent.pywsgi import WSGIServer
