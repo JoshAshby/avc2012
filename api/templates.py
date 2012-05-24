@@ -21,7 +21,10 @@ from Cheetah.Template import Template
 mainTemplateSet = {
 	'index': (templatesFolder + 'index.tpl.html'),
 	'listView': (templatesFolder + 'listView.tpl.html'),
-	'adminMainView': (templatesFolder + 'admin.tpl.html')
+	'adminMainView': (templatesFolder + 'admin.tpl.html'),
+	'aboutView': (templatesFolder + 'about.tpl.html'),
+	'scoreboardView': (templatesFolder + 'scoreboard.tpl.html'),
+	'teamView': (templatesFolder + 'team.tpl.html'),
 }
 
 partialTemplateSet = {
@@ -33,6 +36,19 @@ class indexTemplate(Template):
 	urlRoot = urlRoot
 	asseturl = assetUrl
 	title = ''
+
+class aboutTemplate(Template):
+	baseurl = baseurl
+	urlRoot = urlRoot
+	asseturl = assetUrl
+	title = ''
+
+class scoreboardTemplate(Template):
+	baseurl = baseurl
+	urlRoot = urlRoot
+	asseturl = assetUrl
+	title = ''
+
 
 class listViewTemplate(Template):
 	baseurl = baseurl

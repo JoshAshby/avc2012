@@ -36,6 +36,7 @@ class listView(baseView.baseView):
 			bot = bot['value']
 			partial.teamId = bot['id']
 			partial.teamName = bot['team']
+			partial.location = bot['location']
 			partial.botName = bot['name']
 			partial.builders = bot['builders']
 			partial.checkin = bot['checkedIn']

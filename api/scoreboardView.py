@@ -28,9 +28,10 @@ class scoreboardView(baseView.baseView):
 		return json.dumps({'error': 'This is a web browser application and does not return JSON, Sorry!'})
 		
 	def HTML(self):
-		page = templates.scoreboardTemplate(file=templates.mainTemplatesSet['scoreboardView'])
+		page = templates.scoreboardTemplate(file=templates.mainTemplateSet['scoreboardView'])
 		page.title = (titleHalf + 'Scoreboard')
-		page.content = ''
+		page.checkIn = ''
+		page.schedule = ''
 
 		web.header('Content-Type', 'text/html')
 

@@ -39,7 +39,8 @@
 
 // Links
 // -------------------------
-@linkColor:             #08c;
+//@linkColor:             #08c;
+@linkColor:             #cd2e29;
 @linkColorHover:        darken(@linkColor, 15%);
 
 
@@ -145,11 +146,14 @@
 // Navbar
 // -------------------------
 @navbarHeight:                    40px;
-@navbarBackground:                @red;
-@navbarBackgroundHighlight:       @grayLighter;
+//@navbarBackground:                @grayDarker;
+//@navbarBackgroundHighlight:       @grayDark;
+@navbarBackground:                lighten(@linkColor, 3%);
+@navbarBackgroundHighlight:       darken(@linkColor, 3%);
 
-@navbarText:                      @grayLight;
-@navbarLinkColor:                 @grayLight;
+
+@navbarText:                      @grayLighter;
+@navbarLinkColor:                 @grayLighter;
 @navbarLinkColorHover:            @white;
 @navbarLinkColorActive:           @navbarLinkColorHover;
 @navbarLinkBackgroundHover:       transparent;
