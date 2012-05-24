@@ -1,58 +1,6 @@
 #encoding UTF-8
-<!DOCTYPE html>
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <title>$title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Official scoreboard for the 2012 SparkFun Electronics Autonomous Vehicle Competition.">
-    <meta name="author" content="Josh Ashby">
-
-    <!-- Le styles -->
-    <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
-    <style type="text/css">
-      body {
-        padding-top: 60px;
-        padding-bottom: 40px;
-      }
-    </style>
-    <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
-
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <!-- Le fav and touch icons -->
-    <link rel="shortcut icon" href="http://twitter.github.com/bootstrap/assets/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-57-precomposed.png">
-  </head>
-
-  <body style="zoom: 100%; ">
-
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="$urlRoot/">SparkFun 2012 AVC</a>
-          <div class="nav-collapse">
-            <ul class="nav">
-              <li><a href="$urlRoot/">Home</a></li>
-              <li class="active"><a href="$urlRoot/list/">Team List</a></li>
-	      <li><a href="$urlRoot/scoreboard/">Live Scoreboard</a></li>
-              <li><a href="$urlRoot/about/">About</a></li>            </ul>
-          </div><!--/.nav-collapse -->
-        </div>
-      </div>
-    </div>
-
-    <div class="container">
+#include "htmlTemplates/partials/header.tpl.html"
+<div class="container">
 	<div class="page-header">
 		<h1>List of Autonomous Vehicles</h1>
 	</div>
@@ -70,27 +18,4 @@
 			$content
 		</tbody>
 	</table>
-
-      <footer>
-        <p>© SparkFun Electronics 2012</p>
-      </footer>
-
-    </div>
-
-
-    <script src="$asseturl/js/jquery.js"></script>
-    <script src="$asseturl/js/bootstrap-transition.js"></script>
-    <script src="$asseturl/js/bootstrap-alert.js"></script>
-    <script src="$asseturl/js/bootstrap-modal.js"></script>
-    <script src="$asseturl/js/bootstrap-dropdown.js"></script>
-    <script src="$asseturl/js/bootstrap-scrollspy.js"></script>
-    <script src="$asseturl/js/bootstrap-tab.js"></script>
-    <script src="$asseturl/js/bootstrap-tooltip.js"></script>
-    <script src="$asseturl/js/bootstrap-popover.js"></script>
-    <script src="$asseturl/js/bootstrap-button.js"></script>
-    <script src="$asseturl/js/bootstrap-collapse.js"></script>
-    <script src="$asseturl/js/bootstrap-carousel.js"></script>
-    <script src="$asseturl/js/bootstrap-typeahead.js"></script>
-
-</body></html>
-
+#include "htmlTemplates/partials/footer.tpl.html"

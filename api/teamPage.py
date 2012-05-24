@@ -51,4 +51,29 @@ class all(baseObject.baseHTTPObject):
 		return view.returnData()
 
 
+@baseObject.route('/(.*)')
+class all(baseObject.baseHTTPObject):
+	'''
+
+	'''
+	def get(self):
+		'''
+		GET verb call
+		
+		
+		Args:
+			
+		Returns:
+			
+		'''
+		botId = int(self.hasMember('id'))
+
+		teamInfo = botDoc.view("bots/Bots" key=botId).first()
+		
+		view = teamView.teamView(data=bots)
+		
+		return view.returnData()
+
+
+
 app = web.application(baseObject.urls, globals())

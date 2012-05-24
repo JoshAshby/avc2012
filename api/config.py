@@ -18,11 +18,19 @@ os.chdir(abspath)
 from configSub import *
 import web
 import listPage
+import scoreboardPage
+import standPage
+import teamPage
+import aboutPage
 
 
 web.config.debug = True
 
 urls = (
 	(urlRoot + '/list'), listPage.app,
+	(urlRoot + '/scoreboard'), scoreboardPage.app,
+	(urlRoot + '/stand'), standPage.app,
+	(urlRoot + '/about'), aboutPage.app,
+	(urlRoot + '/team'), teamPage.app,
 	'/static/(.*)', 'static'
 )

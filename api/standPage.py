@@ -20,7 +20,7 @@ os.chdir(abspath)
 from configSub import *
 from botsDocument import *
 from picture import *
-import listView
+import scoreboardView
 import baseObject
 
 baseObject.urlReset()
@@ -49,6 +49,38 @@ class all(baseObject.baseHTTPObject):
 		view = listView.listView(data=bots)
 		
 		return view.returnData()
+
+
+@baseObject.route('/top5')
+class all(baseObject.baseHTTPObject):
+	'''
+
+	'''
+	def get(self):
+		'''
+		GET verb call
+		
+		
+		Args:
+			
+		Returns:
+			
+		'''
+		bots = database.view("bots/Bots").all()
+		
+		for i in bots:
+			i = i['value']
+
+		for bot in bots:
+			times = {}
+			for heats in bot['heats']:
+#				times.append()
+				return heats
+				
+
+#		view = listView.listView(data=bots)
+		
+#		return view.returnData()
 
 
 app = web.application(baseObject.urls, globals())

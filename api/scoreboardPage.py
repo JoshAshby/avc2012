@@ -20,7 +20,7 @@ os.chdir(abspath)
 from configSub import *
 from botsDocument import *
 from picture import *
-import listView
+import scoreboardView
 import baseObject
 
 baseObject.urlReset()
@@ -41,12 +41,7 @@ class all(baseObject.baseHTTPObject):
 		Returns:
 			
 		'''
-		bots = database.view("bots/Bots").all()
-		
-		for i in bots:
-			i = i['value']
-
-		view = listView.listView(data=bots)
+		view = scoreboardView.scoreboardView()
 		
 		return view.returnData()
 
