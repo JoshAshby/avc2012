@@ -31,23 +31,30 @@ partialTemplateSet = {
 class indexTemplate(Template):
 	baseurl = baseurl
 	urlRoot = urlRoot
+	asseturl = assetUrl
 	title = ''
 
 class listViewTemplate(Template):
 	baseurl = baseurl
 	urlRoot = urlRoot
+	asseturl = assetUrl
+	title = ''
 	title = ''
 	content = ''
 
 class adminMainView(Template):
 	baseurl = baseurl
 	urlRoot = urlRoot
+	asseturl = assetUrl
+	title = ''
 	title = ''
 	content = ''
 
 class PartialListRow(Template):
 	baseurl = baseurl
 	urlRoot = urlRoot
+	asseturl = assetUrl
+	title = ''
 	teamId = ''
 	botName = ''
 	teamName = ''

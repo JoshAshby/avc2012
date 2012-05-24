@@ -11,7 +11,6 @@ Josh Ashby
 http://joshashby.com
 joshuaashby@joshashby.com
 """
-import web
 import couchdbkit
 
 '''
@@ -33,11 +32,16 @@ databaseName = 'avc'
 server = couchdbkit.Server()
 database = server.get_or_create_db(databaseName)
 
-templatesFolder = 'public/'
-partialTemplatesFolder = 'public/partials/'
-baseurl = '/avc2012/api/public'
+templatesFolder = 'htmlTemplates/'
+partialTemplatesFolder = 'htmlTemplates/partials/'
+#templating shortcuts...
+baseurl = '/avc2012/api'
 urlRoot = '/avc'
+assetUrl = '/static'
 titleHalf = 'SparkFun 2012 AVC - '
 
 class slash:
 	def GET(self): raise web.seeother("/")
+
+class static:
+	def GET(self,name): return open('static/%s'%name)

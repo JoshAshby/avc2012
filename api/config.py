@@ -20,6 +20,9 @@ import web
 import listPage
 
 
+web.config.debug = True
+
 urls = (
-	(urlRoot + '/list'), listPage.app
+	(urlRoot + '/list'), listPage.app,
+	'/static/(.*)', 'static'
 )

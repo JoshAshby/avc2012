@@ -11,14 +11,20 @@ Josh Ashby
 http://joshashby.com
 joshuaashby@joshashby.com
 """
+try:
+	from configSub import *
+except:
+	abspath = os.path.dirname(__file__)
+	sys.path.append(abspath)
+	os.chdir(abspath)
+	from configSub import *
+if serverType is 'gevent':
+	from gevent import monkey; monkey.patch_all()
+	from gevent.pywsgi import WSGIServer
 import web
 import json
 import sys, os
-abspath = os.path.dirname(__file__)
-sys.path.append(abspath)
-os.chdir(abspath)
 from config import *
-from configSub import *
 import baseObject
 import indexView
 
