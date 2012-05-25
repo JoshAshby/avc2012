@@ -22,14 +22,14 @@ import baseView
 import templates
 
 
-class indexView(baseView.baseView):
+class aboutView(baseView.baseView):
 	def JSON(self):
 		web.header('Content-Type', 'application/json')
-		return json.dumps({'index': self.data})
+		return json.dumps({'about': self.data})
 		
 	def HTML(self):
-		page = templates.indexTemplate(file=templates.mainTemplateSet['index'])
-		page.title = (titleHalf + 'Landing')
+		page = templates.aboutTemplate(file=templates.mainTemplateSet['aboutView'])
+		page.title = (titleHalf + 'About')
 		
 		web.header('Content-Type', "text/html")
 		

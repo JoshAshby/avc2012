@@ -26,31 +26,6 @@ import baseObject
 baseObject.urlReset()
 
 
-@baseObject.route('/')
-class all(baseObject.baseHTTPObject):
-	'''
-
-	'''
-	def get(self):
-		'''
-		GET verb call
-		
-		
-		Args:
-			
-		Returns:
-			
-		'''
-		bots = database.view("bots/Bots").all()
-		
-		for i in bots:
-			i = i['value']
-
-		view = listView.listView(data=bots)
-		
-		return view.returnData()
-
-
 @baseObject.route('/(.*)')
 class all(baseObject.baseHTTPObject):
 	'''
@@ -68,7 +43,7 @@ class all(baseObject.baseHTTPObject):
 		'''
 		botId = int(self.hasMember('id'))
 
-		teamInfo = botDoc.view("bots/Bots" key=botId).first()
+		teamInfo = botDoc.view("bots/Bots", key=botId).first()
 		
 		view = teamView.teamView(data=bots)
 		

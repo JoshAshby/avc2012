@@ -28,10 +28,78 @@ class scoreboardView(baseView.baseView):
 		return json.dumps({'error': 'This is a web browser application and does not return JSON, Sorry!'})
 		
 	def HTML(self):
-		page = templates.scoreboardTemplate(file=templates.mainTemplatesSet['scoreboardView'])
+		page = templates.scoreboardTemplate(file=templates.mainTemplateSet['scoreboardView'])
 		page.title = (titleHalf + 'Scoreboard')
-		page.content = ''
+		page.checkIn = ''
+		page.schedule = ''
 
 		web.header('Content-Type', 'text/html')
 
+		return page
+
+
+class listView(baseView.baseView):
+	def JSON(self):
+		web.header('Content-Type', 'application/json')
+		return json.dumps({'bots': self.data})
+		
+	def HTML(self):
+		page = templates.listViewTemplate(file=templates.mainTemplateSet['listViewBody'])
+		page.content = ''
+		for bot in self.data:
+			partial = templates.PartialListRow(file=templates.partialTemplateSet['row_listViewBody'])
+			partial.teamId = bot['id']
+			partial.teamName = bot['team']
+			partial.location = bot['location']
+			partial.botName = bot['name']
+			partial.builders = bot['builders']
+			partial.checkin = bot['checkedIn']
+			page.content += str(partial)
+		
+		web.header('Content-Type', "text/html")
+		
+		return page
+
+
+class heatView(baseView.baseView):
+	def JSON(self):
+		web.header('Content-Type', 'application/json')
+		return json.dumps({'bots': self.data})
+		
+	def HTML(self):
+		page = templates.listViewTemplate(file=templates.mainTemplateSet['listViewBody'])
+		page.content = ''
+		for bot in self.data:
+			partial = templates.PartialListRow(file=templates.partialTemplateSet['row_listViewBody'])
+			partial.teamId = bot['id']
+			partial.teamName = bot['team']
+			partial.location = bot['location']
+			partial.botName = bot['name']
+			partial.builders = bot['builders']
+			page.content += str(partial)
+		
+		web.header('Content-Type', "text/html")
+		
+		return page
+
+
+class tableView(baseView.baseView):
+	def JSON(self):
+		web.header('Content-Type', 'application/json')
+		return json.dumps({'bots': self.data})
+		
+	def HTML(self):
+		page = templates.listViewTemplate(file=templates.mainTemplateSet['listViewBody'])
+		page.content = ''
+		for bot in self.data:
+			partial = templates.PartialListRow(file=templates.partialTemplateSet['row_listViewBody'])
+			partial.teamId = bot['id']
+			partial.teamName = bot['team']
+			partial.location = bot['location']
+			partial.botName = bot['name']
+			partial.builders = bot['builders']
+			page.content += str(partial)
+		
+		web.header('Content-Type', "text/html")
+		
 		return page

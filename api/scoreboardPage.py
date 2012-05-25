@@ -19,7 +19,7 @@ sys.path.append(abspath)
 os.chdir(abspath)
 from configSub import *
 from botsDocument import *
-from picture import *
+from heatDocument import *
 import scoreboardView
 import baseObject
 
@@ -27,7 +27,7 @@ baseObject.urlReset()
 
 
 @baseObject.route('/')
-class all(baseObject.baseHTTPObject):
+class index(baseObject.baseHTTPObject):
 	'''
 
 	'''
@@ -42,6 +42,64 @@ class all(baseObject.baseHTTPObject):
 			
 		'''
 		view = scoreboardView.scoreboardView()
+		
+		return view.returnData()
+
+@baseObject.route('/checkIn/')
+class checkIn(baseObject.baseHTTPObject):
+	'''
+
+	'''
+	def get(self):
+		'''
+		GET verb call
+		
+		
+		Args:
+			
+		Returns:
+			
+		'''
+		bots = database.view("bots/Bots").all()
+		botNew = []
+		
+		for i in bots:
+			if i['value']['checkedIn'] is 1:
+				botNew.append(i['value'])
+
+
+		view = scoreboardView.tableView(data=botNew)
+		
+		return view.returnData()
+
+
+@baseObject.route('/heat/(.*)/')
+class heatLineUp(baseObject.baseHTTPObject):
+	'''
+
+	'''
+	def get(self):
+		'''
+		GET verb call
+		
+		
+		Args:
+			
+		Returns:
+			
+		'''
+		heat = int(self.hasMember('heat'))
+
+		bots = database.view("bots/Bots").all()
+
+		lineUp = heatDoc.view("schedule/Schedule", key=heat).first()
+
+		spots = []
+
+		for bot in lineUp['bots']:
+			spots.append(bots[int(bot)]['value'])
+
+		view = scoreboardView.heatView(data=spots)
 		
 		return view.returnData()
 

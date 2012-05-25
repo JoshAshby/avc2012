@@ -42,11 +42,13 @@ class all(baseObject.baseHTTPObject):
 			
 		'''
 		bots = database.view("bots/Bots").all()
+		botNew = []
 		
 		for i in bots:
-			i = i['value']
+			botNew.append(i['value'])
 
-		view = listView.listView(data=bots)
+
+		view = listView.listView(data=botNew)
 		
 		return view.returnData()
 

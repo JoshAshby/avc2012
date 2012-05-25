@@ -21,14 +21,31 @@ from Cheetah.Template import Template
 mainTemplateSet = {
 	'index': (templatesFolder + 'index.tpl.html'),
 	'listView': (templatesFolder + 'listView.tpl.html'),
-	'adminMainView': (templatesFolder + 'admin.tpl.html')
+	'listViewBody': (templatesFolder + 'listViewBody.tpl.html'),
+	'adminMainView': (templatesFolder + 'admin.tpl.html'),
+	'aboutView': (templatesFolder + 'about.tpl.html'),
+	'scoreboardView': (templatesFolder + 'scoreboard.tpl.html'),
+	'teamView': (templatesFolder + 'team.tpl.html')
 }
 
 partialTemplateSet = {
-	'row_listView': (partialTemplatesFolder + 'row_listView.tpl.html')
+	'row_listView': (partialTemplatesFolder + 'row_listView.tpl.html'),
+	'row_listViewBody': (partialTemplatesFolder + 'row_listViewBody.tpl.html')
 }
 
 class indexTemplate(Template):
+	baseurl = baseurl
+	urlRoot = urlRoot
+	asseturl = assetUrl
+	title = ''
+
+class aboutTemplate(Template):
+	baseurl = baseurl
+	urlRoot = urlRoot
+	asseturl = assetUrl
+	title = ''
+
+class scoreboardTemplate(Template):
 	baseurl = baseurl
 	urlRoot = urlRoot
 	asseturl = assetUrl
@@ -39,14 +56,12 @@ class listViewTemplate(Template):
 	urlRoot = urlRoot
 	asseturl = assetUrl
 	title = ''
-	title = ''
 	content = ''
 
 class adminMainView(Template):
 	baseurl = baseurl
 	urlRoot = urlRoot
 	asseturl = assetUrl
-	title = ''
 	title = ''
 	content = ''
 

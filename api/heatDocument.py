@@ -18,20 +18,13 @@ os.chdir(abspath)
 from configSub import *
 
 
-class botsDoc(couchdbkit.Document):
+class heatDoc(couchdbkit.Document):
 	
-	name = couchdbkit.StringProperty()
-	team = couchdbkit.StringProperty()
-	location = couchdbkit.StringProperty()
-	description = couchdbkit.StringProperty()
-	builders = couchdbkit.StringProperty()
+	doc_type = "heatDoc"
 	
-	doc_type = "botsDoc"
-	
-	checkedIn = couchdbkit.IntegerProperty()
+	heat = couchdbkit.IntegerProperty()
 	type = couchdbkit.IntegerProperty()
-	id = couchdbkit.IntegerProperty()
 	
-	heats = couchdbkit.DictProperty()
+	bots = couchdbkit.ListProperty()
 
-botsDoc.set_db(database)
+heatDoc.set_db(database)
