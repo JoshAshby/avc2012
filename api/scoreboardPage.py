@@ -20,6 +20,7 @@ os.chdir(abspath)
 from configSub import *
 from botsDocument import *
 from heatDocument import *
+from adminDocument import *
 import scoreboardView
 import baseObject
 
@@ -74,7 +75,7 @@ class checkIn(baseObject.baseHTTPObject):
 
 
 @baseObject.route('/heat/(.*)/')
-class heatLineUp(baseObject.baseHTTPObject):
+class heat(baseObject.baseHTTPObject):
 	'''
 
 	'''
@@ -89,19 +90,44 @@ class heatLineUp(baseObject.baseHTTPObject):
 			
 		'''
 		heat = int(self.hasMember('heat'))
+		
+		lineUp = heatDoc.view("schedule/Schedule", key=heat).first()
 
 		bots = database.view("bots/Bots").all()
-
-		lineUp = heatDoc.view("schedule/Schedule", key=heat).first()
 
 		spots = []
 
 		for bot in lineUp['bots']:
-			spots.append(bots[int(bot)]['value'])
+			spots.append(bots[bot]['value'])
 
 		view = scoreboardView.heatView(data=spots)
 		
 		return view.returnData()
+
+
+@baseObject.route('/admin/')
+class current(baseObject.baseHTTPObject):
+	'''
+
+	'''
+	def get(self):
+		'''
+		GET verb call
+		
+		
+		Args:
+			
+		Returns:
+			
+		'''
+		admin = database.view("admin/Admin", key=0).first()['value']
+
+		print admin
+
+		view = scoreboardView.adminView(data=admin)
+		
+		return view.returnData()
+
 
 
 app = web.application(baseObject.urls, globals())

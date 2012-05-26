@@ -22,10 +22,17 @@ Reveal.initialize({
 	transition: query.transition || 'default' // default/cube/page/concave/linear(2d)
 });
 
-$.get('/avc/scoreboard/checkIn/', function(data) {
-	$('#checkInDiv').html(data);
+heat = 0;
+
+$.getJSON('admin/?t=json', function(data) {
+	alert(data['heat']);
+	heat = data['heat']
 });
 
-$.get('/avc/scoreboard/heat/0/', function(data) {
-	$('#schedule').html(data);
-});
+window.setTimeout($.get('checkIn/', function(data) {
+	$('#checkInTable').html(data);
+}), 500);
+
+window.setTimeout($.get(('heat/' + heat + '/'), function(data) {
+	$('#scheduleTable').html(data);
+}), 500);

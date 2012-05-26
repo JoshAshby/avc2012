@@ -6,33 +6,35 @@
 	<!-- Any section element inside of this container is displayed as a slide -->
 	<div class="slides" style="text-align: left;">
 		<section>
-		<h2>Welcome to the 2012 SparkFun Electronics<br>
+		<h2>Welcome to the 2012 SparkFun Electronics</h2>
 			<br>
-			<b style="color: black">A</b>utonomous<br>
-			<b style="color: black">V</b>ehicle<br>
-			<b style="color: black">C</b>ompetition</h2>
+			<h1>
+				<b style="color: black">A</b>utonomous<br>
+				<b style="color: black">V</b>ehicle<br>
+				<b style="color: black">C</b>ompetition
+			</h1>
 			<img src="/static/img/logo.jpg" id="logo">
+			<h2>(Scoreboard)</h2>
 		</section>
 		<section>
-			<h2>Check In</h2>
-			<div id="checkInTable">
-				<table class="table table-striped table-bordered table-condensed"> 
-					<thead>
-						<tr>
-							<th>Photo</th>
-							<th>Robot</th>
-							<th>Team</th>
-							<th>Builders</th>
-						</tr>
-					</thead>
-					<tbody id="checkInDiv">
-					</tbody>
-				</table>
-
-			</div>
+			<h3>Check In</h3>
+				<div id="checkIn">
+					<table class="table table-striped table-bordered table-condensed"> 
+						<thead>
+							<tr>
+								<th>Photo</th>
+								<th>Robot</th>
+								<th>Team</th>
+								<th>Builders</th>
+							</tr>
+						</thead>
+						<tbody id="checkInTable">
+						</tbody>
+					</table>
+				</div>
 		</section>
 		<section>
-			<h2 id="lineUpHeader">Line Up - </h2>
+			<h3>Line up</h3>
 			<div id="schedule">
 				<table class="table table-striped table-bordered table-condensed">
 					<thead>
@@ -43,18 +45,32 @@
 							<th>Builders</th>
 						</tr>
 					</thead>
-					<tbody id="schedule">
+					<tbody id="scheduleTable">
 					</tbody>
 				</table>
 			</div>
 		</section>
 		<section>
 			<section>
-				<h2>Currently racing</h2>
-				<div id="current"></div>
+				<h3>Currently racing</h3>
+				<div id="current">
+					<table class="table table-striped table-bordered table-condensed">
+						<thead>
+							<tr>
+								<th>Photo</th>
+								<th>Robot</th>
+								<th>Team</th>
+								<th>Builders</th>
+							</tr>
+						</thead>
+						<tbody id="currentTable">
+						</tbody>
+					</table>
+
+				</div>
 			</section>
 			<section>
-				<h2>Whos up next</h2>
+				<h3>Up next</h3>
 				<div id="upNext">
 					<table class="table table-striped table-bordered table-condensed">
 						<thead>
@@ -65,17 +81,16 @@
 								<th>Builders</th>
 							</tr>
 						</thead>
-						<tbody>
-							$schedule
+						<tbody id="upNextTable">
 						</tbody>
 					</table>
 				</div>
 			</section>
 		</section>
 		<section>
-			<h2>Top 5</h2>
+			<h3>Top 5</h3>
 			<section>
-				<h2> - Ground</h2>
+				<h3>Ground - </h3>
 				<div id="groundTop5">
 					<table class="table table-striped table-bordered table-condensed">
 						<thead>
@@ -86,15 +101,14 @@
 								<th>Builders</th>
 							</tr>
 						</thead>
-						<tbody>
-							$schedule
+						<tbody id="groundTop5Table">
 						</tbody>
 					</table>
 				</div>
 			</section>
 			<section>
-				<h2> - Air</h2>
-				<div id="arialTop5">
+				<h3>Air - </h3>
+				<div id="airTop5">
 					<table class="table table-striped table-bordered table-condensed">
 						<thead>
 							<tr>
@@ -104,8 +118,7 @@
 								<th>Builders</th>
 							</tr>
 						</thead>
-						<tbody>
-							$schedule
+						<tbody id="airTop5Table">
 						</tbody>
 					</table>
 				</div>

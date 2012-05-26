@@ -29,7 +29,7 @@ class botsDoc(couchdbkit.Document):
 	doc_type = "botsDoc"
 	
 	checkedIn = couchdbkit.IntegerProperty()
-	type = couchdbkit.IntegerProperty()
+	vehicleType = couchdbkit.IntegerProperty()
 	id = couchdbkit.IntegerProperty()
 	
 	heats = couchdbkit.DictProperty()

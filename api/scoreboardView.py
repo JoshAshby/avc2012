@@ -103,3 +103,17 @@ class tableView(baseView.baseView):
 		web.header('Content-Type', "text/html")
 		
 		return page
+
+
+class adminView(baseView.baseView):
+	def JSON(self):
+		web.header('Content-Type', 'application/json')
+		return json.dumps({'admin': self.data})
+		
+	def HTML(self):
+		page = templates.adminMainView(file=templates.mainTemplateSet['adminMainView'])
+		page.title = (titleHalf + 'Admin')
+
+		web.header('Content-Type', 'text/html')
+
+		return page

@@ -18,13 +18,12 @@ os.chdir(abspath)
 from configSub import *
 
 
-class heatDoc(couchdbkit.Document):
+class adminDoc(couchdbkit.Document):
 	
-	doc_type = "heatDoc"
+	doc_type = "adminDoc"
 	
 	heat = couchdbkit.IntegerProperty()
-	vehicleType = couchdbkit.IntegerProperty()
-	
-	bots = couchdbkit.ListProperty()
+	viewScreen = couchdbkit.IntegerProperty()
 
-heatDoc.set_db(database)
+
+adminDoc.set_db(database)
