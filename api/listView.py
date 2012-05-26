@@ -38,7 +38,7 @@ class listView(baseView.baseView):
 			partial.location = bot['location']
 			partial.botName = bot['name']
 			partial.builders = bot['builders']
-			partial.checkin = bot['checkedIn']
+			partial.checkedIn = bot['checkedIn']
 			page.content += str(partial)
 		
 		web.header('Content-Type', "text/html")
