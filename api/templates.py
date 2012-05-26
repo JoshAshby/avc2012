@@ -58,7 +58,7 @@ class listViewTemplate(Template):
 	title = ''
 	content = ''
 
-class adminMainView(Template):
+class adminTemplate(Template):
 	baseurl = baseurl
 	urlRoot = urlRoot
 	asseturl = assetUrl

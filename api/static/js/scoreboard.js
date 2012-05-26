@@ -31,7 +31,9 @@ function tableRefresh(){
 		heat = data['admin']['heat'];
 		view = data['admin']['viewScreen'];
 	}).complete(function(){
-		window.location = '#/' + view;
+		if(view != null){
+			window.location = '#/' + view;
+		}
 
 		window.setTimeout($.get('checkIn/', function(data) {
 			$('#checkInTable').html(data);
@@ -47,7 +49,7 @@ function tableRefresh(){
 			$('#currentTable').html(data);
 		}), 500);
 	});
-	t=setTimeout(tableRefresh, 10000);
+	t=setTimeout(tableRefresh, 5000);
 };
 
 tableRefresh();

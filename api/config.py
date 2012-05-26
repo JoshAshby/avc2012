@@ -20,6 +20,7 @@ import web
 import listPage
 import scoreboardPage
 import standPage
+import adminPage
 import teamPage
 import aboutPage
 
@@ -32,5 +33,6 @@ urls = (
 	(urlRoot + '/stand'), standPage.app,
 	(urlRoot + '/about'), aboutPage.app,
 	(urlRoot + '/team'), teamPage.app,
+	(urlRoot + '/admin'), adminPage.app,
 	'/static/(.*)', 'static'
 )
