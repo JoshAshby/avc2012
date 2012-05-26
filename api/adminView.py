@@ -28,7 +28,7 @@ class adminMainView(baseView.baseView):
 		return json.dumps({'error': 'This is an HTML only page, no JSON please.'})
 		
 	def HTML(self):
-		page = templates.adminTemplate(file=templates.mainTemplateSet['adminView'])
+		page = templates.adminMainTemplate(file=templates.mainTemplateSet['adminMainView'])
 		page.title = (titleHalf + 'Admin')
 		
 		web.header('Content-Type', "text/html")

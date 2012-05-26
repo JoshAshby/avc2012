@@ -18,10 +18,10 @@ abspath = os.path.dirname(__file__)
 sys.path.append(abspath)
 os.chdir(abspath)
 from configSub import *
-import aboutView
+import adminView
 import baseObject
 from adminDocument import *
-from botDocument import *
+from botsDocument import *
 from heatDocument import *
 
 baseObject.urlReset()
@@ -42,7 +42,7 @@ class adminMain(baseObject.baseHTTPObject):
 		Returns:
 			
 		'''
-		view = adminMainView.adminMainView()
+		view = adminView.adminMainView()
 		
 		return view.returnData()
 

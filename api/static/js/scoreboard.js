@@ -36,17 +36,26 @@ function tableRefresh(){
 		}
 
 		window.setTimeout($.get('checkIn/', function(data) {
-			$('#checkInTable').html(data);
+			table = $('checkInTable').html();
+			if(table != data){
+				$('#checkInTable').html(data);
+			}
 		}), 500);
 
 		window.setTimeout($.get(('heat/' + (heat+1) + '/'), function(data) {
 			$("#upNextId").html(heat+1);
-			$('#upNextTable').html(data);
+			table = $('#upNextTable').html();
+			if(table != data){
+				$('#upNextTable').html(data);
+			}
 		}), 500);
 
 		window.setTimeout($.get(('heat/' + (heat) + '/'), function(data) {
 			$("#currentId").html(heat);
-			$('#currentTable').html(data);
+			table = $('#currentTable').html();
+			if(table != data){
+				$('#currentTable').html(data);
+			}
 		}), 500);
 	});
 	t=setTimeout(tableRefresh, 5000);

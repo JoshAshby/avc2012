@@ -22,7 +22,10 @@ mainTemplateSet = {
 	'index': (templatesFolder + 'index.tpl.html'),
 	'listView': (templatesFolder + 'listView.tpl.html'),
 	'listViewBody': (templatesFolder + 'listViewBody.tpl.html'),
-	'adminMainView': (templatesFolder + 'admin.tpl.html'),
+	'adminMainView': (templatesFolder + 'adminMainView.tpl.html'),
+	'adminTeamListView': (templatesFolder + 'adminTeamListView.tpl.html'),
+	'adminTeamView': (templatesFolder + 'adminTeamView.tpl.html'),
+	'adminScoreboardView': (templatesFolder + 'adminScoreboardView.tpl.html'),
 	'aboutView': (templatesFolder + 'about.tpl.html'),
 	'scoreboardView': (templatesFolder + 'scoreboard.tpl.html'),
 	'teamView': (templatesFolder + 'team.tpl.html')
@@ -58,7 +61,7 @@ class listViewTemplate(Template):
 	title = ''
 	content = ''
 
-class adminTemplate(Template):
+class adminMainTemplate(Template):
 	baseurl = baseurl
 	urlRoot = urlRoot
 	asseturl = assetUrl
