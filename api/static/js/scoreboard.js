@@ -1,7 +1,11 @@
+$.ajaxSetup({cache: false});
 var query = {};
-location.search.replace( /[A-Z0-9]+?=(\w*)/gi, function(a) {
+var heat;
+var view;
+
+location.search.replace( /[A-Z0-9]+?=(\w*)/gi, function(a){
 	query[ a.split( '=' ).shift() ] = a.split( '=' ).pop();
-} );
+});
 
 Reveal.initialize({
 	// Display controls in the bottom right corner
@@ -22,17 +26,28 @@ Reveal.initialize({
 	transition: query.transition || 'default' // default/cube/page/concave/linear(2d)
 });
 
-heat = 0;
+function tableRefresh(){
+	$.getJSON('admin/', {"t": "json"}, function(data){
+		heat = data['admin']['heat'];
+		view = data['admin']['viewScreen'];
+	}).complete(function(){
+		window.location = '#/' + view;
 
-$.getJSON('admin/?t=json', function(data) {
-	alert(data['heat']);
-	heat = data['heat']
-});
+		window.setTimeout($.get('checkIn/', function(data) {
+			$('#checkInTable').html(data);
+		}), 500);
 
-window.setTimeout($.get('checkIn/', function(data) {
-	$('#checkInTable').html(data);
-}), 500);
+		window.setTimeout($.get(('heat/' + (heat+1) + '/'), function(data) {
+			$("#upNextId").html(heat+1);
+			$('#upNextTable').html(data);
+		}), 500);
 
-window.setTimeout($.get(('heat/' + heat + '/'), function(data) {
-	$('#scheduleTable').html(data);
-}), 500);
+		window.setTimeout($.get(('heat/' + (heat) + '/'), function(data) {
+			$("#currentId").html(heat);
+			$('#currentTable').html(data);
+		}), 500);
+	});
+	t=setTimeout(tableRefresh, 10000);
+};
+
+tableRefresh();

@@ -106,7 +106,7 @@ class heat(baseObject.baseHTTPObject):
 
 
 @baseObject.route('/admin/')
-class current(baseObject.baseHTTPObject):
+class admin(baseObject.baseHTTPObject):
 	'''
 
 	'''

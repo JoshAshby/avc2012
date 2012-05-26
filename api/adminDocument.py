@@ -23,7 +23,8 @@ class adminDoc(couchdbkit.Document):
 	doc_type = "adminDoc"
 	
 	heat = couchdbkit.IntegerProperty()
-	viewScreen = couchdbkit.IntegerProperty()
+
+	viewScreen = couchdbkit.StringProperty()
 
 
 adminDoc.set_db(database)
