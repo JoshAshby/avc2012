@@ -77,7 +77,10 @@ class adminScoreboard(baseObject.baseHTTPObject):
 		'''
 		nextView = str(self.hasMember('view'))
 
-		doc = adminDoc(id=0)
+		docId = database.view("admin/Admin", key=0).first()['value']['_id']
+		print docId
+
+		doc = adminDoc.get(docId)
 
 		doc.viewScreen = nextView
 		doc.save()
