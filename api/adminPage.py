@@ -47,4 +47,59 @@ class adminMain(baseObject.baseHTTPObject):
 		return view.returnData()
 
 
+@baseObject.route('/scoreboard/')
+class adminScoreboard(baseObject.baseHTTPObject):
+	'''
+
+	'''
+	def get(self):
+		'''
+		GET verb call
+		
+		
+		Args:
+			
+		Returns:
+			
+		'''
+		view = adminView.adminScoreboardView()
+		
+		return view.returnData()
+
+	def post(self):
+		'''
+		POST verb call
+
+		Args:
+
+		Returns:
+
+		'''
+		nextView = str(self.hasMember('view'))
+
+		doc = adminDoc(id=0)
+
+		doc.viewScreen = nextView
+		doc.save()
+		
+
+@baseObject.route('/teams/')
+class adminTeam(baseObject.baseHTTPObject):
+	'''
+
+	'''
+	def get(self):
+		'''
+		GET verb call
+		
+		
+		Args:
+			
+		Returns:
+			
+		'''
+		view = adminView.adminTeamView()
+		
+		return view.returnData()
+
 app = web.application(baseObject.urls, globals())

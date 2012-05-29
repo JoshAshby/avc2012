@@ -34,3 +34,45 @@ class adminMainView(baseView.baseView):
 		web.header('Content-Type', "text/html")
 		
 		return page
+
+
+class adminScoreboardView(baseView.baseView):
+	def JSON(self):
+		web.header('Content-Type', 'application/json')
+		return json.dumps({'error': 'This is an HTML only page, no JSON please.'})
+		
+	def HTML(self):
+		page = templates.adminMainTemplate(file=templates.mainTemplateSet['adminScoreboardView'])
+		page.title = (titleHalf + 'Admin Scoreboard')
+		
+		web.header('Content-Type', "text/html")
+		
+		return page
+
+
+class adminTeamListView(baseView.baseView):
+	def JSON(self):
+		web.header('Content-Type', 'application/json')
+		return json.dumps({'error': 'This is an HTML only page, no JSON please.'})
+		
+	def HTML(self):
+		page = templates.adminMainTemplate(file=templates.mainTemplateSet['adminTeamListView'])
+		page.title = (titleHalf + 'Admin Teams')
+		
+		web.header('Content-Type', "text/html")
+		
+		return page
+
+
+class adminTeamView(baseView.baseView):
+	def JSON(self):
+		web.header('Content-Type', 'application/json')
+		return json.dumps({'error': 'This is an HTML only page, no JSON please.'})
+		
+	def HTML(self):
+		page = templates.adminMainTemplate(file=templates.mainTemplateSet['adminTeamView'])
+		page.title = (titleHalf + 'Admin Team Info')
+			
+		web.header('Content-Type', "text/html")
+		
+		return page
