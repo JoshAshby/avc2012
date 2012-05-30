@@ -1,25 +1,13 @@
 #encoding UTF-8
 #include "htmlTemplates/partials/header.tpl.html"
-<div class="container-fluid">
-	<div class="row-fluid">
-		<div class="span3">
-			<div class="well sidebar-nav">
-				<ul class="nav nav-list">
-					<li class="nav-header">Scoreboard</li>
-					<li>Current view:</li>
-					<li id="currentView"></li>
-					<li class="nav-header">Team Stats</li>
-					<li id="teamStats"></li>
-				</ul>
-			</div><!--/.well -->
-		</div><!--/span-->
+#include "htmlTemplates/partials/adminSidebar.tpl.html"
 		<div class="span9">
 			<div class="hero-unit">
 				<h2>Welcome to the Scoreboard Admin Panel!</h2>
 				<p>Here you can change the current view of the scoreboard, and view and update team info.</p>
-				<p><a class="btn btn-primary btn-large" href="scoreboard/">Scoreboard Views »</a>   <a class="btn btn-primary btn-large" href="teams/">Team List »</a></p>
+				<p><a class="btn btn-primary btn-large" href="scoreboard/">Scoreboard Views »</a>   <a class="btn btn-primary btn-large" href="teams/">Team List »</a> <a class="btn btn-primary btn-large" href="schedule/">Heat Schedule</a></p>
 			</div>
 		</div><!--/span9-->
 	</div><!--/row-->
 
-#include "htmlTemplates/partials/footer.tpl.html"
+#include "htmlTemplates/partials/adminFooter.tpl.html"

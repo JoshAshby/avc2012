@@ -28,7 +28,7 @@ class listView(baseView.baseView):
 		return json.dumps({'bots': self.data})
 		
 	def HTML(self):
-		page = templates.listViewTemplate(file=templates.mainTemplateSet['listView'])
+		page = templates.genericTemplate(file=templates.mainTemplateSet['listView'])
 		page.title = (titleHalf + 'List-O-Bots')
 		page.content = ''
 		for bot in self.data:

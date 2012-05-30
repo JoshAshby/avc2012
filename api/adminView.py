@@ -28,7 +28,7 @@ class adminMainView(baseView.baseView):
 		return json.dumps({'error': 'This is an HTML only page, no JSON please.'})
 		
 	def HTML(self):
-		page = templates.adminMainTemplate(file=templates.mainTemplateSet['adminMainView'])
+		page = templates.genericTemplate(file=templates.mainTemplateSet['adminMainView'])
 		page.title = (titleHalf + 'Admin')
 		
 		web.header('Content-Type', "text/html")
@@ -42,7 +42,7 @@ class adminScoreboardView(baseView.baseView):
 		return json.dumps({'error': 'This is an HTML only page, no JSON please.'})
 		
 	def HTML(self):
-		page = templates.adminMainTemplate(file=templates.mainTemplateSet['adminScoreboardView'])
+		page = templates.genericTemplate(file=templates.mainTemplateSet['adminScoreboardView'])
 		page.title = (titleHalf + 'Admin Scoreboard')
 		
 		web.header('Content-Type', "text/html")
@@ -56,8 +56,19 @@ class adminTeamListView(baseView.baseView):
 		return json.dumps({'error': 'This is an HTML only page, no JSON please.'})
 		
 	def HTML(self):
-		page = templates.adminMainTemplate(file=templates.mainTemplateSet['adminTeamListView'])
+		page = templates.genericTemplate(file=templates.mainTemplateSet['adminTeamListView'])
 		page.title = (titleHalf + 'Admin Teams')
+		page.content = ''
+
+		for bot in self.data:
+			partial = templates.PartialListRow(file=templates.partialTemplateSet['row_listAdminView'])
+			partial.teamId = bot['id']
+			partial.teamName = bot['team']
+			partial.botName = bot['name']
+			partial.location = bot['location']
+			partial.builders = bot['builders']
+			partial.checkin = bot['checkedIn']
+			page.content += str(partial)
 		
 		web.header('Content-Type', "text/html")
 		
@@ -70,9 +81,38 @@ class adminTeamView(baseView.baseView):
 		return json.dumps({'error': 'This is an HTML only page, no JSON please.'})
 		
 	def HTML(self):
-		page = templates.adminMainTemplate(file=templates.mainTemplateSet['adminTeamView'])
+		page = templates.genericTemplate(file=templates.mainTemplateSet['adminTeamView'])
 		page.title = (titleHalf + 'Admin Team Info')
+		page.content = ''
+		page.team = self.data['team']
+		page.name = self.data['name']
+		page.location = self.data['location']
+		page.builders = self.data['builders']
+		page.checkin = self.data['checkedIn']
+		page.vehicleType = self.data['vehicleType']
 			
+		web.header('Content-Type', "text/html")
+		
+		return page
+
+class adminSchedule(baseView.baseView):
+	def JSON(self):
+		web.header('Content-Type', 'application/json')
+		return json.dumps({'error': 'This is an HTML only page, no JSON please.'})
+		
+	def HTML(self):
+		page = templates.genericTemplate(file=templates.mainTemplateSet['adminScheduleView'])
+		page.title = (titleHalf + 'Admin Team Info')
+		page.content = ''
+	
+		for heat in self.data:
+			partial = templates.PartialListRow(file=templates.partialTemplateSet['row_listAdminHeatView'])
+			partial.heat = heat['heat']
+			partial.vehicleType = heat['vehicleType']
+			partial.bots = heat['bots']
+			page.content += str(partial)
+
+
 		web.header('Content-Type', "text/html")
 		
 		return page

@@ -34,4 +34,37 @@ class botsDoc(couchdbkit.Document):
 	
 	heats = couchdbkit.DictProperty()
 
+	heats = {
+		"1": {
+			"time": 0,
+			"corners": 0,
+			"bonus": {
+				"langBox": 0,
+				"landLot": 0,
+				"takeOff": 0,
+				"ring": 0,
+				},
+		},
+		"2": {
+			"time": 0,
+			"corners": 0,
+			"bonus": {
+				"langBox": 0,
+				"landLot": 0,
+				"takeOff": 0,
+				"ring": 0,
+				},
+	},
+		"3": {
+			"time": 0,
+			"corners": 0,
+			"bonus": {
+				"langBox": 0,
+				"landLot": 0,
+				"takeOff": 0,
+				"ring": 0,
+				},
+		},
+	}
+
 botsDoc.set_db(database)

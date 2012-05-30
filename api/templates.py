@@ -26,42 +26,18 @@ mainTemplateSet = {
 	'adminTeamListView': (templatesFolder + 'adminTeamListView.tpl.html'),
 	'adminTeamView': (templatesFolder + 'adminTeamView.tpl.html'),
 	'adminScoreboardView': (templatesFolder + 'adminScoreboardView.tpl.html'),
+	'adminScheduleView': (templatesFolder + 'adminScheduleView.tpl.html'),
 	'aboutView': (templatesFolder + 'about.tpl.html'),
 	'scoreboardView': (templatesFolder + 'scoreboard.tpl.html'),
-	'teamView': (templatesFolder + 'team.tpl.html')
 }
 
 partialTemplateSet = {
 	'row_listView': (partialTemplatesFolder + 'row_listView.tpl.html'),
-	'row_listViewBody': (partialTemplatesFolder + 'row_listViewBody.tpl.html')
+	'row_listViewBody': (partialTemplatesFolder + 'row_listViewBody.tpl.html'),
+	'row_listAdminView': (partialTemplatesFolder + 'row_listAdminView.tpl.html'),
 }
 
-class indexTemplate(Template):
-	baseurl = baseurl
-	urlRoot = urlRoot
-	asseturl = assetUrl
-	title = ''
-
-class aboutTemplate(Template):
-	baseurl = baseurl
-	urlRoot = urlRoot
-	asseturl = assetUrl
-	title = ''
-
-class scoreboardTemplate(Template):
-	baseurl = baseurl
-	urlRoot = urlRoot
-	asseturl = assetUrl
-	title = ''
-
-class listViewTemplate(Template):
-	baseurl = baseurl
-	urlRoot = urlRoot
-	asseturl = assetUrl
-	title = ''
-	content = ''
-
-class adminMainTemplate(Template):
+class genericTemplate(Template):
 	baseurl = baseurl
 	urlRoot = urlRoot
 	asseturl = assetUrl
@@ -77,4 +53,5 @@ class PartialListRow(Template):
 	botName = ''
 	teamName = ''
 	builders = ''
+	checkin = ''
 

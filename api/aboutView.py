@@ -28,7 +28,7 @@ class aboutView(baseView.baseView):
 		return json.dumps({'about': self.data})
 		
 	def HTML(self):
-		page = templates.aboutTemplate(file=templates.mainTemplateSet['aboutView'])
+		page = templates.genericTemplate(file=templates.mainTemplateSet['aboutView'])
 		page.title = (titleHalf + 'About')
 		
 		web.header('Content-Type', "text/html")

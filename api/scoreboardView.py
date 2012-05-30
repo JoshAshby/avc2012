@@ -28,7 +28,7 @@ class scoreboardView(baseView.baseView):
 		return json.dumps({'error': 'This is a web browser application and does not return JSON, Sorry!'})
 		
 	def HTML(self):
-		page = templates.scoreboardTemplate(file=templates.mainTemplateSet['scoreboardView'])
+		page = templates.genericTemplate(file=templates.mainTemplateSet['scoreboardView'])
 		page.title = (titleHalf + 'Scoreboard')
 		page.checkIn = ''
 		page.schedule = ''
@@ -44,7 +44,7 @@ class listView(baseView.baseView):
 		return json.dumps({'bots': self.data})
 		
 	def HTML(self):
-		page = templates.listViewTemplate(file=templates.mainTemplateSet['listViewBody'])
+		page = templates.genericTemplate(file=templates.mainTemplateSet['listViewBody'])
 		page.content = ''
 		for bot in self.data:
 			partial = templates.PartialListRow(file=templates.partialTemplateSet['row_listViewBody'])
@@ -67,7 +67,7 @@ class heatView(baseView.baseView):
 		return json.dumps({'bots': self.data})
 		
 	def HTML(self):
-		page = templates.listViewTemplate(file=templates.mainTemplateSet['listViewBody'])
+		page = templates.genericTemplate(file=templates.mainTemplateSet['listViewBody'])
 		page.content = ''
 		for bot in self.data:
 			partial = templates.PartialListRow(file=templates.partialTemplateSet['row_listViewBody'])
@@ -89,7 +89,7 @@ class tableView(baseView.baseView):
 		return json.dumps({'bots': self.data})
 		
 	def HTML(self):
-		page = templates.listViewTemplate(file=templates.mainTemplateSet['listViewBody'])
+		page = templates.genericTemplate(file=templates.mainTemplateSet['listViewBody'])
 		page.content = ''
 		for bot in self.data:
 			partial = templates.PartialListRow(file=templates.partialTemplateSet['row_listViewBody'])
@@ -111,7 +111,7 @@ class adminView(baseView.baseView):
 		return json.dumps({'admin': self.data})
 		
 	def HTML(self):
-		page = templates.adminMainView(file=templates.mainTemplateSet['adminMainView'])
+		page = templates.genericTemplate(file=templates.mainTemplateSet['adminMainView'])
 		page.title = (titleHalf + 'Admin')
 
 		web.header('Content-Type', 'text/html')

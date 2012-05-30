@@ -27,7 +27,20 @@
     <!-- <script src="$asseturl/js/bootstrap-collapse.js"></script> -->
     <script src="$asseturl/js/bootstrap-carousel.js"></script>
     <script src="$asseturl/js/bootstrap-typeahead.js"></script>
-<script src="$asseturl/js/adminScoreboardView.js"></script>
+
+    <script src="$asseturl/js/adminMainView.js"></script>
+    <script src="$asseturl/js/adminScoreboardView.js"></script>
+    <script src="$asseturl/js/adminTeamView.js"></script>
+    <script src="$asseturl/js/adminScheduleView.js"></script>
+
+    <script>
+	if($checkin == 0) {
+		\$('#land').button('toggle');
+	} else {
+		\$('#air').button('toggle');
+	}
+    </script>
+
 
 
 </body></html>

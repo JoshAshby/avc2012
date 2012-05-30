@@ -28,7 +28,7 @@ class indexView(baseView.baseView):
 		return json.dumps({'index': self.data})
 		
 	def HTML(self):
-		page = templates.indexTemplate(file=templates.mainTemplateSet['index'])
+		page = templates.genericTemplate(file=templates.mainTemplateSet['index'])
 		page.title = (titleHalf + 'Landing')
 		
 		web.header('Content-Type', "text/html")

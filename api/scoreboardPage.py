@@ -122,8 +122,6 @@ class admin(baseObject.baseHTTPObject):
 		'''
 		admin = database.view("admin/Admin", key=0).first()['value']
 
-		print admin
-
 		view = scoreboardView.adminView(data=admin)
 		
 		return view.returnData()
