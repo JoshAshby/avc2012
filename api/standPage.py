@@ -29,58 +29,21 @@ baseObject.urlReset()
 @baseObject.route('/')
 class all(baseObject.baseHTTPObject):
 	'''
-
+	Manages the heavy lifting of whos the top 5 and who won what.
 	'''
 	def get(self):
 		'''
 		GET verb call
 		
+		returns a html template with a list of the various standings
 		
 		Args:
+			None
 			
 		Returns:
+		HTML template. See standView.py and templates.py for more info.	
 			
 		'''
-		bots = database.view("bots/Bots").all()
-		
-		for i in bots:
-			i = i['value']
-
-		view = listView.listView(data=bots)
-		
-		return view.returnData()
-
-
-@baseObject.route('/top5')
-class all(baseObject.baseHTTPObject):
-	'''
-
-	'''
-	def get(self):
-		'''
-		GET verb call
-		
-		
-		Args:
-			
-		Returns:
-			
-		'''
-		bots = database.view("bots/Bots").all()
-		
-		for i in bots:
-			i = i['value']
-
-		for bot in bots:
-			times = {}
-			for heats in bot['heats']:
-#				times.append()
-				return heats
-				
-
-#		view = listView.listView(data=bots)
-		
-#		return view.returnData()
-
+		pass # still have to write this logic I guess.
 
 app = web.application(baseObject.urls, globals())

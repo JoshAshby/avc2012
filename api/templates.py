@@ -18,6 +18,7 @@ os.chdir(abspath)
 from configSub import *
 from Cheetah.Template import Template
 
+#set-o-main templates. This is really here for ease of use and so forth
 mainTemplateSet = {
 	'index': (templatesFolder + 'index.tpl.html'),
 	'listView': (templatesFolder + 'listView.tpl.html'),
@@ -31,19 +32,25 @@ mainTemplateSet = {
 	'scoreboardView': (templatesFolder + 'scoreboard.tpl.html'),
 }
 
+#same as above just for partials
 partialTemplateSet = {
 	'row_listView': (partialTemplatesFolder + 'row_listView.tpl.html'),
 	'row_listViewBody': (partialTemplatesFolder + 'row_listViewBody.tpl.html'),
 	'row_listAdminView': (partialTemplatesFolder + 'row_listAdminView.tpl.html'),
 }
 
+#generic template class, called by all the views currently
+#because nothing fancy is needed.
 class genericTemplate(Template):
 	baseurl = baseurl
 	urlRoot = urlRoot
 	asseturl = assetUrl
 	title = ''
 	content = ''
+	checkin = ''
 
+#just one for Partials, not that it's needed, but just as a 
+#reminder that your working with a partial. same as above basically.
 class PartialListRow(Template):
 	baseurl = baseurl
 	urlRoot = urlRoot

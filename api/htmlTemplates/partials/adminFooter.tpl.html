@@ -34,11 +34,41 @@
     <script src="$asseturl/js/adminScheduleView.js"></script>
 
     <script>
-	if($checkin == 0) {
-		\$('#land').button('toggle');
-	} else {
-		\$('#air').button('toggle');
-	}
+	//Do this instead of just \$id or \$teamId because this
+	//is on everypage and the id location changes and may not always be there...
+	var botId = \$('#checkInBtn').attr('data-id')|\$('#team').attr('data-id');
+	
+	if(window.location['pathname'].match('team')){
+		if((0$vehicleType|0) == 0) {
+			\$('#land').button('toggle');
+		} else {
+			\$('#air').button('toggle');
+		}
+		\$('#land').click(function(){
+			\$.post('$urlRoot/admin/team/'+botId+'/', {"vehicleType": 0});
+		});
+		\$('#air').click(function(){
+			\$.post('$urlRoot/admin/team/'+botId+'/', {"vehicleType": 1});
+		});
+		\$('#save').click(function(){
+			name = \$('#name').val();
+			team = \$('#teamName').val();
+			builders = \$('#builders').val();
+			locat = \$('#locat').val();
+			heatOne = \$('#heat1').val();
+			heatTwo = \$('#heat2').val();
+			heatThree = \$('#heat3').val();
+
+			\$.post('$urlRoot/admin/team/'+botId+'/', {"name": name, "team": team, "builders": builders, "location": locat, "heatOne": heatOne, "heatTwo": heatTwo, "heatThree": heatThree});
+			window.setTimeout(window.location.reload(), 1500);
+
+		});
+	};
+
+	\$('#checkInBtn').click(function(){
+		\$.post('$urlRoot/admin/teams/', {"botId": botId});
+		window.setTimeout(window.location.reload(), 500);
+	});
     </script>
 
 

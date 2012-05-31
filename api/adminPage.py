@@ -30,16 +30,20 @@ baseObject.urlReset()
 @baseObject.route('/')
 class adminMain(baseObject.baseHTTPObject):
 	'''
-
+	Displays the main admin landing page.
 	'''
 	def get(self):
 		'''
 		GET verb call
 		
+		returns the template for the admin landing page,
+		nothing fancy here just a few links to the areas.
 		
 		Args:
+			None
 			
 		Returns:
+			HTML template, see adminView and templates.py for more info.
 			
 		'''
 		view = adminView.adminMainView()
@@ -50,16 +54,20 @@ class adminMain(baseObject.baseHTTPObject):
 @baseObject.route('/scoreboard/')
 class adminScoreboard(baseObject.baseHTTPObject):
 	'''
-
+	Manages the current view on the over all scoreboard
 	'''
 	def get(self):
 		'''
 		GET verb call
 		
+		Displays the template with the 6 buttons corrisponding
+		to which scoreboard view should be shown.
 		
 		Args:
+			None
 			
 		Returns:
+			HTML template, see adminView and templates.py for more info.
 			
 		'''
 		view = adminView.adminScoreboardView()
@@ -70,10 +78,13 @@ class adminScoreboard(baseObject.baseHTTPObject):
 		'''
 		POST verb call
 
+		updates the admin doc to reflect a change in the view
+
 		Args:
+			view - Can be any of: 0,1,2,2/1,3,3/1
 
 		Returns:
-
+			Nothing, error page if something went wrong.
 		'''
 		nextView = str(self.hasMember('view'))
 
@@ -88,21 +99,28 @@ class adminScoreboard(baseObject.baseHTTPObject):
 @baseObject.route('/teams/')
 class adminTeamList(baseObject.baseHTTPObject):
 	'''
-
+	Manages the team list
 	'''
 	def get(self):
 		'''
 		GET verb call
 		
+		generates a list of all the robots and then places
+		them into a table in the template.
 		
 		Args:
+			None
 			
 		Returns:
+			HTML template, see adminView and templates.py for more info.
 			
 		'''
 		bots = database.view("bots/Bots").all()
 		botNew = []
 		
+		heats = database.view("schedule/Schedule").all()
+		heatNew = []
+
 		for i in bots:
 			botNew.append(i['value'])
 
@@ -117,8 +135,10 @@ class adminTeamList(baseObject.baseHTTPObject):
 		Marks the given botId number as checked in
 		
 		Args:
+			botId - just an int representing the robots id number
 
 		Returns:
+			Nothing, error page if somethings wrong
 
 		'''
 		botId = str(self.hasMember('botId'))
@@ -132,27 +152,39 @@ class adminTeamList(baseObject.baseHTTPObject):
 		doc.save()
 
 
-@baseObject.route('/teams/(.*)/')
+@baseObject.route('/team/(.*)/')
 class adminTeam(baseObject.baseHTTPObject):
 	'''
+	Manages a teams info.
 
+	**TODO**: Add in a PUT call to add new bots.
 	'''
 	def get(self):
 		'''
 		GET verb call
 		
+		pulls the teams info from the database and places it in the template
 		
 		Args:
+			botId - just an int representing the robots ID in the database
 			
 		Returns:
+			HTML template, see adminView and templates.py for more info.
 			
 		'''
 		bot = int(self.hasMember('botId'))
 
 		doc = database.view("bots/Bots", key=bot).first()['value']
-		
-		botInfo = doc
-		view = adminView.adminTeamView(data=botInfo)
+
+		heats = database.view("schedule/Schedule").all()
+		heatNew = []
+
+		for i in heats:
+			heatNew.append(i['value']['heat'])
+
+		data={"bot": doc, "heats": heatNew}
+
+		view = adminView.adminTeamView(data=data)
 		
 		return view.returnData()
 
@@ -163,74 +195,79 @@ class adminTeam(baseObject.baseHTTPObject):
 		Updates the given information in the database
 
 		Args:
+			botId - int
+			name - str
+			builders - str
+			checkedIn - int, one or zero
+			team - str
+			vehicleType - int, one for air, zero for air
+			location - str
+			heatOne - str of the database doc _id
+			heatTwo - str of the database doc _id
+			heatThree - str of the database doc _id
 
 		Returns:
+			Nothing, error page if somethings wrong
 
 		'''
-		botId = str(self.hasMember('botId'))
+		botId = int(self.hasMember(0))
 
 		docId = database.view("bots/Bots", key=botId).first()['value']['_id']
+		doc = botsDoc.get(docId)
 
-		doc = botDocument.get(docId)
-		
-		name = str(self.hasMember('name', True))
-		builders = str(self.hasMember('builders', True))
-		checkedIn = int(self.hasMember('checkedIn', True))
-		team = str(self.hasMember('team', True))
-		vehicleType = int(self.hasMember('vehicleType', True))
-		location = str(self.hasMember('location', True))
+		name = self.hasMember('name', True)
+		builders = self.hasMember('builders', True)
+		checkedIn = self.hasMember('checkedIn', True)
+		team = self.hasMember('team', True)
+		vehicleType = self.hasMember('vehicleType', True)
+		location = self.hasMember('location', True)
+		heatOne = self.hasMember('heatOne', True)
+		heatTwo = self.hasMember('heatTwo', True)
+		heatThree = self.hasMember('heatThree', True)
 
-		if name: doc.name = name
-		if builders: doc.builders = builders
-		if checkedIn: doc.checkedIn = checkedIn
-		if team: doc.team = team
-		if vehicleType: doc.vehicleType = vehicleType
+		if name: doc.name = str(name)
+		if builders: doc.builders = str(builders)
+		if checkedIn: doc.checkedIn = int(checkedIn)
+		if team: doc.team = str(team)
+		if vehicleType: doc.vehicleType = int(vehicleType)
+		if location: doc.location = str(location)
 		
+		# Next up we're going to store the id # of the 
+		# heat doc which holds the info for that heat.
+		# This way it's easy to pull out all three heats
+		# when looking at one robot, and still about to be
+		# used to concoct a set of bots for each id number.
+		if heatOne:
+			doc.heatOne = str(heatOne)
+
+		if heatTwo:
+			doc.heatTwo = str(heatTwo)
+
+		if heatThree:
+			doc.heatThree = str(heatThree)
+
 		doc.save()
 		
-
-@baseObject.route('/time/(.*)/')
-class adminTime(baseObject.baseHTTPObject):
-	'''
-
-	'''
-	def post(self):
-		'''
-		POST verb call
-		
-		Updates heat times for the given botId
-
-		Args:
-
-		Returns:
-
-		'''
-		botId = int(self.hasMember('botId'))
-
-		docId = database.view("bots/Bots", key=botId).first()['value']['_id']
-
-		doc = botDocument.get(docId)
-		
-		heatId = int(self.hasMember('heatId', True))
-
-		
-		
-		doc.save()
-
 
 @baseObject.route('/schedule/')
 class adminSchedule(baseObject.baseHTTPObject):
 	'''
+	Manages the heats
 
+	**TODO**: Add a PUT verb call to add new heats
 	'''
 	def get(self):
 		'''
 		GET verb call
-		
+
+		returns a template of all the heats, pulled from the botDocs
+		and compiled into a complete list.
 		
 		Args:
+			None
 			
 		Returns:
+			HTML template, see adminView and templates.py for more info.
 			
 		'''
 		view = adminView.adminScheduleView()
@@ -241,18 +278,20 @@ class adminSchedule(baseObject.baseHTTPObject):
 		'''
 		POST verb call
 
+		updates the heats info, but not which bots are competing.
+		Bots that are in that heat are managed through the botsDoc
+		because of how heats are setup.
+
 		Args:
+			heatId - str
+			time - duh.
+			vehicleType - int, one for air, zero for ground
+			heatNum - int
 
 		Returns:
+			Nothing, error page if somethings wrong.
 
 		'''
-		heatId = int(self.hasMember('heatId'))
-		
-
-
-		doc = botDocument.get(docId)
-
-		doc.save()
-
+		pass # Still have to write this I guess.
 
 app = web.application(baseObject.urls, globals())

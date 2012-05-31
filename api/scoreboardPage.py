@@ -30,16 +30,19 @@ baseObject.urlReset()
 @baseObject.route('/')
 class index(baseObject.baseHTTPObject):
 	'''
-
+	Manages the scoreboard view
 	'''
 	def get(self):
 		'''
 		GET verb call
 		
+		returns the main scoreboard template
 		
 		Args:
+			None
 			
 		Returns:
+			HTML template, see scoreboardView.py and templates.py for more info.
 			
 		'''
 		view = scoreboardView.scoreboardView()
@@ -49,16 +52,19 @@ class index(baseObject.baseHTTPObject):
 @baseObject.route('/checkIn/')
 class checkIn(baseObject.baseHTTPObject):
 	'''
-
+	Manages the check in table in the scoreboard.
 	'''
 	def get(self):
 		'''
 		GET verb call
 		
-		
+		Returns a partial template of robots who have checked in.
+
 		Args:
-			
+			None	
+
 		Returns:
+			table row formated data to be pulled right into a table body.
 			
 		'''
 		bots = database.view("bots/Bots").all()
@@ -77,16 +83,21 @@ class checkIn(baseObject.baseHTTPObject):
 @baseObject.route('/heat/(.*)/')
 class heat(baseObject.baseHTTPObject):
 	'''
+	Manages views of heats.
 
+	**TODO**: Update this for the new storage of heats in botsDocs not heatDocs
 	'''
 	def get(self):
 		'''
 		GET verb call
-		
-		
+
+		Returns a partial template of robots in a heat.
+
 		Args:
+			heat - int of the heat number
 			
 		Returns:
+			table row formated data to be pulled right into a table body.
 			
 		'''
 		heat = int(self.hasMember('heat'))
@@ -108,16 +119,19 @@ class heat(baseObject.baseHTTPObject):
 @baseObject.route('/admin/')
 class admin(baseObject.baseHTTPObject):
 	'''
-
+	Just a call to figure out what view to be on
 	'''
 	def get(self):
 		'''
 		GET verb call
-		
+
+		returns JSON of which view to be on.
 		
 		Args:
+			None
 			
 		Returns:
+			JSON object silimar to: {"admin": {"viewScreen": "2/1"}} 
 			
 		'''
 		admin = database.view("admin/Admin", key=0).first()['value']

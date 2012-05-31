@@ -18,9 +18,11 @@ except:
 	sys.path.append(abspath)
 	os.chdir(abspath)
 	from configSub import *
+
 if serverType is 'gevent':
 	from gevent import monkey; monkey.patch_all()
 	from gevent.pywsgi import WSGIServer
+
 import web
 import json
 import sys, os
@@ -34,26 +36,37 @@ baseObject.urlReset()
 @baseObject.route(urlRoot + '/')
 class index(baseObject.baseHTTPObject):  
 	'''
-	Base Index
-	
+	Base index view, nothing fancy just a landing page
 	'''
 	def get(self):
+		'''
+		GET verb call
+
+		returns the index template which is just a fancy landing page.
+
+		Args:
+			None
+
+		Returns:
+			HTML template; see indexView.py and templates.py for more info.
+
+		'''
 		view = indexView.indexView()
 		return view.returnData()
 
 urls += baseObject.urls
 
 if __name__ == "__main__":
-	print "Heres the URLs I'm serving things on..."
+	print "Herewego!"
+	print "I'll give you a nice list of all the URLs I'm serving things on..."
 	print urls
+	print 'Now serving py on port %s with the %s library...' % (HTTPport, serverType)
 	if serverType is 'gevent':
-		from gevent import monkey; monkey.patch_all()
-		from gevent.pywsgi import WSGIServer
 		app = web.application(urls, globals()).wsgifunc()
 		app.internalerror = web.debugerror
-		print 'Now serving py on port %i...' % (HTTPport)
-		WSGIServer(('', HTTPport), app).serve_forever()
+		WSGIServer(('', int(HTTPport)), app).serve_forever()
 	else:
+		sys.argv.append(HTTPport)
 		app = web.application(urls, globals())
 		app.internalerror = web.debugerror
 		app.run()

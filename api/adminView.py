@@ -30,6 +30,7 @@ class adminMainView(baseView.baseView):
 	def HTML(self):
 		page = templates.genericTemplate(file=templates.mainTemplateSet['adminMainView'])
 		page.title = (titleHalf + 'Admin')
+		page.vehicleType = ''
 		
 		web.header('Content-Type', "text/html")
 		
@@ -44,6 +45,7 @@ class adminScoreboardView(baseView.baseView):
 	def HTML(self):
 		page = templates.genericTemplate(file=templates.mainTemplateSet['adminScoreboardView'])
 		page.title = (titleHalf + 'Admin Scoreboard')
+		page.vehicleType = ''
 		
 		web.header('Content-Type', "text/html")
 		
@@ -59,8 +61,9 @@ class adminTeamListView(baseView.baseView):
 		page = templates.genericTemplate(file=templates.mainTemplateSet['adminTeamListView'])
 		page.title = (titleHalf + 'Admin Teams')
 		page.content = ''
+		page.vehicleType = ''
 
-		for bot in self.data:
+		for bot in self.data['bots']:
 			partial = templates.PartialListRow(file=templates.partialTemplateSet['row_listAdminView'])
 			partial.teamId = bot['id']
 			partial.teamName = bot['team']
@@ -69,6 +72,7 @@ class adminTeamListView(baseView.baseView):
 			partial.builders = bot['builders']
 			partial.checkin = bot['checkedIn']
 			page.content += str(partial)
+
 		
 		web.header('Content-Type', "text/html")
 		
@@ -83,19 +87,27 @@ class adminTeamView(baseView.baseView):
 	def HTML(self):
 		page = templates.genericTemplate(file=templates.mainTemplateSet['adminTeamView'])
 		page.title = (titleHalf + 'Admin Team Info')
+		page.vehicleType = ''
 		page.content = ''
-		page.team = self.data['team']
-		page.name = self.data['name']
-		page.location = self.data['location']
-		page.builders = self.data['builders']
-		page.checkin = self.data['checkedIn']
-		page.vehicleType = self.data['vehicleType']
+		page.id = self.data['bot']['id']
+		page.team = self.data['bot']['team']
+		page.name = self.data['bot']['name']
+		page.location = self.data['bot']['location']
+		page.builders = self.data['bot']['builders']
+		page.checkin = self.data['bot']['checkedIn']
+		page.vehicleType = self.data['bot']['vehicleType']
+		heatList = []
+		for heat in self.data['heats']:
+			heatList.append('<option>' + str(heat) + '</option>')
+		page.heat1 = heatList
+		page.heat2 = heatList
+		page.heat3 = heatList
 			
 		web.header('Content-Type', "text/html")
 		
 		return page
 
-class adminSchedule(baseView.baseView):
+class adminScheduleView(baseView.baseView):
 	def JSON(self):
 		web.header('Content-Type', 'application/json')
 		return json.dumps({'error': 'This is an HTML only page, no JSON please.'})
@@ -104,6 +116,7 @@ class adminSchedule(baseView.baseView):
 		page = templates.genericTemplate(file=templates.mainTemplateSet['adminScheduleView'])
 		page.title = (titleHalf + 'Admin Team Info')
 		page.content = ''
+		page.vehicleType = ''
 	
 		for heat in self.data:
 			partial = templates.PartialListRow(file=templates.partialTemplateSet['row_listAdminHeatView'])

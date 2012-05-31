@@ -27,16 +27,19 @@ baseObject.urlReset()
 @baseObject.route('/')
 class about(baseObject.baseHTTPObject):
 	'''
-
+	Manages the about page.
 	'''
 	def get(self):
 		'''
 		GET verb call
 		
+		returns the about page template.
 		
 		Args:
+			None
 			
 		Returns:
+			HTML template; see aboutView.py and templates for more info.
 			
 		'''
 		view = aboutView.aboutView()

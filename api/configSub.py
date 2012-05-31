@@ -26,20 +26,25 @@ you want to server the main HTTP interface on.
 #serverType = 'gevent'
 serverType = 'web.py'
 
-HTTPport = 80
+HTTPport = '80'
 
+#couchdbkit stuff.
 databaseName = 'avc'
 server = couchdbkit.Server()
 database = server.get_or_create_db(databaseName)
 
+#templating stuff
 templatesFolder = 'htmlTemplates/'
 partialTemplatesFolder = 'htmlTemplates/partials/'
-#templating shortcuts...
+
+#templating shortcuts... These get passed to templates
+#in all the view and template.py files
 baseurl = '/avc2012/api'
 urlRoot = '/avc'
 assetUrl = '/static'
 titleHalf = 'SparkFun 2012 AVC - '
 
+#basic classes that are helpful
 class slash:
 	def GET(self): raise web.seeother("/")
 

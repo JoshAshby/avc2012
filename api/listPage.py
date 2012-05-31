@@ -29,16 +29,19 @@ baseObject.urlReset()
 @baseObject.route('/')
 class all(baseObject.baseHTTPObject):
 	'''
-
+	Public interface to see a list of teams and general info.
 	'''
 	def get(self):
 		'''
 		GET verb call
 		
+		returns a template filled with info about each team in a table.
 		
 		Args:
+			None
 			
 		Returns:
+			HTML template; see listView.py and templates for more info.
 			
 		'''
 		bots = database.view("bots/Bots").all()

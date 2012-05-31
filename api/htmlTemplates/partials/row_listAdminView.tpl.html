@@ -4,7 +4,7 @@
 		#if $checkin==1
 			<span class="label label-success">Checked In!</span>
 		#else
-		<a href="#" class="btn btn-primary btn-large" id="$teamId">Not Checked In!</a>
+			<a href="#" class="btn btn-primary btn-large" id="checkInBtn" data-id="$teamId">Not Checked In!</a>
 		#end if
 	</td>
 
@@ -21,5 +21,5 @@
 	<td><b>$teamName</b><br>
 		$location</td>
 	<td>$builders</td>
-	<td><a href="$teamId/" class="btn btn-primary btn-large">Edit Info »</a></td>
+	<td><a href="$urlRoot/admin/team/$teamId/" class="btn btn-primary btn-large">Edit Info »</a></td>
 </tr>
