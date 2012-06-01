@@ -118,9 +118,6 @@ class adminTeamList(baseObject.baseHTTPObject):
 		bots = database.view("bots/Bots").all()
 		botNew = []
 		
-		heats = database.view("schedule/Schedule").all()
-		heatNew = []
-
 		for i in bots:
 			botNew.append(i['value'])
 
@@ -156,8 +153,6 @@ class adminTeamList(baseObject.baseHTTPObject):
 class adminTeam(baseObject.baseHTTPObject):
 	'''
 	Manages a teams info.
-
-	**TODO**: Add in a PUT call to add new bots.
 	'''
 	def get(self):
 		'''
@@ -180,9 +175,9 @@ class adminTeam(baseObject.baseHTTPObject):
 		heatNew = []
 
 		for i in heats:
-			heatNew.append(i['value']['heat'])
+			heatNew.append({"id": i['value']['_id'], "num": i['value']['heat']})
 
-		data={"bot": doc, "heats": heatNew}
+		data={"bot": doc, "heat": heatNew}
 
 		view = adminView.adminTeamView(data=data)
 		
@@ -247,6 +242,69 @@ class adminTeam(baseObject.baseHTTPObject):
 			doc.heatThree = str(heatThree)
 
 		doc.save()
+
+	def put(self):
+		'''
+		PUT verb call
+		
+		Inserts a new team into the database.
+		This *should* work...
+
+		Args:
+			name - str
+			builders - str
+			checkedIn - int, one or zero
+			team - str
+			vehicleType - int, one for air, zero for air
+			location - str
+			heatOne - str of the database doc _id
+			heatTwo - str of the database doc _id
+			heatThree - str of the database doc _id
+
+		Returns:
+			Nothing, error page if somethings wrong
+
+		'''
+		botIds = []
+		bots = database.view("bots/Bots")
+		for bot in bots:
+			botIds.append(bot['value']['id'])
+
+		doc = botsDoc(id=(max(botIds)+1))
+
+		name = self.hasMember('name', True)
+		builders = self.hasMember('builders', True)
+		checkedIn = self.hasMember('checkedIn', True)
+		team = self.hasMember('team', True)
+		vehicleType = self.hasMember('vehicleType', True)
+		location = self.hasMember('location', True)
+		heatOne = self.hasMember('heatOne', True)
+		heatTwo = self.hasMember('heatTwo', True)
+		heatThree = self.hasMember('heatThree', True)
+
+		if name: doc.name = str(name)
+		if builders: doc.builders = str(builders)
+		if checkedIn: doc.checkedIn = int(checkedIn)
+		if team: doc.team = str(team)
+		if vehicleType: doc.vehicleType = int(vehicleType)
+		if location: doc.location = str(location)
+		
+		# Next up we're going to store the id # of the 
+		# heat doc which holds the info for that heat.
+		# This way it's easy to pull out all three heats
+		# when looking at one robot, and still about to be
+		# used to concoct a set of bots for each id number.
+		if heatOne:
+			doc.heatOne = str(heatOne)
+
+		if heatTwo:
+			doc.heatTwo = str(heatTwo)
+
+		if heatThree:
+			doc.heatThree = str(heatThree)
+
+		doc.save()
+
 		
 
 @baseObject.route('/schedule/')
@@ -270,7 +328,21 @@ class adminSchedule(baseObject.baseHTTPObject):
 			HTML template, see adminView and templates.py for more info.
 			
 		'''
-		view = adminView.adminScheduleView()
+		heats = {}
+		bots = database.view("bots/Bots")
+		for bot in bots:
+			heats.update({bot['value']['heatOne']: []})
+			heats.update({bot['value']['heatTwo']: []})
+			heats.update({bot['value']['heatThree']: []})
+
+		for bot in bots:
+			heats[bot['value']['heatOne']].append(bot['value'])
+			heats[bot['value']['heatTwo']].append(bot['value'])
+			heats[bot['value']['heatThree']].append(bot['value'])
+
+		print heats
+		
+		view = adminView.adminScheduleView(data=heats)
 		
 		return view.returnData()
 

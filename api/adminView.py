@@ -63,7 +63,7 @@ class adminTeamListView(baseView.baseView):
 		page.content = ''
 		page.vehicleType = ''
 
-		for bot in self.data['bots']:
+		for bot in self.data:
 			partial = templates.PartialListRow(file=templates.partialTemplateSet['row_listAdminView'])
 			partial.teamId = bot['id']
 			partial.teamName = bot['team']
@@ -72,7 +72,6 @@ class adminTeamListView(baseView.baseView):
 			partial.builders = bot['builders']
 			partial.checkin = bot['checkedIn']
 			page.content += str(partial)
-
 		
 		web.header('Content-Type', "text/html")
 		
@@ -97,8 +96,8 @@ class adminTeamView(baseView.baseView):
 		page.checkin = self.data['bot']['checkedIn']
 		page.vehicleType = self.data['bot']['vehicleType']
 		heatList = []
-		for heat in self.data['heats']:
-			heatList.append('<option>' + str(heat) + '</option>')
+		for heat in self.data['heat']:
+			heatList.append('<option value="' + str(heat['id']) + '">' + str(heat['num']) + '</option>')
 		page.heat1 = heatList
 		page.heat2 = heatList
 		page.heat3 = heatList
@@ -117,12 +116,25 @@ class adminScheduleView(baseView.baseView):
 		page.title = (titleHalf + 'Admin Team Info')
 		page.content = ''
 		page.vehicleType = ''
-	
+
+		print self.data
+
 		for heat in self.data:
 			partial = templates.PartialListRow(file=templates.partialTemplateSet['row_listAdminHeatView'])
-			partial.heat = heat['heat']
-			partial.vehicleType = heat['vehicleType']
-			partial.bots = heat['bots']
+			partial.bots = ''
+			partial.heat = heat
+
+			for bot in heat:
+				indivBotPartial = templates.PartialListRow(file=templates.partialTemplateSet['row_listAdminView'])
+				indivBotPartial.teamId = bot['id']
+				indivBotPartial.teamName = bot['team']
+				indivBotPartial.botName = bot['name']
+				indivBotPartial.location = bot['location']
+				indivBotPartial.builders = bot['builders']
+				indivBotPartial.checkin = bot['checkedIn']
+
+				partial.bots += str(indivBotPartial)
+
 			page.content += str(partial)
 
 

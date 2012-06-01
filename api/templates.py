@@ -37,6 +37,7 @@ partialTemplateSet = {
 	'row_listView': (partialTemplatesFolder + 'row_listView.tpl.html'),
 	'row_listViewBody': (partialTemplatesFolder + 'row_listViewBody.tpl.html'),
 	'row_listAdminView': (partialTemplatesFolder + 'row_listAdminView.tpl.html'),
+	'row_listAdminHeatView': (partialTemplatesFolder + 'row_listAdminHeatView.tpl.html'),
 }
 
 #generic template class, called by all the views currently
