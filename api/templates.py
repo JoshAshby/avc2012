@@ -27,7 +27,9 @@ mainTemplateSet = {
 	'adminTeamListView': (templatesFolder + 'adminTeamListView.tpl.html'),
 	'adminTeamView': (templatesFolder + 'adminTeamView.tpl.html'),
 	'adminScoreboardView': (templatesFolder + 'adminScoreboardView.tpl.html'),
-	'adminScheduleView': (templatesFolder + 'adminScheduleView.tpl.html'),
+	'adminHeatListView': (templatesFolder + 'adminHeatListView.tpl.html'),
+	'adminHeatEditView': (templatesFolder + 'adminHeatEditView.tpl.html'),
+	'adminHeatBotView': (templatesFolder + 'adminHeatBotView.tpl.html'),
 	'aboutView': (templatesFolder + 'about.tpl.html'),
 	'scoreboardView': (templatesFolder + 'scoreboard.tpl.html'),
 }

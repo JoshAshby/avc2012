@@ -25,6 +25,4 @@ class heatDoc(couchdbkit.Document):
 	heat = couchdbkit.IntegerProperty()
 	vehicleType = couchdbkit.IntegerProperty()
 	
-	bots = couchdbkit.ListProperty()
-
 heatDoc.set_db(database)

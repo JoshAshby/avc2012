@@ -148,8 +148,9 @@ class baseHTTPObject(object):
 				return self.sentKwargs[tag]
 			
 			if none is None:
-				return self.sentArgs[0]
-			return None
-		
+				return None
+
+			return self.sentArgs[0]
+
 		if type(tag) is int:
 			return self.sentArgs[int(tag)]

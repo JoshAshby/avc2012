@@ -1,0 +1,56 @@
+#encoding UTF-8
+#include "htmlTemplates/partials/header.tpl.html"
+#include "htmlTemplates/partials/adminSidebar.tpl.html"
+		<div class="span9">
+		<div class="row-fluid">
+			<h1>Heat #$heat Info Edit</h1>
+		</div>
+		<div class="row-fluid" id="heat" data-id="$heat">
+			<div class="span9">
+				<form class="well">
+					<label>Heat Time</label>
+					<p>The recommended time has already been placed. If you want to change this, simply edit it and hit save.</p>
+					<input type="text" id="time" value="$time" />
+					<br>
+					<label>Vehicle Type?</label>
+					<div class="btn-group" data-toggle="buttons-radio">
+						<a class="btn" id="land" href="#">Land</a>
+						<a class="btn" id="air" href="#">Air</a>
+					</div>
+					<br>
+					<label>Save the time</a>
+					<a href="#" class="btn btn-large btn-primary" id="save">Save!</a>
+
+
+			</div><!--/span9-->
+		</div><!--/row-->
+	</div><!--/-->
+</div><!--/-->
+<script>
+//Do this instead of just \$id or \$teamId because this
+//is on everypage and the id location changes and may not always be there...
+\$(function(){
+
+	var botId = \$('#heat').attr('data-id')|null;
+
+	if((0$vehicleType|0) == 0) {
+		\$('#land').button('toggle');
+	} else {
+		\$('#air').button('toggle');
+	}
+
+	\$('#save').click(function(){
+		time = \$('#time').val();
+
+		if(\$('#land').active()) {
+			vehicleType = 0;
+		} else {
+			vehicleType = 1;
+		}
+
+		\$.post('$urlRoot/admin/heat/bots/'+botId+'/', {"time": time, "vehicleType": vehicleType});
+		window.setTimeout(window.location.reload(), 1500);
+	});
+});	
+</script>
+#include "htmlTemplates/partials/adminFooter.tpl.html"
