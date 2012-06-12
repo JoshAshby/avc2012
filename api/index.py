@@ -4,6 +4,10 @@ Official 2012 SparkFun Electronics AVC Scoreboard App
 
 For more information, see: https://github.com/JoshAshby/avc2012
 
+**WARNING**
+Make sure you look through and change things in configSub.py
+before running this file, to be sure it runs the way you want it to
+
 http://xkcd.com/353/
 
 Josh Ashby
@@ -65,8 +69,12 @@ if __name__ == "__main__":
 		app = web.application(urls, globals()).wsgifunc()
 		app.internalerror = web.debugerror
 		WSGIServer(('', int(HTTPport)), app).serve_forever()
-	else:
+	elif serverType is 'web.py standalone':
 		sys.argv.append(HTTPport)
+		app = web.application(urls, globals())
+		app.internalerror = web.debugerror
+		app.run()
+	else:
 		app = web.application(urls, globals())
 		app.internalerror = web.debugerror
 		app.run()

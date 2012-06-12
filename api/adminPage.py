@@ -311,8 +311,11 @@ class adminTeamNew(baseObject.baseHTTPObject):
 		bots = database.view("bots/Bots")
 		for bot in bots:
 			botIds.append(bot['value']['id'])
+		
+		if not botIds: botIds = [0]
+		newId = max(botIds)+1
 
-		doc = botsDoc(id=(max(botIds)+1))
+		doc = botsDoc(id=newId)
 
 		name = self.hasMember('name')
 		builders = self.hasMember('builders')
@@ -428,7 +431,11 @@ class adminHeatNew(baseObject.baseHTTPObject):
 		for heat in heats:
 			heatIds.append(heat['value']['heat'])
 
-		doc = heatDoc(heat=(max(heatIds)+1))
+		if not heatIds: heatIds = [0]
+
+		newId = max(heatIds)+1
+
+		doc = heatDoc(heat=newId)
 
 		doc.time = time
 		doc.vehicleType = int(vehicleType)
@@ -468,7 +475,7 @@ class adminHeatBotList(baseObject.baseHTTPObject):
 			heats[bot['value']['heatTwo']].append(bot['value'])
 			heats[bot['value']['heatThree']].append(bot['value'])
 
-		view = adminView.adminHeatBotListView(data=heats)
+		view = adminView.adminHeatBotView(data=heats)
 		
 		return view.returnData()
 

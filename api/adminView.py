@@ -212,9 +212,10 @@ class adminHeatBotView(baseView.baseView):
 		'''
 			**TODO** Finish this!!!
 		'''
-		
+
 		for heat in self.data:
-			partial = templates.PartialListRow(file=templates.partialTemplateSet['row_listAdminHeatView'])
+			partial = templates.PartialListRow(file=templates.partialTemplateSet['row_listAdminHeatBotView'])
+			print heat
 			heat = heat['value']
 			partial.heatNum = heat['heat']
 			parital.time = heat['time']
