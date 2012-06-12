@@ -23,8 +23,8 @@ If set to gevent, be sure to also change HTTPport to the port
 you want to server the main HTTP interface on.
 '''
 #serverType = 'gevent'
-#serverType = 'web.py'
-serverType = 'standalone'
+serverType = 'web.py'
+#serverType = 'standalone'
 
 HTTPport = '80'
 

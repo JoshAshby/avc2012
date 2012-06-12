@@ -24,8 +24,8 @@ import adminPage
 import teamPage
 import aboutPage
 
-
-web.config.debug = True
+if not deploy:
+	web.config.debug = True
 
 urls = (
 	(urlRoot + '/list'), listPage.app,
