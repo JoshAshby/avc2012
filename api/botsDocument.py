@@ -23,12 +23,12 @@ class botsDoc(couchdbkit.Document):
 	name = couchdbkit.StringProperty()
 	team = couchdbkit.StringProperty()
 	location = couchdbkit.StringProperty()
-	description = couchdbkit.StringProperty()
 	builders = couchdbkit.StringProperty()
 	
-	doc_type = "botsDoc"
+	doc_type = "botDoc"
 	
 	checkedIn = couchdbkit.IntegerProperty()
+	checkedIn = 0
 	vehicleType = couchdbkit.IntegerProperty()
 	id = couchdbkit.IntegerProperty()
 	

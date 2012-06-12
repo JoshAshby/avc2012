@@ -40,6 +40,7 @@
 					</div>
 					<br>
 					<br>
+					<p>Pressing this will save the data, creating a new team then redirect to the team list so you can check them in.</p>
 					<a href="#" class="btn btn-large btn-primary" id="save">Save!</a>
 
 				</form>
@@ -65,7 +66,7 @@
 
 	
 	\$.post('$urlRoot/admin/teams/new/', {"name": name, "team": team, "builders": builders, "location": locat, "heatOne": heatOne, "heatTwo": heatTwo, "heatThree": heatThree, "vehicleType": vehicleType});
-//	window.setTimeout(window.location.reload(), 1500);
+	window.setTimeout(window.location = "../", 1500);
 });
 </script>
 #include "htmlTemplates/partials/adminFooter.tpl.html"

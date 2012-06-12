@@ -436,6 +436,43 @@ class adminHeatNew(baseObject.baseHTTPObject):
 		doc.save()
 
 
+@baseObject.route('/heat/bots/')
+class adminHeatBotList(baseObject.baseHTTPObject):
+	'''
+	Manages robots in each of the heats
+
+	'''
+	def get(self):
+		'''
+		GET verb call
+
+		returns a template of all the heats, pulled from the botDocs
+		and compiled into a complete list of which robot and which heat.
+		
+		Args:
+			None
+			
+		Returns:
+			HTML template, see adminView and templates.py for more info.
+			
+		'''
+		heats = {}
+		bots = database.view("bots/Bots")
+		for bot in bots:
+			heats.update({bot['value']['heatOne']: []})
+			heats.update({bot['value']['heatTwo']: []})
+			heats.update({bot['value']['heatThree']: []})
+
+		for bot in bots:
+			heats[bot['value']['heatOne']].append(bot['value'])
+			heats[bot['value']['heatTwo']].append(bot['value'])
+			heats[bot['value']['heatThree']].append(bot['value'])
+
+		view = adminView.adminHeatBotListView(data=heats)
+		
+		return view.returnData()
+
+
 @baseObject.route('/heat/(.*)/')
 class adminHeatInfo(baseObject.baseHTTPObject):
 	'''
@@ -498,83 +535,5 @@ class adminHeatInfo(baseObject.baseHTTPObject):
 			doc.vehicleType = int(vehicleType)
 
 		doc.save()
-
-
-@baseObject.route('/heat/bots/')
-class adminHeatBotList(baseObject.baseHTTPObject):
-	'''
-	Manages robots in each of the heats
-
-	'''
-	def get(self):
-		'''
-		GET verb call
-
-		returns a template of all the heats, pulled from the botDocs
-		and compiled into a complete list of which robot and which heat.
-		
-		Args:
-			None
-			
-		Returns:
-			HTML template, see adminView and templates.py for more info.
-			
-		'''
-		heats = {}
-		bots = database.view("bots/Bots")
-		for bot in bots:
-			heats.update({bot['value']['heatOne']: []})
-			heats.update({bot['value']['heatTwo']: []})
-			heats.update({bot['value']['heatThree']: []})
-
-		for bot in bots:
-			heats[bot['value']['heatOne']].append(bot['value'])
-			heats[bot['value']['heatTwo']].append(bot['value'])
-			heats[bot['value']['heatThree']].append(bot['value'])
-
-		view = adminView.adminHeatBotListView(data=heats)
-		
-		return view.returnData()
-
-
-@baseObject.route('/heat/bots/(.*)/')
-class adminHeatBotInfo(baseObject.baseHTTPObject):
-	'''
-	Manages robots in each of the heats
-
-	'''
-	def get(self):
-		'''
-		GET verb call
-
-		returns a template of all the heats, pulled from the botDocs
-		and compiled into a complete list of which robot and which heat.
-		
-		Args:
-			None
-			
-		Returns:
-			HTML template, see adminView and templates.py for more info.
-			
-		'''
-		heatId = self.hasMember("heatId", True)
-
-		heats = {}
-		bots = database.view("bots/Bots")
-		for bot in bots:
-			heats.update({bot['value']['heatOne']: []})
-			heats.update({bot['value']['heatTwo']: []})
-			heats.update({bot['value']['heatThree']: []})
-
-		for bot in bots:
-			heats[bot['value']['heatOne']].append(bot['value'])
-			heats[bot['value']['heatTwo']].append(bot['value'])
-			heats[bot['value']['heatThree']].append(bot['value'])
-
-		heat = heats[heatId]
-
-		view = adminView.adminHeatBotInfoView(data=heat)
-		
-		return view.returnData()
 
 app = web.application(baseObject.urls, globals())
