@@ -23,8 +23,8 @@ If set to gevent, be sure to also change HTTPport to the port
 you want to server the main HTTP interface on.
 '''
 #serverType = 'gevent'
-serverType = 'web.py'
-#serverType = 'web.py standalone'
+#serverType = 'web.py'
+serverType = 'standalone'
 
 HTTPport = '80'
 
@@ -40,7 +40,8 @@ partialTemplatesFolder = 'htmlTemplates/partials/'
 #templating shortcuts... These get passed to templates
 #in all the view and template.py files
 baseurl = '/avc2012/api'
-urlRoot = '/avc'
+#urlRoot = '/avc'
+urlRoot = '/'
 assetUrl = '/static'
 titleHalf = 'SparkFun 2012 AVC - '
 
