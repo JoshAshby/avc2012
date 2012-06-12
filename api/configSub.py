@@ -30,6 +30,7 @@ HTTPport = '80'
 
 #Is this going to the live SparkFun server or a dev box?
 deploy = True
+#deploy = False
 
 #couchdbkit stuff.
 databaseName = 'avc'
@@ -46,7 +47,7 @@ baseurl = '/avc2012/api'
 urlRoot = '/avc'
 
 if deploy:
-	urlRoot = '/'
+	urlRoot = '/api/'
 	baseurl = '/'
 
 assetUrl = '/static'
