@@ -106,6 +106,29 @@ class adminTeamView(baseView.baseView):
 		
 		return page
 
+
+class adminTeamNewView(baseView.baseView):
+	def JSON(self):
+		web.header('Content-Type', 'application/json')
+		return json.dumps({'error': 'This is an HTML only page, no JSON please.'})
+		
+	def HTML(self):
+		page = templates.genericTemplate(file=templates.mainTemplateSet['adminTeamNewView'])
+		page.title = (titleHalf + 'Admin New Team')
+		page.vehicleType = ''
+		page.content = ''
+		heatList = []
+		for heat in self.data:
+			heatList.append('<option value="' + str(heat['id']) + '">' + str(heat['num']) + '</option>')
+		page.heat1 = heatList
+		page.heat2 = heatList
+		page.heat3 = heatList
+			
+		web.header('Content-Type', "text/html")
+		
+		return page
+
+
 class adminHeatView(baseView.baseView):
 	def JSON(self):
 		web.header('Content-Type', 'application/json')
@@ -159,7 +182,23 @@ class adminHeatEditView(baseView.baseView):
 		return page
 
 
-class adminHeatBotInfoView(baseView.baseView):
+class adminHeatNewView(baseView.baseView):
+	def JSON(self):
+		web.header('Content-Type', 'application/json')
+		return json.dumps({'error': 'This is an HTML only page, no JSON please.'})
+		
+	def HTML(self):
+		page = templates.genericTemplate(file=templates.mainTemplateSet['adminHeatNewView'])
+		page.title = (titleHalf + 'Admin New Heat')
+		page.content = ''
+		page.vehicleType = ''
+
+		web.header('Content-Type', "text/html")
+		
+		return page
+
+
+class adminHeatBotView(baseView.baseView):
 	def JSON(self):
 		web.header('Content-Type', 'application/json')
 		return json.dumps({'error': 'This is an HTML only page, no JSON please.'})
@@ -171,53 +210,26 @@ class adminHeatBotInfoView(baseView.baseView):
 		page.vehicleType = ''
 
 		'''
-			**TODO** Finish this bit!!!
+			**TODO** Finish this!!!
 		'''
 		
 		for heat in self.data:
 			partial = templates.PartialListRow(file=templates.partialTemplateSet['row_listAdminHeatView'])
 			heat = heat['value']
+			partial.heatNum = heat['heat']
+			parital.time = heat['time']
+
 			for bot in heat:
 				partialBot = templates.PartialListRow(file=templates.partialTemplateSet['row_listAdminView'])
+				partialBot.botName = bot['name']
+				partialBot.teamName = bot['team']
+
 				if bot['vehicleType'] is 0:
 					vehicleType = "Ground"
 				else:
 					vehicleType = "Air"
-				partialBot.vehicleType = vehicleType
-
-			page.content += str(partial)
-
-
-		web.header('Content-Type', "text/html")
-		
-		return page
-
-
-class adminHeatBotListView(baseView.baseView):
-	def JSON(self):
-		web.header('Content-Type', 'application/json')
-		return json.dumps({'error': 'This is an HTML only page, no JSON please.'})
-		
-	def HTML(self):
-		page = templates.genericTemplate(file=templates.mainTemplateSet['adminHeatBotView'])
-		page.title = (titleHalf + 'Admin Bots per Heat')
-		page.content = ''
-		page.vehicleType = ''
-
-		'''
-			**TODO** Finish this bit!!!
-		'''
-		
-		for heat in self.data:
-			partial = templates.PartialListRow(file=templates.partialTemplateSet['row_listAdminHeatView'])
-			heat = heat['value']
-			for bot in heat:
-				partialBot = templates.PartialListRow(file=templates.partialTemplateSet['row_listAdminView'])
-				if bot['vehicleType'] is 0:
-					vehicleType = "Ground"
-				else:
-					vehicleType = "Air"
-				partialBot.vehicleType = vehicleType
+				partialBot.vehicle = vehicle
+				partialBot.vechileType = bot['vehicleType']
 
 			page.content += str(partial)
 

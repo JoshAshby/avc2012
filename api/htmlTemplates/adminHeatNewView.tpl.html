@@ -5,12 +5,11 @@
 		<div class="row-fluid">
 			<h1>New Heat</h1>
 		</div>
-		<div class="row-fluid" id="heat" data-id="$heat">
+		<div class="row-fluid" id="heat">
 			<div class="span9">
 				<form class="well">
 					<label>Heat Time</label>
-					<p>The recommended time has already been placed. If you want to change this, simply edit it and hit save.</p>
-					<input type="text" id="time" value="$time" />
+					<input type="text" id="time" value="" />
 					<br>
 					<label>Vehicle Type?</label>
 					<div class="btn-group" data-toggle="buttons-radio">
@@ -30,25 +29,16 @@
 //Do this instead of just \$id or \$teamId because this
 //is on everypage and the id location changes and may not always be there...
 \$(function(){
-
-	var botId = \$('#heat').attr('data-id')|null;
-
-	if((0$vehicleType|0) == 0) {
-		\$('#land').button('toggle');
-	} else {
-		\$('#air').button('toggle');
-	}
-
 	\$('#save').click(function(){
 		time = \$('#time').val();
 
-		if(\$('#land').active()) {
+		if(\$('#land').hasClass("active")) {
 			vehicleType = 0;
 		} else {
 			vehicleType = 1;
 		}
 
-		\$.post('$urlRoot/admin/heat/bots/'+botId+'/', {"time": time, "vehicleType": vehicleType});
+		\$.post('$urlRoot/admin/heat/new/', {"time": time, "vehicleType": vehicleType});
 		window.setTimeout(window.location.reload(), 1500);
 	});
 });	

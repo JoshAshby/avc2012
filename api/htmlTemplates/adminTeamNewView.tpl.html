@@ -1,0 +1,71 @@
+#encoding UTF-8
+#include "htmlTemplates/partials/header.tpl.html"
+#include "htmlTemplates/partials/adminSidebar.tpl.html"
+		<div class="span9">
+		<div class="row-fluid">
+			<h1>New Team</h1>
+			<p>Create a new team.</p>
+		</div>
+		<div class="row-fluid" id="team">
+			<div class="span9">
+				<br>
+				<form class="well">
+					<label>Team Name</label>
+					<input type="text" id="teamName" value="" />
+					<label>Robots Name</label>
+					<input type="text" id="name" value="" />
+					<label>Builders Names</label>
+					<input type="text" id="builders" value="" />
+					<label>Teams Home Location</label>
+					<input type="text" id="locat" value="" />
+					<p><b>Heat Schedule</b></p>
+					<label>Trial 1</label>
+					<select id="heat1">
+						$heat1
+					</select>
+					<label>Trial 2</label>
+					<select id="heat2">
+						$heat2
+					</select>
+					<label>Trial 3</label>
+					<select id="heat3">
+						$heat3
+					</select>
+					<br>
+
+					<label>Vehicle Type?</label>
+					<div class="btn-group" data-toggle="buttons-radio">
+						<a class="btn" id="land" href="#">Land</a>
+						<a class="btn" id="air"href="#">Air</a>
+					</div>
+					<br>
+					<br>
+					<a href="#" class="btn btn-large btn-primary" id="save">Save!</a>
+
+				</form>
+			</div><!--/span9-->
+		</div><!--/row-->
+	</div><!--/-->
+</div><!--/-->
+<script>
+\$('#save').click(function(){
+	name = \$('#name').val();
+	team = \$('#teamName').val();
+	builders = \$('#builders').val();
+	locat = \$('#locat').val();
+	heatOne = \$('#heat1').val();
+	heatTwo = \$('#heat2').val();
+	heatThree = \$('#heat3').val();
+
+	if(\$('#land').hasClass("active")) {
+		vehicleType = 0;
+	} else {
+		vehicleType = 1;
+	}
+
+	
+	\$.post('$urlRoot/admin/teams/new/', {"name": name, "team": team, "builders": builders, "location": locat, "heatOne": heatOne, "heatTwo": heatTwo, "heatThree": heatThree, "vehicleType": vehicleType});
+//	window.setTimeout(window.location.reload(), 1500);
+});
+</script>
+#include "htmlTemplates/partials/adminFooter.tpl.html"

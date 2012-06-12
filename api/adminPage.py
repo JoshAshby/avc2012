@@ -51,6 +51,7 @@ class adminMain(baseObject.baseHTTPObject):
 		return view.returnData()
 
 
+
 @baseObject.route('/scoreboard/')
 class adminScoreboard(baseObject.baseHTTPObject):
 	'''
@@ -101,7 +102,13 @@ class adminScoreboard(baseObject.baseHTTPObject):
 		doc.viewScreen = nextView
 		doc.save()
 		
+'''
+##################################################################
+Team Section
 
+Under here controls everything related to teams and robots
+##################################################################
+'''
 @baseObject.route('/teams/')
 class adminTeamList(baseObject.baseHTTPObject):
 	'''
@@ -249,9 +256,38 @@ class adminTeam(baseObject.baseHTTPObject):
 
 		doc.save()
 
-	def put(self):
+
+@baseObject.route('/teams/new/')
+class adminTeamNew(baseObject.baseHTTPObject):
+	'''
+	Manages a new team
+	'''
+	def get(self):
 		'''
-		PUT verb call
+		GET verb call
+		
+		Displays a template of the add a new team page.
+		
+		Args:
+			Nothing
+
+		Returns:
+			HTML template, see adminView and templates.py for more info.
+			
+		'''
+		heats = database.view("schedule/Schedule").all()
+		heatNew = []
+
+		for i in heats:
+			heatNew.append({"id": i['value']['_id'], "num": i['value']['heat']})
+
+		view = adminView.adminTeamNewView(data=heatNew)
+		
+		return view.returnData()
+
+	def post(self):
+		'''
+		POST verb call
 		
 		Inserts a new team into the database.
 		This *should* work...
@@ -311,13 +347,19 @@ class adminTeam(baseObject.baseHTTPObject):
 
 		doc.save()
 
-		
+
+'''
+##################################################################
+Heat Section
+
+Under here controls everything related to heats, besides which bot
+is in which heat.
+##################################################################
+'''
 @baseObject.route('/heat/')
 class adminHeatList(baseObject.baseHTTPObject):
 	'''
 	Manages the heats
-
-	**TODO**: Add a PUT verb call to add new heats
 	'''
 	def get(self):
 		'''
@@ -360,9 +402,7 @@ class adminHeatNew(baseObject.baseHTTPObject):
 			HTML template, see adminView and templates.py for more info.
 			
 		'''
-		heats = database.view("schedule/Schedule")
-
-		view = adminView.adminHeatView(data=heats)
+		view = adminView.adminHeatNewView()
 		
 		return view.returnData()
 
@@ -374,6 +414,8 @@ class adminHeatNew(baseObject.baseHTTPObject):
 		(in which case it'll give an error page).
 
 		Args:
+			time - 
+			vehicleType - 
 			
 		Returns:
 			Nothing, as stated above.
@@ -381,12 +423,15 @@ class adminHeatNew(baseObject.baseHTTPObject):
 		time = self.hasMember("time")
 		vehicleType = self.hasMember("vehicleType")
 
-		docId = database.view("schedule/Schedule").last()['value']
+		heatIds = []
+		heats = database.view("schedule/Schedule")
+		for heat in heats:
+			heatIds.append(heat['value']['heat'])
 
-		doc = heatDoc.get(heat=docId['heat']+1)
-		
+		doc = heatDoc(heat=(max(heatIds)+1))
+
 		doc.time = time
-		if vehicleType: doc.vehicleType = int(vehicleType)
+		doc.vehicleType = int(vehicleType)
 
 		doc.save()
 
@@ -406,7 +451,7 @@ class adminHeatInfo(baseObject.baseHTTPObject):
 		and view heats by bots in them.
 
 		Args:
-			None
+			heatId - int of the heat #
 			
 		Returns:
 			HTML template, see adminView and templates.py for more info.
