@@ -72,10 +72,10 @@ if __name__ == "__main__":
 		WSGIServer(('', int(HTTPport)), app).serve_forever()
 	elif serverType is 'standalone':
 		sys.argv.append(HTTPport)
-		app = web.application(urls, globals())
+		app = web.application(urls, globals()).wsgifunc()
 		app.internalerror = web.debugerror
 		app.run()
 	else:
-		app = web.application(urls, globals())
+		app = web.application(urls, globals()).wsgifunc()
 		app.internalerror = web.debugerror
 		app.run()
