@@ -16,6 +16,7 @@ http://joshashby.com
 joshuaashby@joshashby.com
 """
 import sys, os
+
 try:
 	from configSub import *
 except:
