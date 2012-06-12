@@ -36,3 +36,10 @@ urls = (
 	(urlRoot + '/admin'), adminPage.app,
 	'/static/(.*)', 'static'
 )
+
+#basic classes that are helpful
+class slash:
+	def GET(self): raise web.seeother("/")
+
+class static:
+	def GET(self,name): return open('static/%s'%name)

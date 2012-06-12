@@ -12,7 +12,6 @@ http://joshashby.com
 joshuaashby@joshashby.com
 """
 import couchdbkit
-
 '''
 Set this to either:
 	gevent
@@ -45,9 +44,3 @@ urlRoot = '/avc'
 assetUrl = '/static'
 titleHalf = 'SparkFun 2012 AVC - '
 
-#basic classes that are helpful
-class slash:
-	def GET(self): raise web.seeother("/")
-
-class static:
-	def GET(self,name): return open('static/%s'%name)
