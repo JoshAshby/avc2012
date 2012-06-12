@@ -339,6 +339,7 @@ class adminHeatList(baseObject.baseHTTPObject):
 		
 		return view.returnData()
 
+
 @baseObject.route('/heat/new/')
 class adminHeatNew(baseObject.baseHTTPObject):
 	'''
@@ -385,7 +386,7 @@ class adminHeatNew(baseObject.baseHTTPObject):
 		doc = heatDoc.get(heat=docId['heat']+1)
 		
 		doc.time = time
-		doc.vehicleType = int(vehicleType)
+		if vehicleType: doc.vehicleType = int(vehicleType)
 
 		doc.save()
 
@@ -393,16 +394,17 @@ class adminHeatNew(baseObject.baseHTTPObject):
 @baseObject.route('/heat/(.*)/')
 class adminHeatInfo(baseObject.baseHTTPObject):
 	'''
-	Manages info for each heat
+	Manages info for a specific heat
 
 	'''
 	def get(self):
 		'''
 		GET verb call
 
-		returns a template of all the heats, pulled from the botDocs
-		and compiled into a complete list.
-		
+		returns a template of all the heats, their times and
+		vehicle type with a button to edit or add a new heat
+		and view heats by bots in them.
+
 		Args:
 			None
 			
@@ -446,7 +448,8 @@ class adminHeatInfo(baseObject.baseHTTPObject):
 		
 		if time:
 			doc.time = time
-		else:
+
+		if vehicleType:
 			doc.vehicleType = int(vehicleType)
 
 		doc.save()
@@ -487,6 +490,7 @@ class adminHeatBotList(baseObject.baseHTTPObject):
 		view = adminView.adminHeatBotListView(data=heats)
 		
 		return view.returnData()
+
 
 @baseObject.route('/heat/bots/(.*)/')
 class adminHeatBotInfo(baseObject.baseHTTPObject):
