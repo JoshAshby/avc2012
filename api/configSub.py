@@ -28,6 +28,9 @@ serverType = 'standalone'
 
 HTTPport = '80'
 
+#Is this going to the live SparkFun server or a dev box?
+deploy = True
+
 #couchdbkit stuff.
 databaseName = 'avc'
 server = couchdbkit.Server()
@@ -40,8 +43,12 @@ partialTemplatesFolder = 'htmlTemplates/partials/'
 #templating shortcuts... These get passed to templates
 #in all the view and template.py files
 baseurl = '/avc2012/api'
-#urlRoot = '/avc'
-urlRoot = '/'
+urlRoot = '/avc'
+
+if deploy:
+	urlRoot = '/api'
+	baseurl = '/'
+
 assetUrl = '/static'
 titleHalf = 'SparkFun 2012 AVC - '
 
