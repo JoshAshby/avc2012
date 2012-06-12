@@ -15,6 +15,7 @@ Josh Ashby
 http://joshashby.com
 joshuaashby@joshashby.com
 """
+import sys, os
 try:
 	from configSub import *
 except:
@@ -29,7 +30,6 @@ if serverType is 'gevent':
 
 import web
 import json
-import sys, os
 from config import *
 import baseObject
 import indexView
