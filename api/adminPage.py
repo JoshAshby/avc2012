@@ -23,6 +23,8 @@ import baseObject
 from adminDocument import *
 from botsDocument import *
 from heatDocument import *
+from couchdbkit.loaders import FileSystemDocsLoader
+
 
 baseObject.urlReset()
 
@@ -50,6 +52,28 @@ class adminMain(baseObject.baseHTTPObject):
 		
 		return view.returnData()
 
+
+@baseObject.route('/setup/')
+class adminMainSetup(baseObject.baseHTTPObject):
+	'''
+	Displays the main admin landing page.
+	'''
+	def get(self):
+		'''
+		GET verb call
+		
+		returns the template for the admin landing page,
+		nothing fancy here just a few links to the areas.
+		
+		Args:
+			None
+			
+		Returns:
+			HTML template, see adminView and templates.py for more info.
+			
+		'''
+		loader = FileSystemDocsLoader('_design')
+		loader.sync(database, verbose=True)
 
 
 @baseObject.route('/scoreboard/')
