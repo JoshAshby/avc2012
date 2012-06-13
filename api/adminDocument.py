@@ -22,7 +22,9 @@ class adminDoc(couchdbkit.Document):
 	
 	doc_type = "adminDoc"
 	
-	heat = couchdbkit.IntegerProperty()
+	heat = couchdbkit.StringProperty()
+	wave = couchdbkit.StringProperty()
+	waveId = couchdbkit.StringProperty()
 
 	viewScreen = couchdbkit.StringProperty()
 

@@ -28,27 +28,19 @@ Reveal.initialize({
 
 function tableRefresh(){
 	$.getJSON('admin/', {"t": "json"}, function(data){
-		heat = data['admin']['heat'];
+		heat = data['admin']['waveId'];
 		view = data['admin']['viewScreen'];
 	}).complete(function(){
 		if(view != null){
 			window.location = '#/' + view;
 		}
-
+		
 		window.setTimeout($.get('checkIn/', function(data) {
 			table = $('checkInTable').html();
 			if(table != data){
 				$('#checkInTable').html(data);
 			}
-		}), 500);
-
-		window.setTimeout($.get(('heat/' + (heat+1) + '/'), function(data) {
-			$("#upNextId").html(heat+1);
-			table = $('#upNextTable').html();
-			if(table != data){
-				$('#upNextTable').html(data);
-			}
-		}), 500);
+		}), 10000);
 
 		window.setTimeout($.get(('heat/' + (heat) + '/'), function(data) {
 			$("#currentId").html(heat);
@@ -56,7 +48,7 @@ function tableRefresh(){
 			if(table != data){
 				$('#currentTable').html(data);
 			}
-		}), 500);
+		}), 10000);
 	});
 	t=setTimeout(tableRefresh, 5000);
 };

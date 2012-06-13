@@ -72,21 +72,19 @@ class adminScoreboard(baseObject.baseHTTPObject):
 			
 		'''
 		heats = database.view("schedule/Schedule").all()
-		heatOneNew = []
-		heatTwoNew = []
-		heatThreeNew = []
+		heatNew = []
 
 		for i in heats:
-			if i['value']['wave'] is 1:
-				heatOneNew.append({"id": i['value']['_id'], "num": i['value']['heat']})
-			if i['value']['wave'] is 2:
-				heatTwoNew.append({"id": i['value']['_id'], "num": i['value']['heat']})
-			if i['value']['wave'] is 3:
-				heatThreeNew.append({"id": i['value']['_id'], "num": i['value']['heat']})
+			i = i['value']
+			heatNew.append({"id": i['_id'], "num": (str(i['heat']) + '.' + str(i['wave']))})
+
+		admin = database.view("admin/Admin", key=0).first()['value']
+
+		current = (admin['heat'] + "." + admin['wave'] + "." + admin['waveId'])
 		
+		data = {"waves": heatNew, "current": current}
 
-
-		view = adminView.adminScoreboardView()
+		view = adminView.adminScoreboardView(data=data)
 		
 		return view.returnData()
 
@@ -110,7 +108,41 @@ class adminScoreboard(baseObject.baseHTTPObject):
 
 		doc.viewScreen = nextView
 		doc.save()
-		
+
+
+@baseObject.route('/scoreboard/heat/')
+class adminScoreboardHeat(baseObject.baseHTTPObject):
+	'''
+	Manages the current heat on the over all scoreboard
+	'''
+	def post(self):
+		'''
+		POST verb call
+
+		updates the admin doc to reflect a change in the view
+
+		Args:
+			view - Can be any of: 0,1,2,2/1,3,3/1
+
+		Returns:
+			Nothing, error page if something went wrong.
+		'''
+		heatId = self.hasMember('heat', True)
+
+		docId = database.view("admin/Admin", key=0).first()['value']['_id']
+
+		doc = adminDoc.get(docId)
+
+		parts = heatId.split(".")
+
+		heat = parts[0]
+		wave = parts[1]
+		waveId = parts[2]
+
+		doc.heat = heat
+		doc.wave = wave
+		doc.waveId = waveId
+		doc.save()
 '''
 ##################################################################
 Team Section
@@ -160,9 +192,9 @@ class adminTeamList(baseObject.baseHTTPObject):
 			Nothing, error page if somethings wrong
 
 		'''
-		botId = str(self.hasMember('botId', True))
+		botId = int(self.hasMember('botId', True))
 
-		docId = database.view("bots/Bots", key=0).first()['value']['_id']
+		docId = database.view("bots/Bots", key=botId).first()['value']['_id']
 
 		doc = botsDoc.get(docId)
 
@@ -386,6 +418,10 @@ class adminTeamNew(baseObject.baseHTTPObject):
 		heatOneTime = self.hasMember('heatOneTime')
 		heatTwoTime = self.hasMember('heatTwoTime')
 		heatThreeTime = self.hasMember('heatThreeTime')
+		heatOneBonus = self.hasMember('heatOneBonus')
+		heatTwoBonus = self.hasMember('heatTwoBonus')
+		heatThreeBonus = self.hasMember('heatThreeBonus')
+
 
 		if name: doc.name = str(name)
 		if builders: doc.builders = str(builders)
@@ -400,13 +436,13 @@ class adminTeamNew(baseObject.baseHTTPObject):
 		# when looking at one robot, and still about to be
 		# used to concoct a set of bots for each id number.
 		if heatOne:
-			doc.heatOne = str(heatOne)
+			doc.heatOneWave = str(heatOne)
 
 		if heatTwo:
-			doc.heatTwo = str(heatTwo)
+			doc.heatTwoWave = str(heatTwo)
 
 		if heatThree:
-			doc.heatThree = str(heatThree)
+			doc.heatThreeWave = str(heatThree)
 
 		if heatOneTime:
 			doc.heatOneTime = str(heatOneTime)
@@ -416,6 +452,15 @@ class adminTeamNew(baseObject.baseHTTPObject):
 
 		if heatThreeTime:
 			doc.heatThreeTime = str(heatThreeTime)
+
+		if heatOneBonus:
+			doc.heatOneBonus = int(heatOneBonus)
+
+		if heatTwoBonus:
+			doc.heatTwoBonus = int(heatTwoBonus)
+
+		if heatThreeBonus:
+			doc.heatThreeBonus = int(heatThreeBonus)
 
 		doc.save()
 

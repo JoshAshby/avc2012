@@ -33,15 +33,24 @@ class botsDoc(couchdbkit.Document):
 	id = couchdbkit.IntegerProperty()
 	
 	heatOneWave = couchdbkit.StringProperty()
+	heatOneWave = ''
 	heatTwoWave = couchdbkit.StringProperty()
+	heatTwoWave = ''
 	heatThreeWave = couchdbkit.StringProperty()
+	heatThreeWave = ''
 
 	heatOneTime = couchdbkit.StringProperty()
+	heatOneTime = ''
 	heatTwoTime = couchdbkit.StringProperty()
+	heatTwoTime = ''
 	heatThreeTime = couchdbkit.StringProperty()
+	heatThreeTime = ''
 
 	heatOneBonus = couchdbkit.IntegerProperty()
+	heatOneBonus = 0
 	heatTwoBonus = couchdbkit.IntegerProperty()
+	heatTwoBonus = 0
 	heatThreeBonus = couchdbkit.IntegerProperty()
+	heatThreeBonus = 0
 
 botsDoc.set_db(database)

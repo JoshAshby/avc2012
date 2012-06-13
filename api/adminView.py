@@ -46,6 +46,14 @@ class adminScoreboardView(baseView.baseView):
 		page = templates.genericTemplate(file=templates.mainTemplateSet['adminScoreboardView'])
 		page.title = (titleHalf + 'Admin Scoreboard')
 		page.vehicleType = ''
+		page.waves = ''
+
+		print self.data
+
+		for wave in self.data['waves']:
+			page.waves += ("<option value=" + wave['num'] + "." + wave['id'] + ">" + wave['num'] + "</option>")
+
+		page.current = self.data['current']
 		
 		web.header('Content-Type', "text/html")
 		

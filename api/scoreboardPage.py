@@ -100,16 +100,22 @@ class heat(baseObject.baseHTTPObject):
 			table row formated data to be pulled right into a table body.
 			
 		'''
-		heat = int(self.hasMember('heat'))
 		
-		lineUp = heatDoc.view("schedule/Schedule", key=heat).first()
-
+		heat = self.hasMember('heat', True)
+		
 		bots = database.view("bots/Bots").all()
 
 		spots = []
 
-		for bot in lineUp['bots']:
-			spots.append(bots[bot]['value'])
+		for bot in bots:
+			bot = bot['value']
+			if bot['checkedIn']:
+				if bot['heatOneWave'] == heat:
+					spots.append(bot)
+				if bot['heatTwoWave'] == heat:
+					spots.append(bot)
+				if bot['heatThreeWave'] == heat:
+					spots.append(bot)
 
 		view = scoreboardView.heatView(data=spots)
 		
