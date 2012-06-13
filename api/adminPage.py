@@ -72,10 +72,19 @@ class adminScoreboard(baseObject.baseHTTPObject):
 			
 		'''
 		heats = database.view("schedule/Schedule").all()
-		heatNew = []
+		heatOneNew = []
+		heatTwoNew = []
+		heatThreeNew = []
 
 		for i in heats:
-			heatNew.append({"id": i['value']['_id'], "num": i['value']['heat']})
+			if i['value']['wave'] is 1:
+				heatOneNew.append({"id": i['value']['_id'], "num": i['value']['heat']})
+			if i['value']['wave'] is 2:
+				heatTwoNew.append({"id": i['value']['_id'], "num": i['value']['heat']})
+			if i['value']['wave'] is 3:
+				heatThreeNew.append({"id": i['value']['_id'], "num": i['value']['heat']})
+		
+
 
 		view = adminView.adminScoreboardView()
 		
@@ -184,13 +193,24 @@ class adminTeam(baseObject.baseHTTPObject):
 
 		doc = database.view("bots/Bots", key=bot).first()['value']
 
-		heats = database.view("schedule/Schedule").all()
-		heatNew = []
+		waves = database.view("schedule/Schedule").all()
+		heatOneNew = []
+		heatTwoNew = []
+		heatThreeNew = []
 
-		for i in heats:
-			heatNew.append({"id": i['value']['_id'], "num": i['value']['heat']})
+		for wave in waves:
+			wave = wave['value']
+			if wave['heat'] is 1:
+				heatOneNew.append({"id": wave['_id'], 'num': wave['wave']})
 
-		data={"bot": doc, "heat": heatNew}
+			if wave['heat'] is 2:
+				heatTwoNew.append({"id": wave['_id'], 'num': wave['wave']})
+
+			if wave['heat'] is 3:
+				heatThreeNew.append({"id": wave['_id'], 'num': wave['wave']})
+
+
+		data={"bot": doc, "heat1": heatOneNew, "heat2": heatTwoNew, "heat3": heatThreeNew}
 
 		view = adminView.adminTeamView(data=data)
 		
@@ -232,6 +252,13 @@ class adminTeam(baseObject.baseHTTPObject):
 		heatOne = self.hasMember('heatOne')
 		heatTwo = self.hasMember('heatTwo')
 		heatThree = self.hasMember('heatThree')
+		heatOneTime = self.hasMember('heatOneTime')
+		heatTwoTime = self.hasMember('heatTwoTime')
+		heatThreeTime = self.hasMember('heatThreeTime')
+		heatOneBonus = self.hasMember('heatOneBonus')
+		heatTwoBonus = self.hasMember('heatTwoBonus')
+		heatThreeBonus = self.hasMember('heatThreeBonus')
+
 
 		if name: doc.name = str(name)
 		if builders: doc.builders = str(builders)
@@ -246,14 +273,31 @@ class adminTeam(baseObject.baseHTTPObject):
 		# when looking at one robot, and still about to be
 		# used to concoct a set of bots for each id number.
 		if heatOne:
-			doc.heatOne = str(heatOne)
+			doc.heatOneWave = str(heatOne)
 
 		if heatTwo:
-			doc.heatTwo = str(heatTwo)
+			doc.heatTwoWave = str(heatTwo)
 
 		if heatThree:
-			doc.heatThree = str(heatThree)
+			doc.heatThreeWave = str(heatThree)
 
+		if heatOneTime:
+			doc.heatOneTime = str(heatOneTime)
+
+		if heatTwoTime:
+			doc.heatTwoTime = str(heatTwoTime)
+
+		if heatThreeTime:
+			doc.heatThreeTime = str(heatThreeTime)
+
+		if heatOneBonus:
+			doc.heatOneBonus = int(heatOneBonus)
+
+		if heatTwoBonus:
+			doc.heatTwoBonus = int(heatTwoBonus)
+
+		if heatThreeBonus:
+			doc.heatThreeBonus = int(heatThreeBonus)
 		doc.save()
 
 
@@ -275,11 +319,24 @@ class adminTeamNew(baseObject.baseHTTPObject):
 			HTML template, see adminView and templates.py for more info.
 			
 		'''
-		heats = database.view("schedule/Schedule").all()
-		heatNew = []
+		waves = database.view("schedule/Schedule").all()
+		heatOneNew = []
+		heatTwoNew = []
+		heatThreeNew = []
 
-		for i in heats:
-			heatNew.append({"id": i['value']['_id'], "num": i['value']['heat']})
+		for wave in waves:
+			wave = wave['value']
+			if wave['heat'] is 1:
+				heatOneNew.append({"id": wave['_id'], 'num': wave['wave']})
+
+			if wave['heat'] is 2:
+				heatTwoNew.append({"id": wave['_id'], 'num': wave['wave']})
+
+			if wave['heat'] is 3:
+				heatThreeNew.append({"id": wave['_id'], 'num': wave['wave']})
+
+
+		heatNew = {"heat1": heatOneNew, "heat2": heatTwoNew, "heat3": heatThreeNew}
 
 		view = adminView.adminTeamNewView(data=heatNew)
 		
@@ -326,6 +383,9 @@ class adminTeamNew(baseObject.baseHTTPObject):
 		heatOne = self.hasMember('heatOne')
 		heatTwo = self.hasMember('heatTwo')
 		heatThree = self.hasMember('heatThree')
+		heatOneTime = self.hasMember('heatOneTime')
+		heatTwoTime = self.hasMember('heatTwoTime')
+		heatThreeTime = self.hasMember('heatThreeTime')
 
 		if name: doc.name = str(name)
 		if builders: doc.builders = str(builders)
@@ -347,6 +407,15 @@ class adminTeamNew(baseObject.baseHTTPObject):
 
 		if heatThree:
 			doc.heatThree = str(heatThree)
+
+		if heatOneTime:
+			doc.heatOneTime = str(heatOneTime)
+
+		if heatTwoTime:
+			doc.heatTwoTime = str(heatTwoTime)
+
+		if heatThreeTime:
+			doc.heatThreeTime = str(heatThreeTime)
 
 		doc.save()
 
@@ -425,17 +494,21 @@ class adminHeatNew(baseObject.baseHTTPObject):
 		'''
 		time = self.hasMember("time")
 		vehicleType = self.hasMember("vehicleType")
+		heatId = self.hasMember("heatId")
 
-		heatIds = []
+		waveIds = []
 		heats = database.view("schedule/Schedule")
 		for heat in heats:
-			heatIds.append(heat['value']['heat'])
+			if heat['value']['heat'] is int(heatId):
+				waveIds.append(heat['value']['wave'])
 
-		if not heatIds: heatIds = [0]
+		if not waveIds: waveIds = [0]
 
-		newId = max(heatIds)+1
+		newId = max(waveIds)+1
+		
+		doc = heatDoc(wave=newId)
 
-		doc = heatDoc(heat=newId)
+		doc.heat = int(heatId)
 
 		doc.time = time
 		doc.vehicleType = int(vehicleType)
@@ -463,17 +536,33 @@ class adminHeatBotList(baseObject.baseHTTPObject):
 			HTML template, see adminView and templates.py for more info.
 			
 		'''
-		heats = {}
+		heatOne = {}
+		heatTwo = {}
+		heatThree = {}
 		bots = database.view("bots/Bots")
-		for bot in bots:
-			heats.update({bot['value']['heatOne']: []})
-			heats.update({bot['value']['heatTwo']: []})
-			heats.update({bot['value']['heatThree']: []})
+		waves = database.view("schedule/id")
+
+		for wave in waves:
+			wave = wave['value']
+			if wave['heat'] is 1:
+				heatOne.update({wave['_id']: []})
+			if wave['heat'] is 2:
+				heatTwo.update({wave['_id']: []})
+			if wave['heat'] is 3:
+				heatThree.update({wave['_id']: []})
 
 		for bot in bots:
-			heats[bot['value']['heatOne']].append(bot['value'])
-			heats[bot['value']['heatTwo']].append(bot['value'])
-			heats[bot['value']['heatThree']].append(bot['value'])
+			bot = bot['value']
+			if bot['heatOneWave'] in heatOne:
+				heatOne[bot['heatOneWave']].append(bot)
+
+			if bot['heatTwoWave'] in heatTwo:
+				heatTwo[bot['heatTwoWave']].append(bot)
+
+			if bot['heatThreeWave'] in heatThree:
+				heatThree[bot['heatThreeWave']].append(bot)
+
+		heats = {"heatOne": heatOne, "heatTwo": heatTwo, "heatThree": heatThree}
 
 		view = adminView.adminHeatBotView(data=heats)
 		
@@ -501,9 +590,9 @@ class adminHeatInfo(baseObject.baseHTTPObject):
 			HTML template, see adminView and templates.py for more info.
 			
 		'''
-		heatId = int(self.hasMember("heatId", True))
+		heatId = self.hasMember("heatId", True)
 
-		heat = database.view("schedule/Schedule", key=heatId).first()['value']
+		heat = database.view("schedule/id", key=heatId).first()['value']
 
 		view = adminView.adminHeatEditView(data=heat)
 		
@@ -528,12 +617,11 @@ class adminHeatInfo(baseObject.baseHTTPObject):
 			Nothing, error page if somethings wrong.
 
 		'''
-		heatId = int(self.hasMember("heatId", True))
+		heatId = self.hasMember("heatId", True)
 		time = self.hasMember("time")
 		vehicleType = self.hasMember("vehicleType")
 
-		docId = database.view("schedule/Schedule", key=heatId).first()['value']['_id']
-		doc = heatDoc.get(docId)
+		doc = heatDoc.get(heatId)
 		
 		if time:
 			doc.time = time

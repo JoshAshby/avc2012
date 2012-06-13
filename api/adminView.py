@@ -95,13 +95,35 @@ class adminTeamView(baseView.baseView):
 		page.builders = self.data['bot']['builders']
 		page.checkin = self.data['bot']['checkedIn']
 		page.vehicleType = self.data['bot']['vehicleType']
-		heatList = []
-		for heat in self.data['heat']:
-			heatList.append('<option value="' + str(heat['id']) + '">' + str(heat['num']) + '</option>')
-		page.heat1 = heatList
-		page.heat2 = heatList
-		page.heat3 = heatList
-			
+		
+		heat1List = []
+		for heat in self.data['heat1']:
+			heat1List.append('<option value="' + str(heat['id']) + '">' + str(heat['num']) + '</option>')
+
+		heat2List = []
+		for heat in self.data['heat2']:
+			heat2List.append('<option value="' + str(heat['id']) + '">' + str(heat['num']) + '</option>')
+
+		heat3List = []
+		for heat in self.data['heat3']:
+			heat3List.append('<option value="' + str(heat['id']) + '">' + str(heat['num']) + '</option>')
+
+		page.heat1 = heat1List
+		page.heat2 = heat2List
+		page.heat3 = heat3List
+
+		page.heat1time = self.data['bot']['heatOneTime']
+		page.heat2time = self.data['bot']['heatTwoTime']
+		page.heat3time = self.data['bot']['heatThreeTime']
+
+		page.heat1bonus = self.data['bot']['heatOneBonus'] 
+		page.heat2bonus = self.data['bot']['heatTwoBonus']
+		page.heat3bonus = self.data['bot']['heatThreeBonus']
+
+		page.heat1id = self.data['bot']['heatOneWave']
+		page.heat2id = self.data['bot']['heatTwoWave']
+		page.heat3id = self.data['bot']['heatThreeWave']
+
 		web.header('Content-Type', "text/html")
 		
 		return page
@@ -117,12 +139,22 @@ class adminTeamNewView(baseView.baseView):
 		page.title = (titleHalf + 'Admin New Team')
 		page.vehicleType = ''
 		page.content = ''
-		heatList = []
-		for heat in self.data:
-			heatList.append('<option value="' + str(heat['id']) + '">' + str(heat['num']) + '</option>')
-		page.heat1 = heatList
-		page.heat2 = heatList
-		page.heat3 = heatList
+
+		heat1List = []
+		for heat in self.data['heat1']:
+			heat1List.append('<option value="' + str(heat['id']) + '">' + str(heat['num']) + '</option>')
+
+		heat2List = []
+		for heat in self.data['heat2']:
+			heat2List.append('<option value="' + str(heat['id']) + '">' + str(heat['num']) + '</option>')
+
+		heat3List = []
+		for heat in self.data['heat3']:
+			heat3List.append('<option value="' + str(heat['id']) + '">' + str(heat['num']) + '</option>')
+
+		page.heat1 = heat1List
+		page.heat2 = heat2List
+		page.heat3 = heat3List
 			
 		web.header('Content-Type', "text/html")
 		
@@ -146,7 +178,9 @@ class adminHeatView(baseView.baseView):
 			partial = templates.PartialListRow(file=templates.partialTemplateSet['row_listAdminHeatView'])
 
 			partial.heat = heat['heat']
+			partial.wave = heat['wave']
 			partial.time = heat['time']
+			partial._id = heat["_id"]
 			partial.vehicleType = heat['vehicleType']
 			if heat['vehicleType'] is 0:
 				vehicleType = "Ground"
@@ -173,7 +207,9 @@ class adminHeatEditView(baseView.baseView):
 		page.content = ''
 		page.vehicleType = ''
 
+		page._id = self.data['_id']
 		page.heat = self.data['heat']
+		page.wave = self.data['wave']
 		page.time = self.data['time']
 		page.vehicleType = self.data['vehicleType']
 
@@ -209,16 +245,9 @@ class adminHeatBotView(baseView.baseView):
 		page.content = ''
 		page.vehicleType = ''
 
-		'''
-			**TODO** Finish this!!!
-		'''
-
-		for heat in self.data:
+		'''for wave in dict(self.data['heatOne']):
 			partial = templates.PartialListRow(file=templates.partialTemplateSet['row_listAdminHeatBotView'])
-			print heat
-			heat = heat['value']
-			partial.heatNum = heat['heat']
-			parital.time = heat['time']
+			print wave
 
 			for bot in heat:
 				partialBot = templates.PartialListRow(file=templates.partialTemplateSet['row_listAdminView'])
@@ -232,7 +261,7 @@ class adminHeatBotView(baseView.baseView):
 				partialBot.vehicle = vehicle
 				partialBot.vechileType = bot['vehicleType']
 
-			page.content += str(partial)
+			page.content += str(partial)'''
 
 
 		web.header('Content-Type', "text/html")

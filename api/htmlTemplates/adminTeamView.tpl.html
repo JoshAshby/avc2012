@@ -26,14 +26,21 @@
 					<input type="text" id="locat" value="$location" />
 					<p><b>Heat Schedule</b></p>
 					<label>Trial 1</label>
+					<input type="text" id="heat1time" value="$heat1time"/>
+					<a href="#" id="heat1bonus" class="btn btn-primary" data-toggle="button">Bonus?</a>
 					<select id="heat1">
 						$heat1
 					</select>
 					<label>Trial 2</label>
+					<input type="text" id="heat2time" value="$heat2time"/>
+					<a href="#" id="heat2bonus" class="btn btn-primary" data-toggle="button">Bonus?</a>
+
 					<select id="heat2">
 						$heat2
 					</select>
 					<label>Trial 3</label>
+					<input type="text" id="heat3time" value="$heat3time"/>
+					<a href="#" id="heat3bonus" class="btn btn-primary" data-toggle="button">Bonus?</a>
 					<select id="heat3">
 						$heat3
 					</select>
@@ -58,11 +65,28 @@
 //is on everypage and the id location changes and may not always be there...
 var botId = \$('#checkInBtn').attr('data-id')|\$('#team').attr('data-id')|null;
 	
-if((0$vehicleType|0) == 0) {
+if(($vehicleType) == 0) {
 	\$('#land').button('toggle');
 } else {
 	\$('#air').button('toggle');
 }
+
+if(($heat1bonus) == 1){
+	\$('#heat1bonus').button('toggle');
+}
+
+if(($heat2bonus) == 1){
+	\$('#heat2bonus').button('toggle');
+}
+
+if(($heat3bonus) == 1){
+	\$('#heat3bonus').button('toggle');
+}
+
+if('$heat1id'){\$('#heat1').val('$heat1id')}
+if('$heat2id'){\$('#heat2').val('$heat2id')}
+if('$heat3id'){\$('#heat3').val('$heat3id')}
+
 \$('#land').click(function(){
 	\$.post('$urlRoot/admin/team/'+botId+'/', {"vehicleType": 0});
 });
@@ -77,8 +101,17 @@ if((0$vehicleType|0) == 0) {
 	heatOne = \$('#heat1').val();
 	heatTwo = \$('#heat2').val();
 	heatThree = \$('#heat3').val();
+	heatOneTime = \$('#heat1time').val();
+	heatTwoTime = \$('#heat2time').val();
+	heatThreeTime = \$('#heat3time').val();
+	heat1bonus = 0;
+	heat2bonus = 0;
+	heat3bonus = 0;
+	if(\$('#heat1bonus').hasClass('active')){heat1bonus = 1}
+	if(\$('#heat2bonus').hasClass('active')){heat2bonus = 1}
+	if(\$('#heat3bonus').hasClass('active')){heat3bonus = 1}
 
-	\$.post('$urlRoot/admin/team/'+botId+'/', {"name": name, "team": team, "builders": builders, "location": locat, "heatOne": heatOne, "heatTwo": heatTwo, "heatThree": heatThree});
+	\$.post('$urlRoot/admin/team/'+botId+'/', {"name": name, "team": team, "builders": builders, "location": locat, "heatOne": heatOne, "heatTwo": heatTwo, "heatThree": heatThree, "heatOneTime": heatOneTime, "heatTwoTime": heatTwoTime, "heatThreeTime": heatThreeTime, "heatOneBonus": heat1bonus, "heatTwoBonus": heat2bonus, "heatThreeBonus": heat3bonus});
 	window.setTimeout(window.location.reload(), 1500);
 });
 

@@ -59,6 +59,7 @@ class index(baseObject.baseHTTPObject):
 		view = indexView.indexView()
 		return view.returnData()
 
+
 urls += baseObject.urls
 
 if __name__ == "__main__":
@@ -67,16 +68,16 @@ if __name__ == "__main__":
 	print urls
 	print 'Now serving py on port %s with the %s library...' % (HTTPport, serverType)
 	if serverType is 'gevent':
-		app = web.application(urls, globals()).wsgifunc()
-		app.internalerror = web.debugerror
-		WSGIServer(('', int(HTTPport)), app).serve_forever()
-	if serverType is 'standalone':
-		sys.argv.append(HTTPport)
 		app = web.application(urls, globals())
 		app.internalerror = web.debugerror
-		app.run()
-	if serverType is 'web.py':
+		WSGIServer(('', int(HTTPport)), app.wsgifunc()).serve_forever()
+	if serverType is 'cgi':
 		app = web.application(urls, globals())
 		app.internalerror = web.debugerror
 		main = app.wsgifunc()
 		application = app.wsgifunc()
+	else:
+		if HTTPport: sys.argv.append(HTTPport)
+		app = web.application(urls, globals())
+		app.internalerror = web.debugerror
+		app.run()

@@ -23,6 +23,7 @@ class heatDoc(couchdbkit.Document):
 	doc_type = "heatDoc"
 	
 	heat = couchdbkit.IntegerProperty()
+	wave = couchdbkit.IntegerProperty()
 	vehicleType = couchdbkit.IntegerProperty()
 	
 heatDoc.set_db(database)

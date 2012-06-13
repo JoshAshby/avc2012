@@ -32,39 +32,16 @@ class botsDoc(couchdbkit.Document):
 	vehicleType = couchdbkit.IntegerProperty()
 	id = couchdbkit.IntegerProperty()
 	
-	heats = couchdbkit.DictProperty()
+	heatOneWave = couchdbkit.StringProperty()
+	heatTwoWave = couchdbkit.StringProperty()
+	heatThreeWave = couchdbkit.StringProperty()
 
-	heats = {
-		"1": {
-			"time": 0,
-			"corners": 0,
-			"bonus": {
-				"langBox": 0,
-				"landLot": 0,
-				"takeOff": 0,
-				"ring": 0,
-				},
-		},
-		"2": {
-			"time": 0,
-			"corners": 0,
-			"bonus": {
-				"langBox": 0,
-				"landLot": 0,
-				"takeOff": 0,
-				"ring": 0,
-				},
-	},
-		"3": {
-			"time": 0,
-			"corners": 0,
-			"bonus": {
-				"langBox": 0,
-				"landLot": 0,
-				"takeOff": 0,
-				"ring": 0,
-				},
-		},
-	}
+	heatOneTime = couchdbkit.StringProperty()
+	heatTwoTime = couchdbkit.StringProperty()
+	heatThreeTime = couchdbkit.StringProperty()
+
+	heatOneBonus = couchdbkit.IntegerProperty()
+	heatTwoBonus = couchdbkit.IntegerProperty()
+	heatThreeBonus = couchdbkit.IntegerProperty()
 
 botsDoc.set_db(database)

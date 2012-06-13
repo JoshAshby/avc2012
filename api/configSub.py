@@ -17,14 +17,16 @@ Set this to either:
 	gevent
 or
 	web.py
-	
+or
+	cgi
+
 To determine the underlying wsgi server for the application.
-If set to gevent, be sure to also change HTTPport to the port
-you want to server the main HTTP interface on.
+If set to gevent or standalone, be sure to also change HTTPport
+to the port you want to server the main HTTP interface on.
 '''
 #serverType = 'gevent'
-#serverType = 'web.py'
-serverType = 'standalone'
+#serverType = 'wsgi'
+serverType = 'web.py'
 
 HTTPport = '80'
 
@@ -47,8 +49,11 @@ baseurl = '/avc2012/api'
 urlRoot = '/avc'
 
 if deploy:
-	baseurl = '/'
-	urlRoot = '/api'
+	baseurl = '/api'
+	urlRoot = '/'
+	serverType = "web.py"
+	#serverType = "wsgi"
+	#serverType = "gevent"
 
 assetUrl = '/static'
 titleHalf = 'SparkFun 2012 AVC - '
