@@ -23,10 +23,14 @@ class adminDoc(couchdbkit.Document):
 	doc_type = "adminDoc"
 	
 	heat = couchdbkit.StringProperty()
+	heat = ''
 	wave = couchdbkit.StringProperty()
+	wave = ''
 	waveId = couchdbkit.StringProperty()
+	waveId = ''
 
 	viewScreen = couchdbkit.StringProperty()
+	viewScreen = ''
 
 
 adminDoc.set_db(database)
