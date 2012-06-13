@@ -92,7 +92,11 @@ class adminTeamView(baseView.baseView):
 		return json.dumps({'error': 'This is an HTML only page, no JSON please.'})
 		
 	def HTML(self):
-		page = templates.genericTemplate(file=templates.mainTemplateSet['adminTeamView'])
+		if self.data['bot']['vehicleType'] is 0:
+			page = templates.genericTemplate(file=templates.mainTemplateSet['adminTeamView'])
+		else:
+			page = templates.genericTemplate(file=templates.mainTemplateSet['adminTeamAirView'])
+
 		page.title = (titleHalf + 'Admin Team Info')
 		page.vehicleType = ''
 		page.content = ''

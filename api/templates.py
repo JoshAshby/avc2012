@@ -26,6 +26,7 @@ mainTemplateSet = {
 	'adminMainView': (templatesFolder + 'adminMainView.tpl.html'),
 	'adminTeamListView': (templatesFolder + 'adminTeamListView.tpl.html'),
 	'adminTeamView': (templatesFolder + 'adminTeamView.tpl.html'),
+	'adminTeamAirView': (templatesFolder + 'adminTeamAirView.tpl.html'),
 	'adminTeamNewView': (templatesFolder + 'adminTeamNewView.tpl.html'),
 	'adminScoreboardView': (templatesFolder + 'adminScoreboardView.tpl.html'),
 	'adminHeatListView': (templatesFolder + 'adminHeatListView.tpl.html'),
