@@ -74,6 +74,8 @@ class adminMainSetup(baseObject.baseHTTPObject):
 		'''
 		loader = FileSystemDocsLoader('_design')
 		loader.sync(database, verbose=True)
+		newAdminDoc = adminDoc(id=0)
+		newAdminDoc.save()
 
 
 @baseObject.route('/scoreboard/')

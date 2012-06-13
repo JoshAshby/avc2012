@@ -28,7 +28,7 @@ to the port you want to server the main HTTP interface on.
 #serverType = 'wsgi'
 serverType = 'web.py'
 
-HTTPport = '80'
+HTTPport = '85'
 
 #Is this going to the live SparkFun server or a dev box?
 #deploy = True

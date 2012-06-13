@@ -19,7 +19,6 @@ sys.path.append(abspath)
 os.chdir(abspath)
 from configSub import *
 from botsDocument import *
-from picture import *
 import listView
 import baseObject
 
