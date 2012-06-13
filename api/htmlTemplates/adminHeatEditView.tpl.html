@@ -3,20 +3,14 @@
 #include "htmlTemplates/partials/adminSidebar.tpl.html"
 		<div class="span9">
 		<div class="row-fluid">
-			<h1>Wave id $_id Info Edit</h1>
-			<p>Edit the time and vehicle type and heat number for this wave.</p>
+			<h1>Run $heat, Heat $wave Info Edit</h1>
+			<p>Edit the time and vehicle type and run number for this heat.</p>
 		</div>
 		<div class="row-fluid" id="wave" data-id="$_id">
 			<div class="span9">
 				<form class="well">
-					<label>Wave Time</label>
-					<input type="text" id="time" value="$time" />
 					<br>
-					<label>Save the time</a>
-					<a href="#" class="btn btn-large btn-primary" id="save">Save!</a>
-					<br>
-
-					<label>Vehicle Type? (this auto updates so you don't have to click save if your just changing this)</label>
+					<label>Vehicle Type?</label>
 					<div class="btn-group" data-toggle="buttons-radio">
 						<a class="btn" id="land" href="#">Land</a>
 						<a class="btn" id="air" href="#">Air</a>
@@ -41,13 +35,6 @@
 
 	\$('#air').click(function(){
 		\$.post('$urlRoot/admin/heat/$_id/', {"vehicleType": 1});
-	});
-
-	\$('#save').click(function(){
-		time = \$('#time').val();
-
-		\$.post("$urlRoot/admin/heat/$_id/", {"time": time, "heatId": "$_id"});
-//		window.setTimeout(window.location.reload(), 1500);
 	});
 });	
 </script>

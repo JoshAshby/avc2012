@@ -635,7 +635,9 @@ class adminHeatBotList(baseObject.baseHTTPObject):
 
 		heats = {"heatOne": heatOne, "heatTwo": heatTwo, "heatThree": heatThree}
 
-		view = adminView.adminHeatBotView(data=heats)
+		data = {'heats': heats, 'waves': waves}
+
+		view = adminView.adminHeatBotView(data=data)
 		
 		return view.returnData()
 

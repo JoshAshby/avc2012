@@ -252,24 +252,48 @@ class adminHeatBotView(baseView.baseView):
 		page.title = (titleHalf + 'Admin Heat Bots')
 		page.content = ''
 		page.vehicleType = ''
+		
+		for heat in self.data['heats']:
+			for wave in self.data['heats'][heat]:
+				partial = templates.PartialListRow(file=templates.partialTemplateSet['row_listAdminHeatBotView'])
 
-		'''for wave in dict(self.data['heatOne']):
-			partial = templates.PartialListRow(file=templates.partialTemplateSet['row_listAdminHeatBotView'])
-			print wave
+				partial.content = ''
 
-			for bot in heat:
-				partialBot = templates.PartialListRow(file=templates.partialTemplateSet['row_listAdminView'])
-				partialBot.botName = bot['name']
-				partialBot.teamName = bot['team']
+				for i in self.data['waves']:
+					print i['value']
+					if wave is i['value']['_id']:
+						waves = i['value']
+				
+				partial.wave = waves['wave']
+				partial.heat = waves['heat']
+				partial.time = waves['time']
+				partial._id = waves['_id']
 
-				if bot['vehicleType'] is 0:
-					vehicleType = "Ground"
+				if waves['vehicleType'] is 0:
+					vehicle = "Ground"
 				else:
-					vehicleType = "Air"
-				partialBot.vehicle = vehicle
-				partialBot.vechileType = bot['vehicleType']
+					vehicle = "Air"
+				partial.vehicle = vehicle
 
-			page.content += str(partial)'''
+
+				for bot in self.data['heats'][heat][wave]:
+					partialBot = templates.PartialListRow(file=templates.partialTemplateSet['row_listAdminView'])
+					partialBot.botName = bot['name']
+					partialBot.teamName = bot['team']
+					partialBot.checkin = bot['checkedIn']
+					partialBot.teamId = bot['id']
+					partialBot.location = bot['location']
+					partialBot.builders = bot['builders']
+				
+					if bot['vehicleType'] is 0:
+						vehicle = "Ground"
+					else:
+						vehicle = "Air"
+					partialBot.vehicle = vehicle
+					partialBot.vechileType = bot['vehicleType']
+					partial.content += str(partialBot)
+				
+				page.content += str(partial)
 
 
 		web.header('Content-Type', "text/html")
