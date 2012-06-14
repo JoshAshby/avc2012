@@ -32,7 +32,6 @@ urls = (
 	(urlRoot + '/scoreboard'), scoreboardPage.app,
 	(urlRoot + '/stand'), standPage.app,
 	(urlRoot + '/about'), aboutPage.app,
-	(urlRoot + '/team'), teamPage.app,
 	(urlRoot + '/admin'), adminPage.app,
 	'/static/(.*)', 'static'
 )
