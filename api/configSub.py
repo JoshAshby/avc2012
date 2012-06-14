@@ -47,7 +47,7 @@ partialTemplatesFolder = 'htmlTemplates/partials/'
 #templating shortcuts... These get passed to templates
 #in all the view and template.py files
 urlRoot = '/avc'
-adminRoot = urlRoot + '/admin'
+adminRoot = (urlRoot + '/admin')
 
 if deploy:
 	urlRoot = '/avc'
