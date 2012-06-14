@@ -32,6 +32,7 @@
 					<div class="btn-group" data-toggle="buttons-radio">
 						<a href="#" class="btn btn-primary" id="heat1boxland">Box Landing Bonus</a>
 						<a href="#" class="btn btn-primary" id="heat1parkinglot">Parking Lot Bonus</a>
+						<a href="#" class="btn btn-primary" id="heat1none">No Landing Bonus</a>
 					</div>
 					<label>Which heat are they in?</label>
 					<select id="heat1">
@@ -40,10 +41,11 @@
 					<h4>Run 2</h4>
 					<label>Time</label>
 					<input type="text" id="heat2time"/>
-					<a href="#" id="heat1takeoff" class="btn btn-primary" data-toggle="button">TakeOff Bonus</a>
+					<a href="#" id="heat2takeoff" class="btn btn-primary" data-toggle="button">TakeOff Bonus</a>
 					<div class="btn-group" data-toggle="buttons-radio">
-						<a href="#" class="btn btn-primary" id="heat1boxland">Box Landing Bonus</a>
-						<a href="#" class="btn btn-primary" id="heat1parkinglot">Parking Lot Bonus</a>
+						<a href="#" class="btn btn-primary" id="heat2boxland">Box Landing Bonus</a>
+						<a href="#" class="btn btn-primary" id="heat2parkinglot">Parking Lot Bonus</a>
+						<a href="#" class="btn btn-primary" id="heat2none">No Landing Bonus</a>
 					</div>
 					<label>Which heat are they in?</label>
 					<select id="heat2">
@@ -52,10 +54,11 @@
 					<h4>Run 3</h4>
 					<label>Time</label>
 					<input type="text" id="heat3time"/>
-					<a href="#" id="heat1takeoff" class="btn btn-primary" data-toggle="button">TakeOff Bonus</a>
+					<a href="#" id="heat3takeoff" class="btn btn-primary" data-toggle="button">TakeOff Bonus</a>
 					<div class="btn-group" data-toggle="buttons-radio">
-						<a href="#" class="btn btn-primary" id="heat1boxland">Box Landing Bonus</a>
-						<a href="#" class="btn btn-primary" id="heat1parkinglot">Parking Lot Bonus</a>
+						<a href="#" class="btn btn-primary" id="heat3boxland">Box Landing Bonus</a>
+						<a href="#" class="btn btn-primary" id="heat3parkinglot">Parking Lot Bonus</a>
+						<a href="#" class="btn btn-primary" id="heat3none">No Landing Bonus</a>
 					</div>
 					<label>Which heat are they in?</label>
 					<select id="heat3">
@@ -88,16 +91,51 @@ if(($vehicleType) == 0) {
 	\$('#air').button('toggle');
 }
 
-if(($heat1bonus) == 1){
-	\$('#heat1bonus').button('toggle');
+if(($heat1takeoff) == 1){
+	\$('#heat1takeoff').button('toggle');
 }
 
-if(($heat2bonus) == 1){
-	\$('#heat2bonus').button('toggle');
+if(($heat2takeoff) == 1){
+	\$('#heat2takeoff').button('toggle');
 }
 
-if(($heat3bonus) == 1){
-	\$('#heat3bonus').button('toggle');
+if(($heat3takeoff) == 1){
+	\$('#heat3takeoff').button('toggle');
+}
+
+if($heat1boxland){
+	\$('#heat1boxland').button('toggle');
+}
+
+if($heat1parkinglot){
+	\$('#heat1parkinglot').button('toggle');
+}
+
+if($heat2boxland){
+	\$('#heat2boxland').button('toggle');
+}
+
+if($heat2parkinglot){
+	\$('#heat2parkinglot').button('toggle');
+}
+
+
+if($heat3boxland){
+	\$('#heat3boxland').button('toggle');
+}
+
+if($heat3parkinglot){
+	\$('#heat3parkinglot').button('toggle');
+}
+
+if($heat1none){
+	\$('#heat1none').button('toggle');
+}
+if($heat2none){
+	\$('#heat2none').button('toggle');
+}
+if($heat3none){
+	\$('#heat3none').button('toggle');
 }
 
 if('$heat1id'){\$('#heat1').val('$heat1id')}
@@ -124,17 +162,80 @@ if('$heat3id'){\$('#heat3').val('$heat3id')}
 	heat1bonus = 0;
 	heat2bonus = 0;
 	heat3bonus = 0;
-	if(\$('#heat1bonus').hasClass('active')){heat1bonus = 1}
-	if(\$('#heat2bonus').hasClass('active')){heat2bonus = 1}
-	if(\$('#heat3bonus').hasClass('active')){heat3bonus = 1}
+
+	if(\$('#heat1none').hasClass('active')){
+		if(\$('#heat1takeoff').hasClass('active')){
+			heat1bonus = 2
+		} else {
+			heat1bonus = 0
+		}
+	}
+	if(\$('#heat2none').hasClass('active')){
+		if(\$('#heat2takeoff').hasClass('active')){
+			heat2bonus = 2
+		} else {
+			heat2bonus = 0
+		}
+	}
+	if(\$('#heat3none').hasClass('active')){
+		if(\$('#heat3takeoff').hasClass('active')){
+			heat3bonus = 2
+		} else {
+			heat3bonus = 0
+		}
+	}
+
+	if(\$('#heat1boxland').hasClass('active')){
+		if(\$('#heat1takeoff').hasClass('active')){
+			heat1bonus = 23
+		} else {
+			heat1bonus = 3
+		}
+	}
+	if(\$('#heat2boxland').hasClass('active')){
+		if(\$('#heat2takeoff').hasClass('active')){
+			heat2bonus = 23
+		} else {
+			heat2bonus = 3
+		}
+	}
+	if(\$('#heat3boxland').hasClass('active')){
+		if(\$('#heat3takeoff').hasClass('active')){
+			heat3bonus = 23
+		} else {
+			heat3bonus = 3
+		}
+	}
+
+	if(\$('#heat1parkinglot').hasClass('active')){
+		if(\$('#heat1takeoff').hasClass('active')){
+			heat1bonus = 24
+		} else {
+			heat1bonus = 4
+		}
+	}
+	if(\$('#heat2parkinglot').hasClass('active')){
+		if(\$('#heat2takeoff').hasClass('active')){
+			heat2bonus = 24
+		} else {
+			heat2bonus = 4
+		}
+	}
+	if(\$('#heat3parkinglot').hasClass('active')){
+		if(\$('#heat3takeoff').hasClass('active')){
+			heat3bonus = 24
+		} else {
+			heat3bonus = 4
+		}
+	}
 
 	\$.post('$urlRoot/admin/team/'+botId+'/', {"name": name, "team": team, "builders": builders, "location": locat, "heatOne": heatOne, "heatTwo": heatTwo, "heatThree": heatThree, "heatOneTime": heatOneTime, "heatTwoTime": heatTwoTime, "heatThreeTime": heatThreeTime, "heatOneBonus": heat1bonus, "heatTwoBonus": heat2bonus, "heatThreeBonus": heat3bonus});
-	window.setTimeout(window.location.reload(), 1500);
+//	window.setTimeout(window.location.reload(), 5000);
 });
 
 \$('#checkInBtn').click(function(){
 	\$.post('$urlRoot/admin/teams/', {"botId": botId});
-	window.setTimeout(window.location.reload(), 1500);
+	window.setTimeout(window.location.reload(), 5000);
 });
 </script>
 #include "htmlTemplates/partials/adminFooter.tpl.html"

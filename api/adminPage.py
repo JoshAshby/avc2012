@@ -348,6 +348,16 @@ class adminTeam(baseObject.baseHTTPObject):
 		if heatThreeTime:
 			doc.heatThreeTime = str(heatThreeTime)
 
+		'''
+		Bonuses are as followed:
+			0 - None
+			1 - Ground Only - ring bonus 
+			2 - Air Only - Autonomous Take Off Bonus
+			3 - Air Only - Landing inside the box bonus
+			4 - Air Only - Landing in the parking lot bonus
+			23 - air only - take off and landing inside box
+			24 - Air only - takeoff and landing in parking lot
+		'''
 		if heatOneBonus:
 			doc.heatOneBonus = int(heatOneBonus)
 
@@ -356,6 +366,7 @@ class adminTeam(baseObject.baseHTTPObject):
 
 		if heatThreeBonus:
 			doc.heatThreeBonus = int(heatThreeBonus)
+
 		doc.save()
 
 

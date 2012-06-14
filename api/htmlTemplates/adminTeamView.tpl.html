@@ -117,12 +117,12 @@ if('$heat3id'){\$('#heat3').val('$heat3id')}
 	if(\$('#heat3bonus').hasClass('active')){heat3bonus = 1}
 
 	\$.post('$urlRoot/admin/team/'+botId+'/', {"name": name, "team": team, "builders": builders, "location": locat, "heatOne": heatOne, "heatTwo": heatTwo, "heatThree": heatThree, "heatOneTime": heatOneTime, "heatTwoTime": heatTwoTime, "heatThreeTime": heatThreeTime, "heatOneBonus": heat1bonus, "heatTwoBonus": heat2bonus, "heatThreeBonus": heat3bonus});
-	window.setTimeout(window.location.reload(), 1500);
+//	window.setTimeout(window.location.reload(), 1500);
 });
 
 \$('#checkInBtn').click(function(){
 	\$.post('$urlRoot/admin/teams/', {"botId": botId});
-	window.setTimeout(window.location.reload(), 1500);
+	window.setTimeout(window.location.reload(), 5000);
 });
 </script>
 #include "htmlTemplates/partials/adminFooter.tpl.html"

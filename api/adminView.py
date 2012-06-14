@@ -96,6 +96,66 @@ class adminTeamView(baseView.baseView):
 			page = templates.genericTemplate(file=templates.mainTemplateSet['adminTeamView'])
 		else:
 			page = templates.genericTemplate(file=templates.mainTemplateSet['adminTeamAirView'])
+			page.heat1takeoff = 0
+			page.heat2takeoff = 0
+			page.heat3takeoff = 0
+			page.heat1boxland = 0
+			page.heat2boxland = 0
+			page.heat3boxland = 0
+			page.heat1parkinglot = 0
+			page.heat2parkinglot = 0
+			page.heat3parkinglot = 0
+			page.heat1none = 0
+			page.heat2none = 0
+			page.heat3none = 0
+
+			if self.data['bot']['heatOneBonus'] is 0:
+				page.heat1none = 1
+			elif self.data['bot']['heatOneBonus'] is 2:
+				page.heat1takeoff = 1
+				page.heat1none = 1
+			elif self.data['bot']['heatOneBonus'] is 3:
+				page.heat1boxland = 1
+			elif self.data['bot']['heatOneBonus'] is 4:
+				page.heat1parkinglot = 1
+			elif self.data['bot']['heatOneBonus'] is 23:
+				page.heat1takeoff = 1
+				page.heat1boxland = 1
+			elif self.data['bot']['heatOneBonus'] is 24:
+				page.heat1takeoff = 1
+				page.heat1parkinglot = 1
+			
+			if self.data['bot']['heatTwoBonus'] is 0:
+				page.heat2none = 1
+			elif self.data['bot']['heatTwoBonus'] is 2:
+				page.heat2takeoff = 1
+				page.heat2none = 1
+			elif self.data['bot']['heatTwoBonus'] is 3:
+				page.heat2boxland = 1
+			elif self.data['bot']['heatTwoBonus'] is 4:
+				page.heat2parkinglot = 1
+			elif self.data['bot']['heatTwoBonus'] is 23:
+				page.heat2takeoff = 1
+				page.heat2boxland = 1
+			elif self.data['bot']['heatTwoBonus'] is 24:
+				page.heat2takeoff = 1
+				page.heat2parkinglot = 1
+
+			if self.data['bot']['heatThreeBonus'] is 0:
+				page.heat3none = 1
+			elif self.data['bot']['heatThreeBonus'] is 2:
+				page.heat3takeoff = 1
+				page.heat3none = 1
+			elif self.data['bot']['heatThreeBonus'] is 3:
+				page.heat3boxland = 1
+			elif self.data['bot']['heatThreeBonus'] is 4:
+				page.heat3parkinglot = 1
+			elif self.data['bot']['heatThreeBonus'] is 23:
+				page.heat3takeoff = 1
+				page.heat3boxland = 1
+			elif self.data['bot']['heatThreeBonus'] is 24:
+				page.heat3takeoff = 1
+				page.heat3parkinglot = 1
 
 		page.title = (titleHalf + 'Admin Team Info')
 		page.vehicleType = ''
