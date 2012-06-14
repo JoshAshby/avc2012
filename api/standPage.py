@@ -28,7 +28,7 @@ baseObject.urlReset()
 @baseObject.route('/')
 class all(baseObject.baseHTTPObject):
 	'''
-	Manages the heavy lifting of whos the top 5 and who won what.
+	Manages the heavy lifting of whos the top 3 and who won what.
 	'''
 	def get(self):
 		'''
@@ -43,6 +43,19 @@ class all(baseObject.baseHTTPObject):
 		HTML template. See standView.py and templates.py for more info.	
 			
 		'''
+		bots = database.view("bots/Bots").all()
+		ground = []
+		air = []
+
+		for bot in bots:
+			bot = bot['value']
+			if bot['vehicleType'] is 0:
+				ground.append(bot)
+			else:
+				air.append(bot)
+
+		print air
+
 		pass # still have to write this logic I guess.
 
 app = web.application(baseObject.urls, globals())

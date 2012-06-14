@@ -48,8 +48,6 @@ class adminScoreboardView(baseView.baseView):
 		page.vehicleType = ''
 		page.waves = ''
 
-		print self.data
-
 		for wave in self.data['waves']:
 			page.waves += ("<option value=" + wave['num'] + "." + wave['id'] + ">" + wave['num'] + "</option>")
 

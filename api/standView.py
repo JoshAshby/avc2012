@@ -25,7 +25,7 @@ import templates
 class top5View(baseView.baseView):
 	def JSON(self):
 		web.header('Content-Type', 'application/json')
-		return json.dumps({'topFive': self.data})
+		return json.dumps({'topThree': self.data})
 		
 	def HTML(self):
 		pass
