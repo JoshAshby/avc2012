@@ -65,5 +65,28 @@
 		heatId = \$('#wave').val();
 		\$.post('$adminRoot/scoreboard/heat/', {"heat": heatId});
 	});
+$('#checkIn').click(function(){
+	$.post("$adminRoot/scoreboard/", {view: "1"});
+});
+
+$('#schedule').click(function(){
+	$.post("$adminRoot/scoreboard/", {view: "2"});
+});
+
+$('#current').click(function(){
+	$.post("$adminRoot/scoreboard/", {view: "2/1"});
+});
+
+$('#top5Ground').click(function(){
+	$.post("$adminRoot/scoreboard/", {view: "3"});
+});
+
+$('#top5Air').click(function(){
+	$.post("$adminRoot/scoreboard/", {view: "3/1"});
+});
+
+$('#idle').click(function(){
+	$.post("$adminRoot/scoreboard/", {view: "0"});
+});
 </script>
 #include "htmlTemplates/partials/adminFooter.tpl.html"
