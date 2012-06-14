@@ -22,10 +22,43 @@ import baseView
 import templates
 
 
-class top5View(baseView.baseView):
+class listView(baseView.baseView):
 	def JSON(self):
 		web.header('Content-Type', 'application/json')
 		return json.dumps({'topThree': self.data})
 		
 	def HTML(self):
-		pass
+		page = templates.genericTemplate(file=templates.mainTemplateSet['standView'])
+		page.title = (titleHalf + 'Top 3')
+		page.contentair = ''
+		page.contentground = ''
+
+		for bot in self.data['air']:
+			partial = templates.PartialListRow(file=templates.partialTemplateSet['row_listStandView'])
+			partial.place = bot
+			bot = self.data['air'][bot]
+			partial.teamId = bot['id']
+			partial.teamName = bot['team']
+			partial.location = bot['location']
+			partial.botName = bot['name']
+			partial.builders = bot['builders']
+			partial.time = bot['time']
+
+			page.contentair += str(partial)
+		
+		for bot in self.data['ground']:
+			partial = templates.PartialListRow(file=templates.partialTemplateSet['row_listStandView'])
+			partial.place = bot
+			bot = self.data['air'][bot]
+			partial.teamId = bot['id']
+			partial.teamName = bot['team']
+			partial.location = bot['location']
+			partial.botName = bot['name']
+			partial.builders = bot['builders']
+			partial.time = bot['time']
+
+			page.contentground += str(partial)
+
+		web.header('Content-Type', "text/html")
+		
+		return page

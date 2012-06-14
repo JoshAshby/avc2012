@@ -38,7 +38,16 @@ import indexView
 baseObject.urlReset()
 
 
-@baseObject.route(urlRoot + '/')
+@baseObject.route('/')
+class index(baseObject.baseHTTPObject):  
+	'''
+	Base index view, nothing fancy just a landing page
+	'''
+	def get(self):
+		raise web.seeother("/avc")
+
+
+@baseObject.route(urlRoot+'/')
 class index(baseObject.baseHTTPObject):  
 	'''
 	Base index view, nothing fancy just a landing page

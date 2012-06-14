@@ -40,11 +40,11 @@ class botsDoc(couchdbkit.Document):
 	heatThreeWave = ''
 
 	heatOneTime = couchdbkit.StringProperty()
-	heatOneTime = ''
+	heatOneTime = '0:00'
 	heatTwoTime = couchdbkit.StringProperty()
-	heatTwoTime = ''
+	heatTwoTime = '0:00'
 	heatThreeTime = couchdbkit.StringProperty()
-	heatThreeTime = ''
+	heatThreeTime = '0:00'
 
 	heatOneBonus = couchdbkit.IntegerProperty()
 	heatOneBonus = 0

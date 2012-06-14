@@ -63,7 +63,7 @@
 	\$('#wave').val('$current');
 	\$('#wave').change(function(){
 		heatId = \$('#wave').val();
-		\$.post('$urlRoot/admin/scoreboard/heat/', {"heat": heatId});
+		\$.post('$adminRoot/scoreboard/heat/', {"heat": heatId});
 	});
 </script>
 #include "htmlTemplates/partials/adminFooter.tpl.html"

@@ -23,6 +23,8 @@ mainTemplateSet = {
 	'index': (templatesFolder + 'index.tpl.html'),
 	'listView': (templatesFolder + 'listView.tpl.html'),
 	'listViewBody': (templatesFolder + 'listViewBody.tpl.html'),
+	'standView': (templatesFolder + 'standView.tpl.html'),
+	'standViewBody': (templatesFolder + 'standViewBody.tpl.html'),
 	'adminMainView': (templatesFolder + 'adminMainView.tpl.html'),
 	'adminTeamListView': (templatesFolder + 'adminTeamListView.tpl.html'),
 	'adminTeamView': (templatesFolder + 'adminTeamView.tpl.html'),
@@ -41,17 +43,18 @@ mainTemplateSet = {
 partialTemplateSet = {
 	'row_listView': (partialTemplatesFolder + 'row_listView.tpl.html'),
 	'row_listViewBody': (partialTemplatesFolder + 'row_listViewBody.tpl.html'),
+	'row_listStandView': (partialTemplatesFolder + 'row_standView.tpl.html'),
+	'row_listStandViewBody': (partialTemplatesFolder + 'row_standViewBody.tpl.html'),
 	'row_listAdminView': (partialTemplatesFolder + 'row_listAdminView.tpl.html'),
 	'row_listAdminHeatView': (partialTemplatesFolder + 'row_listAdminHeatView.tpl.html'),
 	'row_listAdminHeatBotView': (partialTemplatesFolder + 'row_listAdminHeatBotView.tpl.html'),
-
 }
 
 #generic template class, called by all the views currently
 #because nothing fancy is needed.
 class genericTemplate(Template):
-	baseurl = baseurl
 	urlRoot = urlRoot
+	adminRoot = adminRoot
 	asseturl = assetUrl
 	title = ''
 	content = ''
@@ -60,8 +63,8 @@ class genericTemplate(Template):
 #just one for Partials, not that it's needed, but just as a 
 #reminder that your working with a partial. same as above basically.
 class PartialListRow(Template):
-	baseurl = baseurl
 	urlRoot = urlRoot
+	adminRoot = adminRoot
 	asseturl = assetUrl
 	title = ''
 	teamId = ''

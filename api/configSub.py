@@ -12,6 +12,7 @@ http://joshashby.com
 joshuaashby@joshashby.com
 """
 import couchdbkit
+import web
 '''
 Set this to either:
 	gevent
@@ -31,8 +32,8 @@ serverType = 'web.py'
 HTTPport = '85'
 
 #Is this going to the live SparkFun server or a dev box?
-#deploy = True
-deploy = False
+deploy = True
+#deploy = False
 
 #couchdbkit stuff.
 databaseName = 'avc'
@@ -45,12 +46,12 @@ partialTemplatesFolder = 'htmlTemplates/partials/'
 
 #templating shortcuts... These get passed to templates
 #in all the view and template.py files
-baseurl = '/avc2012/api'
 urlRoot = '/avc'
+adminRoot = '/admin'
 
 if deploy:
-	baseurl = '/api'
-	urlRoot = '/'
+	urlRoot = '/avc'
+	adminRoot = '/admin'
 	serverType = "web.py"
 	#serverType = "wsgi"
 	#serverType = "gevent"
@@ -58,3 +59,9 @@ if deploy:
 assetUrl = '/static'
 titleHalf = 'SparkFun 2012 AVC - '
 
+#basic classes that are helpful
+class slash:
+	def GET(self): raise web.seeother("/")
+
+class static:
+	def GET(self,name): return open('static/%s'%name)

@@ -42,7 +42,7 @@
 			vehicleType = 1;
 		}
 
-		\$.post('$urlRoot/admin/heat/new/', {"time": time, "vehicleType": vehicleType, "heatId": \$('#heat').val()});
+		\$.post('$adminRoot/heat/new/', {"time": time, "vehicleType": vehicleType, "heatId": \$('#heat').val()});
 //		window.setTimeout(window.location.reload(), 1500);
 	});
 });	

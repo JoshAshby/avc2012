@@ -93,10 +93,10 @@ if('$heat2id'){\$('#heat2').val('$heat2id')}
 if('$heat3id'){\$('#heat3').val('$heat3id')}
 
 \$('#land').click(function(){
-	\$.post('$urlRoot/admin/team/'+botId+'/', {"vehicleType": 0});
+	\$.post('$adminRoot/team/'+botId+'/', {"vehicleType": 0});
 });
 \$('#air').click(function(){
-	\$.post('$urlRoot/admin/team/'+botId+'/', {"vehicleType": 1});
+	\$.post('$adminRoot/team/'+botId+'/', {"vehicleType": 1});
 });
 \$('#save').click(function(){
 	name = \$('#name').val();
@@ -116,12 +116,12 @@ if('$heat3id'){\$('#heat3').val('$heat3id')}
 	if(\$('#heat2bonus').hasClass('active')){heat2bonus = 1}
 	if(\$('#heat3bonus').hasClass('active')){heat3bonus = 1}
 
-	\$.post('$urlRoot/admin/team/'+botId+'/', {"name": name, "team": team, "builders": builders, "location": locat, "heatOne": heatOne, "heatTwo": heatTwo, "heatThree": heatThree, "heatOneTime": heatOneTime, "heatTwoTime": heatTwoTime, "heatThreeTime": heatThreeTime, "heatOneBonus": heat1bonus, "heatTwoBonus": heat2bonus, "heatThreeBonus": heat3bonus});
+	\$.post('$adminRoot/team/'+botId+'/', {"name": name, "team": team, "builders": builders, "location": locat, "heatOne": heatOne, "heatTwo": heatTwo, "heatThree": heatThree, "heatOneTime": heatOneTime, "heatTwoTime": heatTwoTime, "heatThreeTime": heatThreeTime, "heatOneBonus": heat1bonus, "heatTwoBonus": heat2bonus, "heatThreeBonus": heat3bonus});
 //	window.setTimeout(window.location.reload(), 1500);
 });
 
 \$('#checkInBtn').click(function(){
-	\$.post('$urlRoot/admin/teams/', {"botId": botId});
+	\$.post('$adminRoot/teams/', {"botId": botId});
 	window.setTimeout(window.location.reload(), 5000);
 });
 </script>
