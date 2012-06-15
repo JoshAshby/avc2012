@@ -29,6 +29,7 @@ Reveal.initialize({
 function tableRefresh(){
 	$.getJSON('admin/', {"t": "json"}, function(data){
 		heat = data['admin']['waveId'];
+		heatNext = data['admin']['waveNextId']
 		view = data['admin']['viewScreen'];
 	}).complete(function(){
 		if(view != null){
@@ -42,6 +43,14 @@ function tableRefresh(){
 			}
 		}), 10000);
 
+		window.setTimeout($.get(('nextheat/' + (heatNext) + '/'), function(data) {
+			$("#currentId").html(heatNext);
+			table = $('#currentTable').html();
+			if(table != data){
+				$('#currentTable').html(data);
+			}
+		}), 10000);
+		
 		window.setTimeout($.get(('heat/' + (heat) + '/'), function(data) {
 			$("#currentId").html(heat);
 			table = $('#currentTable').html();

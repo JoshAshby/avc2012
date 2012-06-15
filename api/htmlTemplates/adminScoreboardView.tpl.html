@@ -15,6 +15,23 @@
 				$waves
 			</select>
 		</div><!--/row-->
+
+		<div class="row-fluid">
+			<h1>Upnext: Run/Heat</h1>
+			<p>Change the upnext heat and wave. (in the format of run.heat)</p>
+			<div class="alert alert-info">
+				<strong>Heads up!</strong> This saves itself so you just have to change it as the heats advance, so don't worry about reloading the page!
+			</div>
+			<div class="alert">
+				<strong>Heads up again!</strong> This is a quick hack since I was running out of time, sorry about that!
+			</div>
+
+		</div>
+		<div class="row-fluid">
+			<select id="waveNext">
+				$waves
+			</select>
+		</div><!--/row-->
 		<br>
 		<hr>
 		<br>
@@ -60,33 +77,40 @@
 	</div><!--/-->
 </div><!--/-->
 <script>
-	\$('#wave').val('$current');
-	\$('#wave').change(function(){
-		heatId = \$('#wave').val();
-		\$.post('$adminRoot/scoreboard/heat/', {"heat": heatId});
-	});
-$('#checkIn').click(function(){
-	$.post("$adminRoot/scoreboard/", {view: "1"});
+\$('#wave').val('$current');
+\$('#wave').change(function(){
+	heatId = \$('#wave').val();
+	\$.post('$adminRoot/scoreboard/heat/', {"heat": heatId});
 });
 
-$('#schedule').click(function(){
-	$.post("$adminRoot/scoreboard/", {view: "2"});
+\$('#waveNext').val('$upnext');
+\$('#waveNext').change(function(){
+	heatId = \$('#waveNext').val();
+	\$.post('$adminRoot/scoreboard/heat/next/', {"heatNext": heatId});
 });
 
-$('#current').click(function(){
-	$.post("$adminRoot/scoreboard/", {view: "2/1"});
+\$('#checkIn').click(function(){
+	\$.post("$adminRoot/scoreboard/", {view: "1"});
 });
 
-$('#top5Ground').click(function(){
-	$.post("$adminRoot/scoreboard/", {view: "3"});
+\$('#schedule').click(function(){
+	\$.post("$adminRoot/scoreboard/", {view: "2"});
 });
 
-$('#top5Air').click(function(){
-	$.post("$adminRoot/scoreboard/", {view: "3/1"});
+\$('#current').click(function(){
+	\$.post("$adminRoot/scoreboard/", {view: "2/1"});
 });
 
-$('#idle').click(function(){
-	$.post("$adminRoot/scoreboard/", {view: "0"});
+\$('#top5Ground').click(function(){
+	\$.post("$adminRoot/scoreboard/", {view: "3"});
+});
+
+\$('#top5Air').click(function(){
+	\$.post("$adminRoot/scoreboard/", {view: "3/1"});
+});
+
+\$('#idle').click(function(){
+	\$.post("$adminRoot/scoreboard/", {view: "0"});
 });
 </script>
 #include "htmlTemplates/partials/adminFooter.tpl.html"

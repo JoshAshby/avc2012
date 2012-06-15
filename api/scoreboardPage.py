@@ -49,6 +49,7 @@ class index(baseObject.baseHTTPObject):
 		
 		return view.returnData()
 
+
 @baseObject.route('/checkIn/')
 class checkIn(baseObject.baseHTTPObject):
 	'''

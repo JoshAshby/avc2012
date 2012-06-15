@@ -107,8 +107,9 @@ class adminScoreboard(baseObject.baseHTTPObject):
 		admin = database.view("admin/Admin", key=0).first()['value']
 
 		current = (admin['heat'] + "." + admin['wave'] + "." + admin['waveId'])
-		
-		data = {"waves": heatNew, "current": current}
+		upnext = (admin['heatNext'] + "." + admin['waveNext'] + "." + admin['waveNextId'])
+	
+		data = {"waves": heatNew, "current": current, "upnext": upnext}
 
 		view = adminView.adminScoreboardView(data=data)
 		
@@ -169,6 +170,42 @@ class adminScoreboardHeat(baseObject.baseHTTPObject):
 		doc.wave = wave
 		doc.waveId = waveId
 		doc.save()
+
+
+@baseObject.route('/scoreboard/heat/next/')
+class adminScoreboardHeatNext(baseObject.baseHTTPObject):
+	'''
+	Manages the current heat on the over all scoreboard
+	'''
+	def post(self):
+		'''
+		POST verb call
+
+		updates the admin doc to reflect a change in the view
+
+		Args:
+			view - Can be any of: 0,1,2,2/1,3,3/1
+
+		Returns:
+			Nothing, error page if something went wrong.
+		'''
+		heatId = self.hasMember('heatNext', True)
+
+		docId = database.view("admin/Admin", key=0).first()['value']['_id']
+
+		doc = adminDoc.get(docId)
+
+		parts = heatId.split(".")
+
+		heat = parts[0]
+		wave = parts[1]
+		waveId = parts[2]
+
+		doc.heatNext = heat
+		doc.waveNext = wave
+		doc.waveNextId = waveId
+		doc.save()
+
 '''
 ##################################################################
 Team Section

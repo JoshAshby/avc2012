@@ -52,6 +52,7 @@ class adminScoreboardView(baseView.baseView):
 			page.waves += ("<option value=" + wave['num'] + "." + wave['id'] + ">" + wave['num'] + "</option>")
 
 		page.current = self.data['current']
+		page.upnext = self.data['upnext']
 		
 		web.header('Content-Type', "text/html")
 		

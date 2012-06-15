@@ -29,6 +29,13 @@ class adminDoc(couchdbkit.Document):
 	waveId = couchdbkit.StringProperty()
 	waveId = ''
 
+	heatNext = couchdbkit.StringProperty()
+	heatNext = ''
+	waveNext = couchdbkit.StringProperty()
+	waveNext = ''
+	waveNextId = couchdbkit.StringProperty()
+	waveNextId = ''
+
 	viewScreen = couchdbkit.StringProperty()
 	viewScreen = ''
 
