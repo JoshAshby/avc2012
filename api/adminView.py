@@ -323,7 +323,6 @@ class adminHeatBotView(baseView.baseView):
 				partial.content = ''
 
 				for i in self.data['waves']:
-					print i['value']
 					if wave is i['value']['_id']:
 						waves = i['value']
 				
