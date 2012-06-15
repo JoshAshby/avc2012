@@ -43,7 +43,7 @@ function tableRefresh(){
 			}
 		}), 10000);
 
-		window.setTimeout($.get(('nextheat/' + (heatNext) + '/'), function(data) {
+		window.setTimeout($.get(('heat/' + (heatNext) + '/'), function(data) {
 			$("#currentId").html(heatNext);
 			table = $('#currentTable').html();
 			if(table != data){
