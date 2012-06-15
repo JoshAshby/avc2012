@@ -37,7 +37,6 @@ class adminDoc(couchdbkit.Document):
 	waveNextId = ''
 
 	viewScreen = couchdbkit.StringProperty()
-	viewScreen = ''
 
 
 adminDoc.set_db(database)
