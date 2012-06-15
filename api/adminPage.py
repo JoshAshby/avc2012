@@ -655,6 +655,7 @@ class adminHeatBotList(baseObject.baseHTTPObject):
 			HTML template, see adminView and templates.py for more info.
 			
 		'''
+		view = self.hasMember('view')
 		heatOne = {}
 		heatTwo = {}
 		heatThree = {}
@@ -684,8 +685,11 @@ class adminHeatBotList(baseObject.baseHTTPObject):
 		heats = {"heatOne": heatOne, "heatTwo": heatTwo, "heatThree": heatThree}
 
 		data = {'heats': heats, 'waves': waves}
-
-		view = adminView.adminHeatBotView(data=data)
+		
+		if view == 'pit':
+			view = adminView.adminHeatBotBodyView(data=data)
+		else:
+			view = adminView.adminHeatBotView(data=data)
 		
 		return view.returnData()
 

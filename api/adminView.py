@@ -361,3 +361,61 @@ class adminHeatBotView(baseView.baseView):
 		web.header('Content-Type', "text/html")
 		
 		return page
+
+
+class adminHeatBotBodyView(baseView.baseView):
+	def JSON(self):
+		web.header('Content-Type', 'application/json')
+		return json.dumps({'error': 'This is an HTML only page, no JSON please.'})
+		
+	def HTML(self):
+		page = templates.genericTemplate(file=templates.mainTemplateSet['adminHeatBotBodyView'])
+		page.title = (titleHalf + 'Admin Heat Bots')
+		page.content = ''
+		page.vehicleType = ''
+		
+		for heat in self.data['heats']:
+			for wave in self.data['heats'][heat]:
+				partial = templates.PartialListRow(file=templates.partialTemplateSet['row_listAdminHeatBotBodyView'])
+
+				partial.content = ''
+
+				for i in self.data['waves']:
+					if wave is i['value']['_id']:
+						waves = i['value']
+				
+				partial.wave = waves['wave']
+				partial.heat = waves['heat']
+				partial.time = waves['time']
+				partial._id = waves['_id']
+
+				if waves['vehicleType'] is 0:
+					vehicle = "Ground"
+				else:
+					vehicle = "Air"
+				partial.vehicle = vehicle
+
+
+				for bot in self.data['heats'][heat][wave]:
+					partialBot = templates.PartialListRow(file=templates.partialTemplateSet['row_listAdminHeatBodyView'])
+					partialBot.botName = bot['name']
+					partialBot.teamName = bot['team']
+					partialBot.checkin = bot['checkedIn']
+					partialBot.teamId = bot['id']
+					partialBot.location = bot['location']
+					partialBot.builders = bot['builders']
+				
+					if bot['vehicleType'] is 0:
+						vehicle = "Ground"
+					else:
+						vehicle = "Air"
+					partialBot.vehicle = vehicle
+					partialBot.vechileType = bot['vehicleType']
+					partial.content += str(partialBot)
+				
+				page.content += str(partial)
+
+
+		web.header('Content-Type', "text/html")
+		
+		return page

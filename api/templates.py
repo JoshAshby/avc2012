@@ -34,6 +34,7 @@ mainTemplateSet = {
 	'adminHeatListView': (templatesFolder + 'adminHeatListView.tpl.html'),
 	'adminHeatEditView': (templatesFolder + 'adminHeatEditView.tpl.html'),
 	'adminHeatBotView': (templatesFolder + 'adminHeatBotView.tpl.html'),
+	'adminHeatBotBodyView': (templatesFolder + 'adminHeatBotBodyView.tpl.html'),
 	'adminHeatNewView': (templatesFolder + 'adminHeatNewView.tpl.html'),
 	'aboutView': (templatesFolder + 'about.tpl.html'),
 	'scoreboardView': (templatesFolder + 'scoreboard.tpl.html'),
@@ -43,11 +44,14 @@ mainTemplateSet = {
 partialTemplateSet = {
 	'row_listView': (partialTemplatesFolder + 'row_listView.tpl.html'),
 	'row_listViewBody': (partialTemplatesFolder + 'row_listViewBody.tpl.html'),
+	'row_listAdminHeatBodyView': (partialTemplatesFolder + 'row_listAdminHeatBodyView.tpl.html'),
 	'row_listStandView': (partialTemplatesFolder + 'row_standView.tpl.html'),
 	'row_listStandViewBody': (partialTemplatesFolder + 'row_standViewBody.tpl.html'),
 	'row_listAdminView': (partialTemplatesFolder + 'row_listAdminView.tpl.html'),
 	'row_listAdminHeatView': (partialTemplatesFolder + 'row_listAdminHeatView.tpl.html'),
 	'row_listAdminHeatBotView': (partialTemplatesFolder + 'row_listAdminHeatBotView.tpl.html'),
+	'row_listAdminHeatBotBodyView': (partialTemplatesFolder + 'row_listAdminHeatBotBodyView.tpl.html'),
+
 }
 
 #generic template class, called by all the views currently

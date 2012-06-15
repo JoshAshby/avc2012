@@ -1,0 +1,17 @@
+#encoding UTF-8
+#include "htmlTemplates/partials/header.tpl.html"
+#include "htmlTemplates/partials/adminSidebarPit.tpl.html"
+	<div class="span12">
+		<h1>Heat List with robots - Pit View</h1>
+		<p>View each heat and the robots in it.</p>
+		<div class="alert alert-info">
+			<strong>Heads up!</strong> This page is not ordered so make sure you're paying attention to which heat you're looking at! (Sorry!!!)
+		</div>
+	</div>
+	<div class="row" id="teams">
+		<div class="span12">
+			$content
+		</div><!--/span9-->
+	</div><!--/row-->
+</div><!--/-->
+#include "htmlTemplates/partials/adminFooter.tpl.html"
