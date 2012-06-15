@@ -44,10 +44,10 @@ function tableRefresh(){
 		}), 10000);
 
 		window.setTimeout($.get(('heat/' + (heatNext) + '/'), function(data) {
-			$("#currentId").html(heatNext);
-			table = $('#currentTable').html();
+			$("#upNextId").html(heatNext);
+			table = $('#upNextTable').html();
 			if(table != data){
-				$('#currentTable').html(data);
+				$('#upNextTable').html(data);
 			}
 		}), 10000);
 		
