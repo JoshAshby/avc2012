@@ -2,6 +2,16 @@ $.ajaxSetup({cache: false});
 var query = {};
 var heat;
 var view;
+var current;
+
+var screens = {
+	'0': '',
+	'1': '1',
+	'2': '2',
+	'3': '2/1',
+	'4': '3',
+	'5': '3/1'
+};
 
 location.search.replace( /[A-Z0-9]+?=(\w*)/gi, function(a){
 	query[ a.split( '=' ).shift() ] = a.split( '=' ).pop();
@@ -32,8 +42,15 @@ function tableRefresh(){
 		heatNext = data['admin']['waveNextId']
 		view = data['admin']['viewScreen'];
 	}).complete(function(){
-		if(view != null){
+		if(view != 0){
 			window.location = '#/' + view;
+		} else {
+			window.location = '#/' + screens[current];
+			if (current <= 4) {
+				current++;
+			} else {
+				current = 0;
+			}
 		}
 		
 		window.setTimeout($.get('checkIn/', function(data) {
@@ -67,7 +84,7 @@ function tableRefresh(){
 			$('#groundTop5Table').html(data);
 		}), 10000);
 	});
-	t=setTimeout(tableRefresh, 5000);
+	t=setTimeout(tableRefresh, 10000);
 };
 
 tableRefresh();
