@@ -51,7 +51,7 @@ adminRoot = (urlRoot + '/admin')
 
 if deploy:
 	urlRoot = '/avc'
-	adminRoot = (urlRoot + '/admin')
+	adminRoot = (urlRoot + '/NZbatshhPw/admin')
 	serverType = "web.py"
 	#serverType = "wsgi"
 	#serverType = "gevent"
