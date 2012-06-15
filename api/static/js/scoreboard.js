@@ -58,6 +58,14 @@ function tableRefresh(){
 				$('#currentTable').html(data);
 			}
 		}), 10000);
+
+		window.setTimeout($.get(('stand/'), {"type": 'air'}, function(data) {
+			$('#airTop5Table').html(data);
+		}), 10000);
+
+		window.setTimeout($.get(('stand/'), {"type": 'ground'}, function(data) {
+			$('#groundTop5Table').html(data);
+		}), 10000);
 	});
 	t=setTimeout(tableRefresh, 5000);
 };

@@ -61,6 +61,31 @@ class listView(baseView.baseView):
 		return page
 
 
+class standView(baseView.baseView):
+	def JSON(self):
+		web.header('Content-Type', 'application/json')
+		return json.dumps({'bots': self.data})
+		
+	def HTML(self):
+		page = templates.genericTemplate(file=templates.mainTemplateSet['standViewBody'])
+		page.content = ''
+
+		for bot in self.data:
+			bot = self.data[bot]
+			partial = templates.PartialListRow(file=templates.partialTemplateSet['row_listStandViewBody'])
+			partial.teamId = bot['id']
+			partial.teamName = bot['team']
+			partial.location = bot['location']
+			partial.botName = bot['name']
+			partial.builders = bot['builders']
+			partial.time = bot['time']
+			page.content += str(partial)
+		
+		web.header('Content-Type', "text/html")
+		
+		return page
+
+
 class heatView(baseView.baseView):
 	def JSON(self):
 		web.header('Content-Type', 'application/json')
