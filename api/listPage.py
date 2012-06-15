@@ -43,7 +43,9 @@ class all(baseObject.baseHTTPObject):
 			HTML template; see listView.py and templates for more info.
 			
 		'''
-		bots = database.view("bots/Bots").all()
+		try: bots = database.view("bots/Bots").all()
+		except: bots = database.view("bots/Bots").all()
+
 		botNew = []
 		
 		for i in bots:

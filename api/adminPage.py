@@ -24,6 +24,7 @@ from adminDocument import *
 from botsDocument import *
 from heatDocument import *
 from couchdbkit.loaders import FileSystemDocsLoader
+import operator
 
 
 baseObject.urlReset()
@@ -690,6 +691,62 @@ class adminHeatBotList(baseObject.baseHTTPObject):
 			view = adminView.adminHeatBotBodyView(data=data)
 		else:
 			view = adminView.adminHeatBotView(data=data)
+		
+		return view.returnData()
+
+
+@baseObject.route('/heat/pit/')
+class adminHeatBotPitList(baseObject.baseHTTPObject):
+	'''
+	Manages robots in each of the heats
+
+	'''
+	def get(self):
+		'''
+		GET verb call
+
+		returns a template of all the heats, pulled from the botDocs
+		and compiled into a complete list of which robot and which heat.
+		
+		Args:
+			None
+			
+		Returns:
+			HTML template, see adminView and templates.py for more info.
+			
+		'''
+		heatOne = {}
+		heatTwo = {}
+		heatThree = {}
+		bots = database.view("bots/Bots")
+		waves = database.view("schedule/id")
+		admin = database.view("admin/Admin", key=0).first()['value']
+
+		currentSpots = []
+		for bot in bots:
+			bot = bot['value']
+			if bot['checkedIn']:
+				if bot['heatOneWave'] == admin['waveId']:
+					currentSpots.append(bot)
+				if bot['heatTwoWave'] == admin['waveId']:
+					currentSpots.append(bot)
+				if bot['heatThreeWave'] == admin['waveId']:
+					currentSpots.append(bot)
+
+		upNextSpots = []
+		for bot in bots:
+			bot = bot['value']
+			if bot['checkedIn']:
+				if bot['heatOneWave'] == admin['waveNextId']:
+					upNextSpots.append(bot)
+				if bot['heatTwoWave'] == admin['waveNextId']:
+					upNextSpots.append(bot)
+				if bot['heatThreeWave'] == admin['waveNextId']:
+					upNextSpots.append(bot)
+
+		data = {'current': currentSpots, 'upnext': upNextSpots}
+		
+		view = adminView.adminHeatPitView(data=data)
 		
 		return view.returnData()
 

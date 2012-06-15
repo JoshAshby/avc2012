@@ -34,6 +34,7 @@ mainTemplateSet = {
 	'adminHeatListView': (templatesFolder + 'adminHeatListView.tpl.html'),
 	'adminHeatEditView': (templatesFolder + 'adminHeatEditView.tpl.html'),
 	'adminHeatBotView': (templatesFolder + 'adminHeatBotView.tpl.html'),
+	'adminHeatPitView': (templatesFolder + 'adminHeatPitView.tpl.html'),
 	'adminHeatBotBodyView': (templatesFolder + 'adminHeatBotBodyView.tpl.html'),
 	'adminHeatNewView': (templatesFolder + 'adminHeatNewView.tpl.html'),
 	'aboutView': (templatesFolder + 'about.tpl.html'),
