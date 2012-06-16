@@ -49,7 +49,7 @@ class listView(baseView.baseView):
 		for bot in self.data['ground']:
 			partial = templates.PartialListRow(file=templates.partialTemplateSet['row_listStandView'])
 			partial.place = bot
-			bot = self.data['air'][bot]
+			bot = self.data['ground'][bot]
 			partial.teamId = bot['id']
 			partial.teamName = bot['team']
 			partial.location = bot['location']

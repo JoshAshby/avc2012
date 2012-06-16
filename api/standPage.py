@@ -45,7 +45,12 @@ class all(baseObject.baseHTTPObject):
 			HTML template. See standView.py and templates.py for more info.	
 			
 		'''
-		bots = database.view("bots/Bots").all()
+		print database
+		try:
+			bots = database.view("bots/Bots").all()
+		except:
+			bots = database.view("bots/Bots").all()
+
 		'''
 		Air Bonuses
 
@@ -60,7 +65,7 @@ class all(baseObject.baseHTTPObject):
 
 		1 - 30 seconds
 		'''
-		times = {
+		bonusTimes = {
 			"0": datetime.timedelta(seconds=0),
 			"1": datetime.timedelta(seconds=30),
 			"2": datetime.timedelta(seconds=10),
@@ -79,19 +84,19 @@ class all(baseObject.baseHTTPObject):
 				if bot['heatOneTime'] != '0:00':
 					heatOneTime = datetime.datetime.strptime(bot['heatOneTime'], '%M:%S')
 					if bot['heatOneBonus']:
-						heatOneTime = heatOneTime - times[bot['heatOneBonus']]
+						heatOneTime = heatOneTime - bonusTimes[bot['heatOneBonus']]
 					times.append(heatOneTime.time())
 
 				if bot['heatTwoTime'] != '0:00':
 					heatTwoTime = datetime.datetime.strptime(bot['heatTwoTime'], '%M:%S')
 					if bot['heatTwoBonus']:
-						heatTwoTime = heatTwoTime - times[bot['heatTwoBonus']]
+						heatTwoTime = heatTwoTime - bonusTimes[bot['heatTwoBonus']]
 					times.append(heatTwoTime.time())
 
 				if bot['heatThreeTime'] != '0:00':
 					heatThreeTime = datetime.datetime.strptime(bot['heatThreeTime'], '%M:%S')
 					if bot['heatThreeBonus']:
-						heatThreeTime = heatThreeTime - times[bot['heatThreeBonus']]
+						heatThreeTime = heatThreeTime - bonusTimes[bot['heatThreeBonus']]
 					times.append(heatThreeTime.time())
 
 				if times:
