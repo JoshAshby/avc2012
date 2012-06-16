@@ -66,13 +66,13 @@ class all(baseObject.baseHTTPObject):
 		1 - 30 seconds
 		'''
 		bonusTimes = {
-			"0": datetime.timedelta(seconds=0),
-			"1": datetime.timedelta(seconds=30),
-			"2": datetime.timedelta(seconds=10),
-			"3": datetime.timedelta(seconds=30),
-			"4": datetime.timedelta(seconds=10),
-			"23": datetime.timedelta(seconds=40),
-			"24": datetime.timedelta(seconds=20)
+			0: datetime.timedelta(seconds=0),
+			1: datetime.timedelta(seconds=30),
+			2: datetime.timedelta(seconds=10),
+			3: datetime.timedelta(seconds=30),
+			4: datetime.timedelta(seconds=10),
+			23: datetime.timedelta(seconds=40),
+			24: datetime.timedelta(seconds=20)
 		}
 
 		airTimes = []
