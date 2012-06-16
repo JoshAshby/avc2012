@@ -28,7 +28,7 @@
 					<h4>Run 1</h4>
 					<label>Time</label>
 					<input type="text" id="heat1time"/>
-					<a href="#" id="heat1bonus" class="btn btn-primary" data-toggle="button">Bonus?</a>
+					<a href="#" id="heat1bonus" class="btn btn-primary">Bonus?</a>
 					<label>Which heat are they in?</label>
 					<select id="heat1">
 						$heat1
@@ -36,7 +36,7 @@
 					<h4>Run 2</h4>
 					<label>Time</label>
 					<input type="text" id="heat2time"/>
-					<a href="#" id="heat2bonus" class="btn btn-primary" data-toggle="button">Bonus?</a>
+					<a href="#" id="heat2bonus" class="btn btn-primary">Bonus?</a>
 					<label>Which heat are they in?</label>
 					<select id="heat2">
 						$heat2
@@ -44,7 +44,7 @@
 					<h4>Run 3</h4>
 					<label>Time</label>
 					<input type="text" id="heat3time"/>
-					<a href="#" id="heat3bonus" class="btn btn-primary" data-toggle="button">Bonus?</a>
+					<a href="#" id="heat3bonus" class="btn btn-primary">Bonus?</a>
 					<label>Which heat are they in?</label>
 					<select id="heat3">
 						$heat3
@@ -88,9 +88,9 @@ if(($heat3bonus) == 1){
 	\$('#heat3bonus').button('toggle');
 }
 
-if('$heat1id'){\$('#heat1').val('$heat1id')}
-if('$heat2id'){\$('#heat2').val('$heat2id')}
-if('$heat3id'){\$('#heat3').val('$heat3id')}
+if('$heat1id'){\$('#heat1').val('$heat1id');}
+if('$heat2id'){\$('#heat2').val('$heat2id');}
+if('$heat3id'){\$('#heat3').val('$heat3id');}
 
 \$('#land').click(function(){
 	\$.post('$adminRoot/team/'+botId+'/', {"vehicleType": 0});
@@ -112,9 +112,9 @@ if('$heat3id'){\$('#heat3').val('$heat3id')}
 	heat1bonus = 0;
 	heat2bonus = 0;
 	heat3bonus = 0;
-	if(\$('#heat1bonus').hasClass('active')){heat1bonus = 1}
-	if(\$('#heat2bonus').hasClass('active')){heat2bonus = 1}
-	if(\$('#heat3bonus').hasClass('active')){heat3bonus = 1}
+	if(\$('#heat1bonus').hasClass('active')){heat1bonus = 1;}
+	if(\$('#heat2bonus').hasClass('active')){heat2bonus = 1;}
+	if(\$('#heat3bonus').hasClass('active')){heat3bonus = 1;}
 
 	\$.post('$adminRoot/team/'+botId+'/', {"name": name, "team": team, "builders": builders, "location": locat, "heatOne": heatOne, "heatTwo": heatTwo, "heatThree": heatThree, "heatOneTime": heatOneTime, "heatTwoTime": heatTwoTime, "heatThreeTime": heatThreeTime, "heatOneBonus": heat1bonus, "heatTwoBonus": heat2bonus, "heatThreeBonus": heat3bonus});
 //	window.setTimeout(window.location.reload(), 1500);
